@@ -1,6 +1,6 @@
-# Eventify - Mobile Event Management and Networking App
+# eventNet - Mobile Event Management and Networking App
 
-**Eventify** é um aplicativo de gestão de eventos e networking que permite aos usuários criar, participar e interagir em eventos de forma fácil e eficiente. Organize eventos, faça networking com outros participantes e mantenha-se informado com notificações em tempo real.
+**eventNet** é um aplicativo de gestão de eventos e networking que permite aos usuários criar, participar e interagir em eventos de forma fácil e eficiente. Organize eventos, faça networking com outros participantes e mantenha-se informado com notificações em tempo real.
 
 ## Índice
 
@@ -16,7 +16,7 @@
 
 ## Visão Geral
 
-O **Eventify** é um aplicativo mobile completo para gestão de eventos, permitindo que os usuários criem eventos, inscrevam-se, façam check-in usando QR Codes e interajam com outros participantes através de chat em tempo real. O backend gerencia a autenticação, a lógica de eventos e a comunicação em tempo real, enquanto o frontend, desenvolvido em React Native, oferece uma interface amigável e responsiva.
+O **Eventify** é um aplicativo mobile completo para gestão de eventos, permitindo que os usuários criem eventos, inscrevam-se, façam check-in usando QR Codes e interajam com outros participantes através de chat em tempo real. O backend gerencia a autenticação, a lógica de eventos e a comunicação em tempo real, enquanto o frontend, desenvolvido em Angular + Ionic, oferece uma interface amigável e responsiva.
 
 ## Funcionalidades
 
