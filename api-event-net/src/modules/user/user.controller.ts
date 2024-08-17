@@ -27,7 +27,7 @@ export class UserController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<UserModel> {
+  async findOne(@Param('id') id: string): Promise<UserModel | null> {
     return this.userService.user({ id });
   }
 
