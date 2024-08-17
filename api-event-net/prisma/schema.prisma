@@ -24,12 +24,12 @@ model User {
 }
 
 model Address {
-  id           String @id @default(uuid())
-  city         String
-  state        String
-  neighborhood String
-  userId       String @map("user_id")
-  user         User   @relation(fields: [userId], references: [id])
+  id           String  @id @default(uuid())
+  city         String?
+  state        String?
+  neighborhood String?
+  userId       String  @map("user_id")
+  user         User    @relation(fields: [userId], references: [id])
 
   @@map("address")
 }
