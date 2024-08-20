@@ -29,7 +29,7 @@ model Address {
   state        String?
   neighborhood String?
   userId       String  @map("user_id")
-  user         User    @relation(fields: [userId], references: [id])
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("address")
 }
@@ -42,7 +42,7 @@ model Profile {
   linkedin  String?
   instagram String?
   userId    String  @map("user_id")
-  user      User    @relation(fields: [userId], references: [id])
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("profiles")
 }
