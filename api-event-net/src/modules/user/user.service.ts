@@ -7,8 +7,25 @@ export class UserService {
   constructor(private prisma: PrismaService) {}
 
   async createUser(data: Prisma.UserCreateInput): Promise<User> {
+    const { name, email, password, phone } = data;
+
     return this.prisma.user.create({
-      data,
+      data: {
+        name,
+        email,
+        password,
+        phone,
+        Profile: {
+          create: {},
+        },
+        Address: {
+          create: {},
+        },
+      },
+      include: {
+        Profile: true,
+        Address: true,
+      },
     });
   }
 
@@ -26,6 +43,10 @@ export class UserService {
       cursor,
       where,
       orderBy,
+      include: {
+        Profile: true,
+        Address: true,
+      },
     });
   }
 
@@ -34,6 +55,10 @@ export class UserService {
   ): Promise<User | null> {
     return this.prisma.user.findUnique({
       where: userWhereUniqueInput,
+      include: {
+        Profile: true,
+        Address: true,
+      },
     });
   }
 
