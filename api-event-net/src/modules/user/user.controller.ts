@@ -8,8 +8,8 @@ import {
   Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto } from './dtos/user-dto/create-user.dto';
+import { UpdateUserDto } from './dtos/user-dto/update-user.dto';
 import { User as UserModel } from '@prisma/client';
 
 @Controller('user')
