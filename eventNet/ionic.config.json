@@ -1,0 +1,7 @@
+{
+  "name": "eventNet",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

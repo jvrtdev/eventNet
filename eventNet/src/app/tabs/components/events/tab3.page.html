@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="selectedSegment">
+      <ion-segment-button value="official">
+        <ion-label>Oficiais</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="community">
+        <ion-label>Comunidade</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="selectedSegment == 'official'" class="ion-padding">
+  <official-events></official-events>
+</ion-content>
+<ion-content *ngIf="selectedSegment == 'community'" class="ion-padding">
+  <community-events></community-events>
+</ion-content>
