@@ -9,11 +9,13 @@
       </ion-menu-toggle>
     </ion-buttons>
   </ion-toolbar>
-  <ion-content class=""> </ion-content>
+  <ion-content>
+    
+  </ion-content>
 </ion-menu>
 
-<ion-header id="main-content">
-  <ion-toolbar>
+<ion-header id="main-content" class="shadow-none border-b border-slate-400">
+  <ion-toolbar class="shadow-none">
     <ion-buttons slot="start">
       <ion-menu-toggle>
         <ion-button>
@@ -22,7 +24,7 @@
       </ion-menu-toggle>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button [routerLink]="['/chat']">
         <ion-icon name="chatbubbles-outline" size="large"></ion-icon>
       </ion-button>
     </ion-buttons>
