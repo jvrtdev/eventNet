@@ -37,7 +37,9 @@ import { HeaderComponent } from 'src/components/header/header.component';
 })
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
-
+  
+  component = HeaderComponent
+  
   constructor() {
     addIcons({
       calendarOutline,
