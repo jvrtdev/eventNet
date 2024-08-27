@@ -15,8 +15,12 @@ import {
   IonToolbar,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { chatbubblesOutline, closeOutline, personCircleOutline } from 'ionicons/icons';
-import { ChatComponent } from 'src/app/chat/chat.component';
+import {
+  chatbubblesOutline,
+  closeOutline,
+  personCircleOutline,
+} from 'ionicons/icons';
+import { ChatComponent } from 'src/app/chat-container/chat/chat.component';
 
 @Component({
   standalone: true,
@@ -35,7 +39,7 @@ import { ChatComponent } from 'src/app/chat/chat.component';
     IonContent,
     IonMenuButton,
     IonNavLink,
-    RouterLink
+    RouterLink,
   ],
 })
 export class HeaderComponent {
@@ -44,5 +48,4 @@ export class HeaderComponent {
   }
 
   avatarUrl = 'https://ionicframework.com/docs/img/demos/avatar.svg';
-
 }
