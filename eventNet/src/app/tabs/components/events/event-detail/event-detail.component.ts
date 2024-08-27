@@ -35,6 +35,5 @@ export class EventDetailComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(this.id);
   }
 }
