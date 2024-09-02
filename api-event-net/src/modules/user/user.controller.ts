@@ -1,16 +1,16 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Post,
   Put,
 } from '@nestjs/common';
-import { UserService } from './user.service';
-import { CreateUserDto } from './dtos/user-dto/create-user.dto';
-import { UpdateUserDto } from './dtos/user-dto/update-user.dto';
 import { User as UserModel } from '@prisma/client';
+import { CreateUserDto } from '../../domain/dtos/user/create-user.dto';
+import { UpdateUserDto } from '../../domain/dtos/user/update-user.dto';
+import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {

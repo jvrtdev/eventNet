@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { UserModule } from './modules/user/user.module';
-import { ChatGateway } from './websocket/chat/chat.gateway';
+import { ChatGateway } from './modules/chat/chat.gateway';
 
 @Module({
   imports: [UserModule],
