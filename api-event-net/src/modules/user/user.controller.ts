@@ -8,8 +8,8 @@ import {
   Put,
 } from '@nestjs/common';
 import { User as UserModel } from '@prisma/client';
-import { CreateUserDto } from '../../domain/dtos/user/create-user.dto';
-import { UpdateUserDto } from '../../domain/dtos/user/update-user.dto';
+import { CreateUserInput } from '../../domain/dtos/user/create-user.dto';
+import { UpdateUserInput } from '../../domain/dtos/user/update-user.dto';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -17,7 +17,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async create(@Body() createUserDto: CreateUserDto): Promise<UserModel> {
+  async create(@Body() createUserDto: CreateUserInput): Promise<UserModel> {
     return this.userService.createUser(createUserDto);
   }
 
@@ -34,7 +34,7 @@ export class UserController {
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() updateUserDto: UpdateUserDto,
+    @Body() updateUserDto: UpdateUserInput,
   ): Promise<UserModel> {
     return this.userService.updateUser({
       where: { id },
