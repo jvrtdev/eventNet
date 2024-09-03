@@ -1,5 +1,5 @@
 import { CreateUserDto, UpdateUserDto } from 'src/domain/dtos';
-import { UserEntity } from 'src/domain/entities';
+import { QueryBuilderEntity, UserEntity } from 'src/domain/entities';
 import { RepositoryFactory } from 'src/common/factories';
 import { Injectable } from '@nestjs/common';
 
@@ -32,6 +32,7 @@ export class UserRepository extends RepositoryFactory<
   }
 
   findAll(): Promise<UserEntity[]> {
+    //query: QueryBuilderEntity
     return this.prismaService.user.findMany({
       include: {
         profile: true,
@@ -48,6 +49,14 @@ export class UserRepository extends RepositoryFactory<
       include: {
         profile: true,
         address: true,
+      },
+    });
+  }
+
+  findByEmail(email: string): Promise<UserEntity | null> {
+    return this.prismaService.user.findFirst({
+      where: {
+        email,
       },
     });
   }
@@ -69,6 +78,10 @@ export class UserRepository extends RepositoryFactory<
             data: address,
           },
         },
+      },
+      include: {
+        profile: true,
+        address: true,
       },
     });
   }

@@ -1,8 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { CreateUserDto, UpdateUserDto } from 'src/domain/dtos';
+import { CreateUserDto, QueryParamsDto, UpdateUserDto } from 'src/domain/dtos';
 import { ServiceBase } from 'src/common/base';
-import { UserRepository } from '../repository/user.repository';
+import { UserRepository } from '../repositories/user.repository';
 import { UserEntity } from 'src/domain/entities';
+import { hash, QueryBuilder } from 'src/common/utils';
 
 @Injectable()
 export class UserService
@@ -10,15 +11,23 @@ export class UserService
 {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async createUser(data: CreateUserDto): Promise<UserEntity> {
-    //TODOO: implementar os useCases
+  async createUser(dto: CreateUserDto): Promise<UserEntity> {
+    const emailAlreadyExists = await this.userRepository.findByEmail(dto.email);
 
-    return this.userRepository.create(data);
+    if (emailAlreadyExists)
+      throw new HttpException('Email already exists', HttpStatus.BAD_REQUEST);
+
+    dto.password = await hash(dto.password);
+
+    return this.userRepository.create(dto);
   }
 
   async findAll(): Promise<UserEntity[]> {
-    // TODO: fazer os queryParams
-    //const { skip, take, where, orderBy } = params;
+    //queryParams: QueryParamsDto
+    // const { query } = new QueryBuilder()
+    //   .sort(queryParams?.orderBy)
+    //   .date('createdAt', queryParams?.from, queryParams?.to)
+    //   .pagination(queryParams?.page, queryParams?.pageSize);
 
     const data = await this.userRepository.findAll();
 
