@@ -6,7 +6,7 @@ import { MessageRepository } from './message.repository';
 import { PrismaService } from 'src/infra/database/prisma/prisma.service';
 
 @Module({
-  providers: [MessageGateway, MessageService, MessageRepository, PrismaService],
+  providers: [MessageGateway, MessageService, MessageRepository],
   controllers: [MessageController],
   exports: [MessageService],
 })
