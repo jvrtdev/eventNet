@@ -7,26 +7,6 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "ES2021",
-    "paths": {
-      "@dtos": [
-        "./src/domain/dtos/index.ts"
-      ],
-      "@entities": [
-        "./src/domain/entities/index.ts"
-      ],
-      "@utils": [
-        "./src/common/utils/index.ts"
-      ],
-      "@bases": [
-        "./src/common/base/index.ts"
-      ],
-      "@factories": [
-        "./src/common/factories/index.ts"
-      ],
-      "@validators": [
-        "./src/common/validators/index.ts"
-      ],
-    },
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",

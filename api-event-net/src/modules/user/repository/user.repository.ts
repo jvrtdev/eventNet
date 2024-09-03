@@ -1,6 +1,6 @@
-import { CreateUserDto, UpdateUserDto } from '@dtos';
-import { UserEntity } from '@entities';
-import { RepositoryFactory } from '@factories';
+import { CreateUserDto, UpdateUserDto } from 'src/domain/dtos';
+import { UserEntity } from 'src/domain/entities';
+import { RepositoryFactory } from 'src/common/factories';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
