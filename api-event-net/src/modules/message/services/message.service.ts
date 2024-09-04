@@ -4,7 +4,6 @@ import { CreateMessageDto, UpdateMessageDto } from 'src/domain/dtos';
 import { MessageEntity } from 'src/domain/entities';
 import { MessageRepository } from '../repositories/message.repository';
 
-
 @Injectable()
 export class MessageService
   implements ServiceBase<MessageEntity, CreateMessageDto, UpdateMessageDto>
@@ -12,7 +11,6 @@ export class MessageService
   constructor(private readonly messageRepository: MessageRepository) {}
 
   async create(dto: CreateMessageDto): Promise<MessageEntity> {
-    
     if (dto.content != null) {
       throw new HttpException('Mensagem inválida!', HttpStatus.BAD_REQUEST);
     }
@@ -22,5 +20,5 @@ export class MessageService
     return message;
   }
 
-  async findAllMessagesByConversationId(conversation_id: string){}
+  async findAllMessagesByConversationId(conversation_id: string) {}
 }
