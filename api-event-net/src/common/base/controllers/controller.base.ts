@@ -1,3 +1,4 @@
+import { Get } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { QueryParamsDto } from 'src/domain/dtos/shared/query-params.dto';
 

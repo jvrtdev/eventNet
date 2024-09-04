@@ -1,7 +1,7 @@
 import { Message } from '@prisma/client';
 import { IsBoolean, IsDate, IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateMessageInput {
+export class CreateMessageDto {
   @IsString()
   @IsNotEmpty()
   content: string;

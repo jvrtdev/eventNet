@@ -1,5 +1,4 @@
 import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
-import { Type } from 'class-transformer';
 import { IsSort } from 'src/common/validators';
 
 export class QueryParamsDto {
@@ -18,11 +17,9 @@ export class QueryParamsDto {
 
   @IsOptional()
   @IsDate()
-  @Type(() => Date)
   from?: Date;
 
   @IsOptional()
   @IsDate()
-  @Type(() => Date)
   to?: Date;
 }
