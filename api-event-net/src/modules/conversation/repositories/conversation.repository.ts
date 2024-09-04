@@ -16,5 +16,4 @@ export class ConversationRepository extends RepositoryFactory<
   findAll(query?: any): Promise<ConversationEntity[]> {
     return this.prismaService.conversation.findMany(query);
   }
-
 }
