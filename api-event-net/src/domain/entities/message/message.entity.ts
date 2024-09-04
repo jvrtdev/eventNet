@@ -1,6 +1,6 @@
-import { Message } from '@prisma/client'
+import { Message } from '@prisma/client';
 
-export class MessageEntity implements Message{
+export class MessageEntity implements Message {
   id: string;
   content: string;
   conversationId: string;

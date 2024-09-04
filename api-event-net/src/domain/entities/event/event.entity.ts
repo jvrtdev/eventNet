@@ -1,6 +1,6 @@
-import { Event } from '@prisma/client'
+import { Event } from '@prisma/client';
 
-export class EventEntity implements Event{
+export class EventEntity implements Event {
   id: string;
   title: string;
   description: string;

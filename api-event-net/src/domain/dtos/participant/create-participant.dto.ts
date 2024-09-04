@@ -1,12 +1,10 @@
-import { $Enums } from "@prisma/client";
-import { IsNotEmpty, IsString } from "class-validator";
+import { $Enums } from '@prisma/client';
+import { IsNotEmpty, IsString } from 'class-validator';
 
-
-export class CreateParticipantDto{
-  
+export class CreateParticipantDto {
   @IsString()
   @IsNotEmpty()
-  conversationId: string; 
+  conversationId: string;
 
   @IsString()
   @IsNotEmpty()
