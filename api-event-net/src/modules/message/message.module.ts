@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
-import { PrismaService } from 'src/infra/database/prisma/prisma.service';
-import { MessageController } from './message.controller';
 import { MessageGateway } from './gateways/message.gateway';
-import { MessageService } from './message.service';
 import { MessageRepository } from './repositories/message.repository';
+import { MessageController } from './controllers/message.controller';
+import { MessageService } from './services/message.service';
 
 @Module({
   providers: [MessageGateway, MessageService, MessageRepository],
