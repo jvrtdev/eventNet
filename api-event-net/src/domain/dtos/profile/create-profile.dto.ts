@@ -12,6 +12,7 @@ export class CreateProfileDto {
   @IsString()
   @IsOptional()
   github?: string;
+
   @IsString()
   @IsOptional()
   linkedin?: string;
