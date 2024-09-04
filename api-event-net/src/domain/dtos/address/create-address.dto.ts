@@ -1,6 +1,6 @@
-import { IsOptional, IsString } from "class-validator";
+import { IsOptional, IsString } from 'class-validator';
 
-export class CreateAddressInput {
+export class CreateAddressDto {
   @IsString()
   @IsOptional()
   city?: string;

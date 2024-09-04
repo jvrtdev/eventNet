@@ -18,7 +18,6 @@ export class RepositoryFactory<K, T = void, J = void> {
     return this.prismaService[this.model].create({
       data: {
         ...data,
-        deletedAt: null,
       },
     });
   }
@@ -46,13 +45,10 @@ export class RepositoryFactory<K, T = void, J = void> {
     return this.prismaService[this.model].count({ where });
   }
 
-  softDelete(id: string): Promise<K | null> {
-    return this.prismaService[this.model].update({
+  Delete(id: string): Promise<K | null> {
+    return this.prismaService[this.model].delete({
       where: {
         id,
-      },
-      data: {
-        deletedAt: new Date(),
       },
     });
   }

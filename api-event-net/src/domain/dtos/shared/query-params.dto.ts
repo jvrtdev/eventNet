@@ -1,16 +1,25 @@
-import { IsNumber, IsOptional, IsString } from "class-validator";
+import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsSort } from 'src/common/validators';
 
-export class QueryParamsInput{
+export class QueryParamsDto {
   @IsNumber()
   @IsOptional()
-  page: number = 1
+  page: number;
 
   @IsNumber()
   @IsOptional()
-  pageSize: number = 10
+  pageSize: number;
 
   @IsString()
   @IsOptional()
-  orderBy?: string
+  @IsSort()
+  orderBy?: string;
 
+  @IsOptional()
+  @IsDate()
+  from?: Date;
+
+  @IsOptional()
+  @IsDate()
+  to?: Date;
 }
