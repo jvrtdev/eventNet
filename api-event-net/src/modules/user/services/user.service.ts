@@ -52,5 +52,11 @@ export class UserService
 
   async remove(id: string): Promise<UserEntity> {
     return this.userRepository.Delete(id);
+
+
+
   }
+
+
+  
 }
