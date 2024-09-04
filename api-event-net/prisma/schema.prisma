@@ -76,7 +76,7 @@ model UserEvent {
 
 model Conversation {
   id          String        @id @default(uuid())
-  isGroup     Boolean
+  isGroup     Boolean?      @default(false)
   Event       Event[]
   message     Message[]
   Participant Participant[]
