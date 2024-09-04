@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding space-y-3">
+  <div
+    *ngFor="let message of messages"
+    class="bg-blue-800 text-white p-1 max-w-fit self-end rounded-e-lg"
+  
+  >
+    <div class="flex flex-col">
+      <ion-text>
+        <strong>{{ message.name }}</strong>
+      </ion-text>
+      <ion-text>
+        <p>{{ message.text }}</p>
+      </ion-text>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-item>
+    <ion-textarea
+      [(ngModel)]="message.text"
+      placeholder="Digite sua mensagem"
+    />
+    <ion-button (click)="sendMessage()"
+      ><ion-icon name="send-outline" size="large"></ion-icon
+    ></ion-button>
+  </ion-item>
+</ion-footer>
