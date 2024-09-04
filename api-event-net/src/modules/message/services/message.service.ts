@@ -1,18 +1,18 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ServiceBase } from 'src/common/base';
-import { CreateMessageInput, UpdateMessageInput } from 'src/domain/dtos';
+import { CreateMessageDto, UpdateMessageDto } from 'src/domain/dtos';
 import { MessageEntity } from 'src/domain/entities';
-import { MessageRepository } from './repository/message.repository';
+import { MessageRepository } from '../repositories/message.repository';
+
 
 @Injectable()
 export class MessageService
-  implements ServiceBase<MessageEntity, CreateMessageInput, UpdateMessageInput>
+  implements ServiceBase<MessageEntity, CreateMessageDto, UpdateMessageDto>
 {
   constructor(private readonly messageRepository: MessageRepository) {}
 
-  async create(dto: CreateMessageInput): Promise<MessageEntity> {
-    //validar se existe um conversation(chat), se não existir, criar um conversation e colocar na tabela participants o id do sender e o receiver
-
+  async create(dto: CreateMessageDto): Promise<MessageEntity> {
+    
     if (dto.content != null) {
       throw new HttpException('Mensagem inválida!', HttpStatus.BAD_REQUEST);
     }
@@ -21,4 +21,6 @@ export class MessageService
 
     return message;
   }
+
+  async findAllMessagesByConversationId(conversation_id: string){}
 }
