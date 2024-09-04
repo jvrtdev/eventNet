@@ -9,7 +9,7 @@ export class QueryBuilder {
     };
   }
 
-  pagination(page: number, pageSize: number) {
+  pagination(page: number = 1, pageSize: number = 10) {
     const skip =
       (parseInt(page.toString()) - 1) * parseInt(pageSize.toString());
 

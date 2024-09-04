@@ -23,9 +23,6 @@ export class UserService
   }
 
   async findAll(queryParams: QueryParamsDto): Promise<UserEntity[]> {
-    if (queryParams.page == null) queryParams.page = 1;
-    if (queryParams.pageSize == null) queryParams.pageSize = 10;
-
     const { query } = new QueryBuilder()
       .sort(queryParams.orderBy)
       .date('createdAt', queryParams.from, queryParams.to)
