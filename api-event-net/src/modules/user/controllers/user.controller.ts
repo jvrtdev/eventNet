@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CreateUserDto, QueryParamsDto, UpdateUserDto } from 'src/domain/dtos';
 import { UserService } from '../services/user.service';
@@ -21,9 +22,8 @@ export class UserController {
   }
 
   @Get()
-  async findAll() /*@Body('queryParams') queryParams: QueryParamsDto,*/
-  : Promise<UserEntity[]> {
-    return this.userService.findAll();
+  async findAll(@Query() queryParams: QueryParamsDto): Promise<UserEntity[]> {
+    return this.userService.findAll(queryParams);
   }
 
   @Get(':id')

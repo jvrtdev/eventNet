@@ -31,9 +31,9 @@ export class UserRepository extends RepositoryFactory<
     });
   }
 
-  findAll(): Promise<UserEntity[]> {
-    //query: QueryBuilderEntity
+  findAll(query: QueryBuilderEntity): Promise<UserEntity[]> {
     return this.prismaService.user.findMany({
+      ...query,
       include: {
         profile: true,
         address: true,

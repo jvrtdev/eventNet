@@ -5,13 +5,11 @@ import { IsSort } from 'src/common/validators';
 export class QueryParamsDto {
   @IsNumber()
   @IsOptional()
-  @Type(() => Number)
-  page: number = 1;
+  page: number;
 
   @IsNumber()
   @IsOptional()
-  @Type(() => Number)
-  pageSize: number = 10;
+  pageSize: number;
 
   @IsString()
   @IsOptional()

@@ -22,14 +22,16 @@ export class UserService
     return this.userRepository.create(dto);
   }
 
-  async findAll(): Promise<UserEntity[]> {
-    //queryParams: QueryParamsDto
-    // const { query } = new QueryBuilder()
-    //   .sort(queryParams?.orderBy)
-    //   .date('createdAt', queryParams?.from, queryParams?.to)
-    //   .pagination(queryParams?.page, queryParams?.pageSize);
+  async findAll(queryParams: QueryParamsDto): Promise<UserEntity[]> {
+    if (queryParams.page == null) queryParams.page = 1;
+    if (queryParams.pageSize == null) queryParams.pageSize = 10;
 
-    const data = await this.userRepository.findAll();
+    const { query } = new QueryBuilder()
+      .sort(queryParams.orderBy)
+      .date('createdAt', queryParams.from, queryParams.to)
+      .pagination(queryParams.page, queryParams.pageSize);
+
+    const data = await this.userRepository.findAll(query);
 
     return data;
   }
