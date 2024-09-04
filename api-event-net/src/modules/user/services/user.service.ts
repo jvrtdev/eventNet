@@ -17,6 +17,16 @@ export class UserService
     if (emailAlreadyExists)
       throw new HttpException('Email already exists', HttpStatus.BAD_REQUEST);
 
+    const userNameAlreadyExists = await this.userRepository.findByUserName(
+      dto.userName,
+    );
+
+    if (userNameAlreadyExists)
+      throw new HttpException(
+        'UserName already exists',
+        HttpStatus.BAD_REQUEST,
+      );
+
     dto.password = await hash(dto.password);
 
     return this.userRepository.create(dto);
@@ -42,9 +52,14 @@ export class UserService
   }
 
   async update(dto: UpdateUserDto): Promise<UserEntity> {
-    const user = await this.userRepository.update(dto);
+    const user = await this.userRepository.findById(dto.id);
 
-    return user;
+    const update = await this.userRepository.update({ ...dto, id: user.id });
+
+    if (!update)
+      throw new HttpException('Failed to update', HttpStatus.NOT_ACCEPTABLE);
+
+    return update;
   }
 
   async remove(id: string): Promise<UserEntity> {
