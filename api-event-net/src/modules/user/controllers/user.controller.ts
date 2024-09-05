@@ -17,22 +17,22 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async createUser(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
+  createUser(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
     return this.userService.createUser(createUserDto);
   }
 
   @Get()
-  async findAll(@Query() queryParams: QueryParamsDto): Promise<UserEntity[]> {
+  findAll(@Query() queryParams: QueryParamsDto): Promise<UserEntity[]> {
     return this.userService.findAll(queryParams);
   }
 
   @Get(':id')
-  async findById(@Param('id') id: string): Promise<UserEntity | null> {
+  findById(@Param('id') id: string): Promise<UserEntity | null> {
     return this.userService.findById(id);
   }
 
   @Put(':id')
-  async updateUser(
+  updateUser(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ): Promise<UserEntity> {
@@ -41,7 +41,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  async removeUser(@Param('id') id: string): Promise<UserEntity> {
+  removeUser(@Param('id') id: string): Promise<UserEntity> {
     return this.userService.remove(id);
   }
 }

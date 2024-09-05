@@ -29,7 +29,9 @@ export class UserService
 
     dto.password = await hash(dto.password);
 
-    return this.userRepository.create(dto);
+    const user = await this.userRepository.create(dto);
+
+    return user;
   }
 
   async findAll(queryParams: QueryParamsDto): Promise<UserEntity[]> {
@@ -63,6 +65,8 @@ export class UserService
   }
 
   async remove(id: string): Promise<UserEntity> {
-    return this.userRepository.Delete(id);
+    const remove = await this.userRepository.delete(id);
+
+    return remove;
   }
 }
