@@ -45,7 +45,7 @@ export class RepositoryFactory<K, T = void, J = void> {
     return this.prismaService[this.model].count({ where });
   }
 
-  Delete(id: string): Promise<K | null> {
+  delete(id: string): Promise<K | null> {
     return this.prismaService[this.model].delete({
       where: {
         id,
