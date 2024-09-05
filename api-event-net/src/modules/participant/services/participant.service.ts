@@ -13,7 +13,9 @@ export class ParticipantService
   constructor(private readonly participantRepository: ParticipantRepository) {}
 
   async create(dto: CreateParticipantDto): Promise<ParticipantEntity> {
-    return await this.participantRepository.create(dto);
+    const participant = await this.participantRepository.create(dto);
+
+    return participant;
   }
 
   async findAll(queryParams: QueryParamsDto): Promise<ParticipantEntity[]> {
@@ -34,5 +36,11 @@ export class ParticipantService
       throw new HttpException('Participant not found', HttpStatus.NOT_FOUND);
 
     return participant;
+  }
+
+  async remove(id: string): Promise<ParticipantEntity> {
+    const remove = await this.participantRepository.delete(id);
+
+    return remove;
   }
 }
