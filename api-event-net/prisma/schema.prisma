@@ -14,19 +14,19 @@ model User {
   password          String
   phone             String
   role              UserRole      @default(common)
+  createdAt         DateTime      @default(now()) @map("created_at") @db.Timestamp(6)
   username          String        @map("username")
   address           Address?
-  createdAt         DateTime      @default(now()) @map("created_at") @db.Timestamp
+  userComments      Comment[]
+  friendshipsFriend Friendship[]  @relation("FriendshipsFriend")
+  friendshipsUser   Friendship[]  @relation("FriendshipsUser")
+  userLikes         Like[]
   message           Message[]
   Participant       Participant[]
-  profile           Profile?
-  userEvent         UserEvent[]
-  friendshipsUser   Friendship[]  @relation("FriendshipsUser")
-  friendshipsFriend Friendship[]  @relation("FriendshipsFriend")
   userPosts         Post[]
-  userComments      Comment[]
-  userLikes         Like[]
+  profile           Profile?
   userReposts       Repost[]
+  userEvent         UserEvent[]
 
   @@map("users")
 }
@@ -49,8 +49,8 @@ model Profile {
   github    String?
   linkedin  String?
   instagram String?
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp
   userId    String   @unique @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp(6)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("profiles")
@@ -65,8 +65,8 @@ model Event {
   location       String
   qr_code        String
   image          String
-  createdAt      DateTime     @default(now()) @map("created_at") @db.Timestamp
   conversationId String       @map("conversation_id")
+  createdAt      DateTime     @default(now()) @map("created_at") @db.Timestamp(6)
   conversation   Conversation @relation(fields: [conversationId], references: [id])
   userEvent      UserEvent[]
 
@@ -78,7 +78,7 @@ model UserEvent {
   userId    String     @map("user_id")
   eventId   String     @map("event_id")
   role      EventRole? @default(participant)
-  createdAt DateTime   @default(now()) @map("created_at") @db.Timestamp
+  createdAt DateTime   @default(now()) @map("created_at") @db.Timestamp(6)
   event     Event      @relation(fields: [eventId], references: [id])
   user      User       @relation(fields: [userId], references: [id])
 
@@ -91,9 +91,9 @@ model Friendship {
   friendId       String
   conversationId String
   status         FriendshipStatus? @default(pending)
-  createdAt      DateTime          @default(now()) @db.Timestamp
-  user           User              @relation("FriendshipsUser", fields: [userId], references: [id])
+  createdAt      DateTime          @default(now()) @db.Timestamp(6)
   friend         User              @relation("FriendshipsFriend", fields: [friendId], references: [id])
+  user           User              @relation("FriendshipsUser", fields: [userId], references: [id])
 
   @@map("friendships")
 }
@@ -101,7 +101,7 @@ model Friendship {
 model Conversation {
   id          String        @id @default(uuid())
   isGroup     Boolean       @default(false)
-  createdAt   DateTime      @default(now()) @map("created_at") @db.Timestamp
+  createdAt   DateTime      @default(now()) @map("created_at") @db.Timestamp(6)
   Event       Event[]
   message     Message[]
   Participant Participant[]
@@ -112,10 +112,10 @@ model Conversation {
 model Message {
   id             String       @id @default(uuid())
   content        String
-  createdAt      DateTime     @default(now()) @map("created_at") @db.Timestamp
   senderId       String       @map("sender_id")
   conversationId String       @map("conversation_id")
   isRead         Boolean      @map("is_read")
+  createdAt      DateTime     @default(now()) @map("created_at") @db.Timestamp(6)
   conversation   Conversation @relation(fields: [conversationId], references: [id])
   user           User         @relation(fields: [senderId], references: [id])
 
@@ -127,23 +127,22 @@ model Participant {
   conversationId String           @map("conversation_id")
   userId         String           @map("user_id")
   role           ParticipantRole? @default(member)
-  createdAt      DateTime         @default(now()) @map("created_at") @db.Timestamp
+  createdAt      DateTime         @default(now()) @map("created_at") @db.Timestamp(6)
   conversation   Conversation     @relation(fields: [conversationId], references: [id])
   user           User             @relation(fields: [userId], references: [id])
 
   @@map("participants")
 }
 
-//daqui pra baixo está fora do mvp
 model Post {
   id        String    @id @default(uuid())
-  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp
-  updatedAt DateTime  @default(now()) @map("updated_at") @db.Timestamp
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime  @default(now()) @map("updated_at") @db.Timestamp(6)
   text      String
   ownerId   String    @map("owner_id")
-  owner     User      @relation(fields: [ownerId], references: [id])
   comments  Comment[]
   likes     Like[]
+  owner     User      @relation(fields: [ownerId], references: [id])
   reposts   Repost[]
 
   @@map("posts")
@@ -154,22 +153,22 @@ model Repost {
   text      String?
   userId    String   @map("user_id")
   postId    String   @map("post_id")
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp
-  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp(6)
   post      Post     @relation(fields: [postId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 
   @@map("reposts")
 }
 
 model Comment {
   id        String   @id @default(uuid())
-  text      String   
+  text      String
   postId    String   @map("post_id")
   userId    String   @map("user_id")
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp
-  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamp
-  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamp(6)
   post      Post     @relation(fields: [postId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 
   @@map("comments")
 }
@@ -178,14 +177,12 @@ model Like {
   id        String   @id @default(uuid())
   postId    String   @map("post_id")
   userId    String   @map("user_id")
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp(6)
   post      Post     @relation(fields: [postId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
 
   @@map("likes")
 }
-
-//enums
 
 enum FriendshipStatus {
   pending
