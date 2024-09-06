@@ -4,5 +4,5 @@ import { IsBoolean, IsNotEmpty } from 'class-validator';
 export class CreateConversationDto {
   @IsBoolean()
   @IsNotEmpty()
-  isGroup: boolean;
+  isGroup?: boolean;
 }

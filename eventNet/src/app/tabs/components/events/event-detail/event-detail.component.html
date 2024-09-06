@@ -1,15 +1,74 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-        
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="ion-padding space-y-5">
+  <ion-text>
+    <h1 class="text-2xl font-bold">UNISUAMJS</h1>
+  </ion-text>
 
-  <p>
-    dynamic id {{id}}
-    event-detail works!
-  </p>
+  <ion-text class="flex items-center gap-2 text-sm">
+    <ion-icon name="calendar-outline" class="text-xl"></ion-icon>
+    <p>07 set - 2024 • 23:00 > 08 set - 2024 • 09:30</p>
+  </ion-text>
+
+  <ion-text class="flex items-center gap-2 text-sm">
+    <ion-icon name="location-outline" class="text-xl"></ion-icon>
+    <p>Evento presencial em KOMPLEXO TEMPO, São Paulo - SP</p>
+  </ion-text>
+
+  <ion-card class="rounded-xl">
+    <ion-card-header>
+      <ion-card-title class="flex items-center justify-between">
+        <p class="font-bold">Ingressos</p>
+        <div class="flex items-center text-base">
+          <ion-icon name="cart-outline" size="large"></ion-icon>
+          <span>R$ {{ valorIngresso }}</span>
+        </div>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="full">
+        <ion-item>
+          <div class="grid grid-cols-2 w-full">
+            <div class="flex items-center col-span-1">
+              <ion-icon name="ticket" class="text-4xl mr-2"></ion-icon>
+              <div class="flex flex-col">
+                <span class="text-nowrap">Ingresso Inteira</span>
+                <span>R$ 0,00</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 col-span-1 place-content-end">
+              <ion-icon name="remove-circle" class="text-xl"></ion-icon>
+              <span class="text-xl">{{ numberTickets }}</span>
+              <ion-icon name="add-circle" class="text-xl"></ion-icon>
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+    <div class="flex w-full justify-center items-center p-2">
+      <ion-button>Comprar Ingresso</ion-button>
+    </div>
+  </ion-card>
+
+  <div class="flex flex-col mt-4 gap-2">
+    <ion-text>
+      <h1 class="text-xl font-bold">Descrição do evento:</h1>
+    </ion-text>
+
+    <ion-text>
+      Desbravando o Futuro da Web com JavaScript O UnisuamJs é um evento de
+      destaque no calendário tecnológico da Universidade Unisuam, projetado para
+      fomentar o aprendizado e a troca de experiências sobre JavaScript, uma das
+      linguagens de programação mais importantes e versáteis do mercado. Este
+      evento oferece uma plataforma para explorar as últimas tendências,
+      melhores práticas e ferramentas emergentes no ecossistema JavaScript.
+    </ion-text>
+    <ion-button>Entrar no chat</ion-button>
+  </div>
 </ion-content>

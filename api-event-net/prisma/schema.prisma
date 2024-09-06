@@ -100,7 +100,7 @@ model Friendship {
 
 model Conversation {
   id          String        @id @default(uuid())
-  isGroup     Boolean
+  isGroup     Boolean       @default(false)
   createdAt   DateTime      @default(now()) @map("created_at") @db.Timestamp
   Event       Event[]
   message     Message[]

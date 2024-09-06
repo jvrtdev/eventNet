@@ -64,7 +64,7 @@ export class UserRepository extends RepositoryFactory<
   findByUserName(userName: string): Promise<UserEntity | null> {
     return this.prismaService.user.findFirst({
       where: {
-        userName,
+        username,
       },
     });
   }

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { EventDetailComponent } from './tabs/components/events/event-detail/event-detail.component';
-import { ChatComponent } from './chat/chat.component';
+import { ChatContainerComponent } from './chat-container/chat-container.component';
+import { ChatComponent } from './chat-container/chat/chat.component';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,10 @@ export const routes: Routes = [
   },
   {
     path: 'chat',
+    component: ChatContainerComponent,
+  },
+  {
+    path: 'chat/:id',
     component: ChatComponent
   }
 ];

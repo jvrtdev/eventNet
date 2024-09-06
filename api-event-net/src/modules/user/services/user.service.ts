@@ -18,7 +18,7 @@ export class UserService
       throw new HttpException('Email already exists', HttpStatus.BAD_REQUEST);
 
     const userNameAlreadyExists = await this.userRepository.findByUserName(
-      dto.userName,
+      dto.username,
     );
 
     if (userNameAlreadyExists)
