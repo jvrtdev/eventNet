@@ -5,4 +5,5 @@ export class ParticipantEntity implements Participant {
   conversationId: string;
   role: $Enums.ParticipantRole;
   userId: string;
+  createdAt: Date;
 }

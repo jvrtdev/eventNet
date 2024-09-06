@@ -10,4 +10,5 @@ export class EventEntity implements Event {
   image: string;
   location: string;
   qr_code: string;
+  createdAt: Date;
 }

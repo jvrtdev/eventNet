@@ -9,4 +9,5 @@ export class ProfileEntity implements Profile{
   instagram: string;
   linkedin: string;
   userId: string;
+  createdAt: Date;
 }

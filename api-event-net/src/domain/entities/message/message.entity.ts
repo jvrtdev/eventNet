@@ -7,4 +7,5 @@ export class MessageEntity implements Message {
   isRead: boolean;
   senderId: string;
   timeStamp: Date;
+  createdAt: Date;
 }
