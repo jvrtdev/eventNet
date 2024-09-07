@@ -92,6 +92,8 @@ model Friendship {
   conversationId String
   status         FriendshipStatus? @default(pending)
   createdAt      DateTime          @default(now()) @db.Timestamp(6)
+  conversation   Conversation      @relation(fields: [conversationId], references: [id])
+
   friend         User              @relation("FriendshipsFriend", fields: [friendId], references: [id])
   user           User              @relation("FriendshipsUser", fields: [userId], references: [id])
 
@@ -105,6 +107,8 @@ model Conversation {
   Event       Event[]
   message     Message[]
   Participant Participant[]
+  friendship  Friendship[]
+  
 
   @@map("conversations")
 }
