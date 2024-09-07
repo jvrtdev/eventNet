@@ -4,6 +4,7 @@ import { PrismaModule } from './infra/database/prisma/prisma.module';
 import { MessageModule } from './modules/message/message.module';
 import { ConversationModule } from './modules/conversation/conversation.module';
 import { ParticipantModule } from './modules/participant/participant.module';
+import { FriendshipModule } from './modules/friendship/friendship.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { ParticipantModule } from './modules/participant/participant.module';
     MessageModule,
     ConversationModule,
     ParticipantModule,
+    FriendshipModule,
     PrismaModule,
   ],
 })
