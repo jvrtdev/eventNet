@@ -65,7 +65,12 @@ export class UserService
   }
 
   async remove(id: string): Promise<UserEntity> {
-    const remove = await this.userRepository.delete(id);
+    const user = await this.findById(id);
+
+    const remove = await this.userRepository.delete(user.id);
+
+    if (!remove)
+      throw new HttpException('Failed to remove', HttpStatus.NOT_ACCEPTABLE);
 
     return remove;
   }
