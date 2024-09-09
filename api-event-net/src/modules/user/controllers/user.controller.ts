@@ -31,7 +31,7 @@ export class UserController {
     return this.userService.findById(id);
   }
 
-  @Put(':id')
+  @Put()
   updateUser(@Body() updateUserDto: UpdateUserDto): Promise<UserEntity> {
     return this.userService.update(updateUserDto);
   }
