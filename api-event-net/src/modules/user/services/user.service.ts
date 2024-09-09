@@ -54,7 +54,7 @@ export class UserService
   }
 
   async update(dto: UpdateUserDto): Promise<UserEntity> {
-    const user = await this.userRepository.findById(dto.id);
+    const user = await this.findById(dto.id);
 
     const update = await this.userRepository.update({ ...dto, id: user.id });
 
