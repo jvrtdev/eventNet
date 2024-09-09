@@ -22,12 +22,12 @@ export class UserController {
   }
 
   @Get()
-  findAll(@Query() queryParams: QueryParamsDto): Promise<UserEntity[]> {
+  findAllUsers(@Query() queryParams: QueryParamsDto): Promise<UserEntity[]> {
     return this.userService.findAll(queryParams);
   }
 
   @Get(':id')
-  findById(@Param('id') id: string): Promise<UserEntity | null> {
+  findUserById(@Param('id') id: string): Promise<UserEntity | null> {
     return this.userService.findById(id);
   }
 
