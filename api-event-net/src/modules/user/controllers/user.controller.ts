@@ -32,11 +32,7 @@ export class UserController {
   }
 
   @Put(':id')
-  updateUser(
-    @Param('id') id: string,
-    @Body() updateUserDto: UpdateUserDto,
-  ): Promise<UserEntity> {
-    updateUserDto.id = id;
+  updateUser(@Body() updateUserDto: UpdateUserDto): Promise<UserEntity> {
     return this.userService.update(updateUserDto);
   }
 
