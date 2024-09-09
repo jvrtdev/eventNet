@@ -16,7 +16,7 @@
 
 ## Visão Geral
 
-O **Eventify** é um aplicativo mobile completo para gestão de eventos, permitindo que os usuários criem eventos, inscrevam-se, façam check-in usando QR Codes e interajam com outros participantes através de chat em tempo real. O backend gerencia a autenticação, a lógica de eventos e a comunicação em tempo real, enquanto o frontend, desenvolvido em Angular + Ionic, oferece uma interface amigável e responsiva.
+O **eventNet** é um aplicativo mobile completo para gestão de eventos, permitindo que os usuários criem eventos, inscrevam-se, façam check-in usando QR Codes e interajam com outros participantes através de chat em tempo real. O backend gerencia a autenticação, a lógica de eventos e a comunicação em tempo real, enquanto o frontend, desenvolvido em Angular + Ionic, oferece uma interface amigável e responsiva.
 
 ## Funcionalidades
 
