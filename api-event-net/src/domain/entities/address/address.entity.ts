@@ -1,6 +1,6 @@
-import { Address} from '@prisma/client'
+import { Address } from '@prisma/client';
 
-export class AddressEntity implements Address{
+export class AddressEntity implements Address {
   id: string;
   state: string;
   city: string;

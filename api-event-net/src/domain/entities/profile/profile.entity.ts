@@ -1,7 +1,6 @@
-import { Profile } from '@prisma/client'
+import { Profile } from '@prisma/client';
 
-
-export class ProfileEntity implements Profile{
+export class ProfileEntity implements Profile {
   id: string;
   avatar: string;
   bio: string;

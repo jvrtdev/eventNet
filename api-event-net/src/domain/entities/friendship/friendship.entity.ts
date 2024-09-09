@@ -1,7 +1,6 @@
-import { $Enums, Friendship } from "@prisma/client";
+import { $Enums, Friendship } from '@prisma/client';
 
-
-export class FriendshipEntity implements Friendship{
+export class FriendshipEntity implements Friendship {
   id: string;
   conversationId: string;
   userId: string;
