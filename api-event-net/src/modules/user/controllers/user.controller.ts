@@ -27,7 +27,7 @@ export class UserController {
   }
 
   @Get(':id')
-  findUserById(@Param('id') id: string): Promise<UserEntity | null> {
+  findUserById(@Param('id') id: string): Promise<UserEntity> {
     return this.userService.findById(id);
   }
 
