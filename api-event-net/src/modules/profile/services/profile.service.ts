@@ -10,7 +10,7 @@ export class ProfileService
 {
   constructor(private readonly profileRepository: ProfileRepository) {}
 
-  async create(dto?: CreateProfileDto): Promise<ProfileEntity> {
+  async create(dto: CreateProfileDto): Promise<ProfileEntity> {
     const profile = await this.profileRepository.create(dto);
 
     return profile;

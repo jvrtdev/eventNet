@@ -4,12 +4,18 @@ import { ServiceBase } from 'src/common/base';
 import { UserRepository } from '../repositories/user.repository';
 import { UserEntity } from 'src/domain/entities';
 import { hash, QueryBuilder } from 'src/common/utils';
+import { ProfileService } from 'src/modules/profile/services/profile.service';
+import { AddressService } from 'src/modules/address/services/address.service';
 
 @Injectable()
 export class UserService
   implements ServiceBase<UserEntity, CreateUserDto, UpdateUserDto>
 {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly profileService: ProfileService,
+    private readonly addressService: AddressService,
+  ) {}
 
   async createUser(dto: CreateUserDto): Promise<UserEntity> {
     const emailAlreadyExists = await this.userRepository.findByEmail(dto.email);
@@ -18,7 +24,7 @@ export class UserService
       throw new HttpException('Email already exists', HttpStatus.BAD_REQUEST);
 
     const userNameAlreadyExists = await this.userRepository.findByUserName(
-      dto.username,
+      dto.userName,
     );
 
     if (userNameAlreadyExists)
@@ -30,6 +36,10 @@ export class UserService
     dto.password = await hash(dto.password);
 
     const user = await this.userRepository.create(dto);
+
+    await this.profileService.create({ userId: user.id });
+
+    await this.addressService.create({ userId: user.id });
 
     return user;
   }

@@ -10,7 +10,7 @@ export class AddressService
 {
   constructor(private readonly addressRepository: AddressRepository) {}
 
-  async create(dto?: CreateAddressDto): Promise<AddressEntity> {
+  async create(dto: CreateAddressDto): Promise<AddressEntity> {
     const address = await this.addressRepository.create(dto);
 
     return address;

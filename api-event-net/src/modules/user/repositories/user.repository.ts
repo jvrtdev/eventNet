@@ -13,24 +13,6 @@ export class UserRepository extends RepositoryFactory<
     super('user');
   }
 
-  create(data: CreateUserDto): Promise<UserEntity> {
-    return this.prismaService.user.create({
-      data: {
-        ...data,
-        profile: {
-          create: {},
-        },
-        address: {
-          create: {},
-        },
-      },
-      include: {
-        profile: true,
-        address: true,
-      },
-    });
-  }
-
   findAll(query: QueryBuilderEntity): Promise<UserEntity[]> {
     return this.prismaService.user.findMany({
       ...query,
@@ -61,10 +43,10 @@ export class UserRepository extends RepositoryFactory<
     });
   }
 
-  findByUserName(username: string): Promise<UserEntity | null> {
+  findByUserName(userName: string): Promise<UserEntity | null> {
     return this.prismaService.user.findFirst({
       where: {
-        username,
+        userName,
       },
     });
   }
