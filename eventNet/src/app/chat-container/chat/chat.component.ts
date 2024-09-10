@@ -2,6 +2,7 @@ import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 
+import { ActivatedRoute } from '@angular/router';
 import {
   IonBackButton,
   IonButton,
@@ -18,9 +19,8 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { sendOutline } from 'ionicons/icons';
-import { MessageTypes } from 'src/@types/message';
+import { MessageTypes } from 'src/shared/@types/message';
 import { ChatService } from './chat.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -44,7 +44,7 @@ import { ActivatedRoute } from '@angular/router';
   ],
 })
 export class ChatComponent implements OnInit {
-  id: any
+  id: any;
 
   message: MessageTypes = { name: '', text: '' };
   messages: MessageTypes[] = [];
