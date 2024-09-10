@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list [inset]="true">
+    <ion-item>
+      <ion-toggle
+        (ngModel)="(paletteToggle)"
+        (ionChange)="toggleChange($event)"
+        justify="space-between"
+        class="text-lg"
+        >Dark Mode</ion-toggle
+      >
+    </ion-item>
+  </ion-list>
+</ion-content>
