@@ -5,10 +5,14 @@ import { MessageModule } from './modules/message/message.module';
 import { ConversationModule } from './modules/conversation/conversation.module';
 import { ParticipantModule } from './modules/participant/participant.module';
 import { FriendshipModule } from './modules/friendship/friendship.module';
+import { AddressModule } from './modules/address/address.module';
+import { ProfileModule } from './modules/profile/profile.module';
 
 @Module({
   imports: [
     UserModule,
+    AddressModule,
+    ProfileModule,
     MessageModule,
     ConversationModule,
     ParticipantModule,
