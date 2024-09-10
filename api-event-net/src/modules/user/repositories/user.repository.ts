@@ -50,34 +50,4 @@ export class UserRepository extends RepositoryFactory<
       },
     });
   }
-
-  update({
-    id,
-    address,
-    profile,
-    ...data
-  }: UpdateUserDto & { id: string }): Promise<UserEntity | null> {
-    return this.prismaService.user.update({
-      where: {
-        id,
-      },
-      data: {
-        ...data,
-        profile: {
-          update: {
-            data: profile,
-          },
-        },
-        address: {
-          update: {
-            data: address,
-          },
-        },
-      },
-      include: {
-        profile: true,
-        address: true,
-      },
-    });
-  }
 }

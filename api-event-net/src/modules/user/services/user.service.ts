@@ -37,9 +37,9 @@ export class UserService
 
     const user = await this.userRepository.create(dto);
 
-    await this.profileService.create({ userId: user.id });
+    user.profile = await this.profileService.create({ userId: user.id });
 
-    await this.addressService.create({ userId: user.id });
+    user.address = await this.addressService.create({ userId: user.id });
 
     return user;
   }
@@ -66,7 +66,16 @@ export class UserService
   async update(dto: UpdateUserDto): Promise<UserEntity> {
     const user = await this.findById(dto.id);
 
-    const update = await this.userRepository.update({ ...dto, id: user.id });
+    const { profile, address, ...userDto } = dto;
+
+    const update = await this.userRepository.update({
+      ...userDto,
+      id: user.id,
+    });
+
+    update.profile = await this.profileService.update(profile);
+
+    update.address = await this.addressService.update(address);
 
     if (!update)
       throw new HttpException('Failed to update', HttpStatus.NOT_ACCEPTABLE);

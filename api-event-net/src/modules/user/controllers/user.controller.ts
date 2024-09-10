@@ -31,8 +31,12 @@ export class UserController {
     return this.userService.findById(id);
   }
 
-  @Put()
-  updateUser(@Body() updateUserDto: UpdateUserDto): Promise<UserEntity> {
+  @Put(':id')
+  updateUser(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<UserEntity> {
+    updateUserDto.id = id;
     return this.userService.update(updateUserDto);
   }
 
