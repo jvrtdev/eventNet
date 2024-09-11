@@ -15,7 +15,9 @@ export class ConversationService
   ) {}
 
   async create(dto?: CreateConversationDto): Promise<ConversationEntity> {
-    return await this.conversationRepository.create(dto);
+    const conversation = await this.conversationRepository.create(dto);
+
+    return conversation;
   }
 
   async findAll(queryParams: QueryParamsDto): Promise<ConversationEntity[]> {
