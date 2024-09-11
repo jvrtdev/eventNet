@@ -117,7 +117,7 @@ model Message {
   content        String
   senderId       String       @map("sender_id")
   conversationId String       @map("conversation_id")
-  isRead         Boolean      @map("is_read")
+  isRead         Boolean?      @default(false) @map("is_read")
   createdAt      DateTime     @default(now()) @map("created_at") @db.Timestamp(6)
   conversation   Conversation @relation(fields: [conversationId], references: [id])
   user           User         @relation(fields: [senderId], references: [id])
