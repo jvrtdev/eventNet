@@ -34,8 +34,7 @@ export class FriendshipService
       },
     ];
 
-    const participant =
-      await this.participantService.createMany(participantData);
+    await this.participantService.createMany(participantData);
 
     return friendship;
   }
