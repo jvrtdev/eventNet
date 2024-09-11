@@ -8,7 +8,7 @@ export class ConversationController {
   constructor(private readonly conversationService: ConversationService) {}
 
   @Get()
-  async findAll(queryParams: QueryParamsDto): Promise<ConversationEntity[]> {
-    return await this.conversationService.findAll(queryParams);
+  findAll(queryParams: QueryParamsDto): Promise<ConversationEntity[]> {
+    return this.conversationService.findAll(queryParams);
   }
 }
