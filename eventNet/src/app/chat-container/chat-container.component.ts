@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   IonAvatar,
   IonBackButton,
@@ -25,6 +26,7 @@ import {
     IonBackButton,
     IonButtons,
     IonLabel,
+    RouterLink
   ],
 })
 export class ChatContainerComponent implements OnInit {
