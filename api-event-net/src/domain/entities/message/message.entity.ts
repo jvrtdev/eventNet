@@ -6,6 +6,6 @@ export class MessageEntity implements Message {
   conversationId: string;
   isRead: boolean;
   senderId: string;
-  timeStamp: Date;
+  timeStamp?: Date;
   createdAt: Date;
 }

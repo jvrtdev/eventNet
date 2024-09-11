@@ -1,6 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ServiceBase } from 'src/common/base';
-import { CreateMessageDto, UpdateMessageDto } from 'src/domain/dtos';
+import {
+  CreateMessageDto,
+  QueryParamsDto,
+  UpdateMessageDto,
+} from 'src/domain/dtos';
 import { MessageEntity } from 'src/domain/entities';
 import { MessageRepository } from '../repositories/message.repository';
 
@@ -11,7 +15,7 @@ export class MessageService
   constructor(private readonly messageRepository: MessageRepository) {}
 
   async create(dto: CreateMessageDto): Promise<MessageEntity> {
-    if (dto.content != null) {
+    if (!dto.content) {
       throw new HttpException('Mensagem inválida!', HttpStatus.BAD_REQUEST);
     }
 
@@ -20,5 +24,14 @@ export class MessageService
     return message;
   }
 
-  async findAllMessagesByConversationId(conversation_id: string) {}
+  async findAllMessagesByConversationId(
+    conversationId: string,
+  ): Promise<MessageEntity[]> {
+    const messages =
+      await this.messageRepository.findAllMessagesByConversationId(
+        conversationId,
+      );
+
+    return messages;
+  }
 }
