@@ -13,15 +13,16 @@ export class ParticipantService
 {
   constructor(private readonly participantRepository: ParticipantRepository) {}
 
+  async createMany(dto: CreateParticipantDto[]): Promise<Prisma.BatchPayload> {
+    const participants = await this.participantRepository.createMany(dto);
+
+    return participants;
+  }
+
   async create(dto: CreateParticipantDto): Promise<ParticipantEntity> {
     const participant = await this.participantRepository.create(dto);
 
     return participant;
-  }
-
-  async createMany(dto: CreateParticipantDto[]): Promise<Prisma.BatchPayload> {
-    const participants = await this.participantRepository.createMany(dto)
-    return participants
   }
 
   async findAll(queryParams: QueryParamsDto): Promise<ParticipantEntity[]> {
@@ -45,7 +46,12 @@ export class ParticipantService
   }
 
   async remove(id: string): Promise<ParticipantEntity> {
-    const remove = await this.participantRepository.delete(id);
+    const particpant = await this.findById(id);
+
+    const remove = await this.participantRepository.delete(particpant.id);
+
+    if (!remove)
+      throw new HttpException('Failed to remove', HttpStatus.NOT_ACCEPTABLE);
 
     return remove;
   }
