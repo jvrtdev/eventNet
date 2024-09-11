@@ -5,6 +5,7 @@ import { ParticipantEntity } from 'src/domain/entities';
 import { ParticipantRepository } from '../repositories/participant.repository';
 import { QueryParamsDto } from 'src/domain/dtos';
 import { QueryBuilder } from 'src/common/utils';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class ParticipantService
@@ -16,6 +17,11 @@ export class ParticipantService
     const participant = await this.participantRepository.create(dto);
 
     return participant;
+  }
+
+  async createMany(dto: CreateParticipantDto[]): Promise<Prisma.BatchPayload> {
+    const participants = await this.participantRepository.createMany(dto)
+    return participants
   }
 
   async findAll(queryParams: QueryParamsDto): Promise<ParticipantEntity[]> {
