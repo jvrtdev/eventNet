@@ -1,8 +1,7 @@
-import { Conversation } from '@prisma/client';
-import { IsBoolean, IsNotEmpty } from 'class-validator';
+import { IsBoolean, IsOptional } from 'class-validator';
 
 export class CreateConversationDto {
   @IsBoolean()
-  @IsNotEmpty()
+  @IsOptional()
   isGroup?: boolean;
 }

@@ -8,7 +8,7 @@ export class CreateParticipantDto {
 
   @IsString()
   @IsNotEmpty()
-  role: $Enums.ParticipantRole;
+  role?: $Enums.ParticipantRole;
 
   @IsString()
   @IsNotEmpty()
