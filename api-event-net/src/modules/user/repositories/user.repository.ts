@@ -50,4 +50,12 @@ export class UserRepository extends RepositoryFactory<
       },
     });
   }
+
+  findByPhone(phone: string): Promise<UserEntity | null> {
+    return this.prismaService.user.findFirst({
+      where: {
+        phone,
+      },
+    });
+  }
 }

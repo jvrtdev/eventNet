@@ -33,6 +33,11 @@ export class UserService
         HttpStatus.BAD_REQUEST,
       );
 
+    const phoneAlreadyExists = await this.userRepository.findByPhone(dto.phone);
+
+    if (phoneAlreadyExists)
+      throw new HttpException('Phone already exists', HttpStatus.BAD_REQUEST);
+
     dto.password = await hash(dto.password);
 
     const user = await this.userRepository.create(dto);
