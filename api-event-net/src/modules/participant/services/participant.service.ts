@@ -5,7 +5,6 @@ import { ParticipantEntity } from 'src/domain/entities';
 import { ParticipantRepository } from '../repositories/participant.repository';
 import { QueryParamsDto } from 'src/domain/dtos';
 import { QueryBuilder } from 'src/common/utils';
-import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class ParticipantService
@@ -13,7 +12,7 @@ export class ParticipantService
 {
   constructor(private readonly participantRepository: ParticipantRepository) {}
 
-  async createMany(dto: CreateParticipantDto[]): Promise<Prisma.BatchPayload> {
+  async createMany(dto: CreateParticipantDto[]): Promise<ParticipantEntity[]> {
     const participants = await this.participantRepository.createMany(dto);
 
     return participants;
