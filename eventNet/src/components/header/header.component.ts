@@ -27,7 +27,6 @@ import {
   personCircleOutline,
   settingsOutline,
 } from 'ionicons/icons';
-import { ChatComponent } from 'src/app/chat-container/chat/chat.component';
 import { menuHeader } from 'src/shared/data/menu-header';
 
 @Component({
@@ -68,6 +67,5 @@ export class HeaderComponent {
 
   items = menuHeader
   
-
   avatarUrl = 'https://ionicframework.com/docs/img/demos/avatar.svg';
 }
