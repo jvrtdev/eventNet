@@ -7,12 +7,14 @@ import { ParticipantModule } from './modules/participant/participant.module';
 import { FriendshipModule } from './modules/friendship/friendship.module';
 import { AddressModule } from './modules/address/address.module';
 import { ProfileModule } from './modules/profile/profile.module';
+import { EventModule } from './modules/event/event.module';
 
 @Module({
   imports: [
     UserModule,
     AddressModule,
     ProfileModule,
+    EventModule,
     MessageModule,
     ConversationModule,
     ParticipantModule,
