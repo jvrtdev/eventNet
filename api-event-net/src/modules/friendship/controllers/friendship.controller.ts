@@ -8,7 +8,9 @@ export class FriendshipController {
   constructor(private readonly friendshipService: FriendshipService) {}
 
   @Post()
-  create(@Body() dto: CreateFriendshipDto): Promise<FriendshipEntity> {
-    return this.friendshipService.create(dto);
+  create(
+    @Body() createFriendshipDto: CreateFriendshipDto,
+  ): Promise<FriendshipEntity> {
+    return this.friendshipService.create(createFriendshipDto);
   }
 }

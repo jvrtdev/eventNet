@@ -11,31 +11,4 @@ export class FriendshipRepository extends RepositoryFactory<
   constructor() {
     super('friendship');
   }
-
-  createFriendshipChat(
-    data: CreateFriendshipDto,
-    users: { userId: string }[],
-  ): Promise<FriendshipEntity> {
-    return this.prismaService.friendship.create({
-      data: {
-        user: {
-          connect: { id: data.userId },
-        },
-        friend: {
-          connect: { id: data.friendId },
-        },
-        conversation: {
-          create: {
-            Participant: {
-              createMany: {
-                data: users.map((user) => ({
-                  userId: user.userId,
-                })),
-              },
-            },
-          },
-        },
-      },
-    });
-  }
 }
