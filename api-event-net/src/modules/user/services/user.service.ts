@@ -68,6 +68,14 @@ export class UserService
     return user;
   }
 
+  async findByUserName(userName: string): Promise<UserEntity> {
+    const user = await this.userRepository.findByUserName(userName);
+
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+
+    return user;
+  }
+
   async update(dto: UpdateUserDto): Promise<UserEntity> {
     const user = await this.findById(dto.id);
 
