@@ -8,3 +8,4 @@ export * from './participant';
 export * from './conversation';
 export * from './friendship';
 export * from './event';
+export * from './auth';

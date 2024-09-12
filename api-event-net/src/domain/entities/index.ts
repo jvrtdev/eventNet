@@ -7,4 +7,4 @@ export * from './shared';
 export * from './conversation';
 export * from './participant';
 export * from './friendship';
-
+export * from './auth';

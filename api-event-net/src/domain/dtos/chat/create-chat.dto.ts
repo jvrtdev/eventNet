@@ -1,7 +1,5 @@
-
-
-export class CreateChatDto{
-  conversationId?: string
-  senderId?: string
-  receiverId?: string
+export class CreateChatDto {
+  conversationId?: string;
+  senderId?: string;
+  receiverId?: string;
 }
