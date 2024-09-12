@@ -1,4 +1,3 @@
-import { Prisma } from '@prisma/client';
 import { QueryParamsDto } from 'src/domain/dtos/shared/query-params.dto';
 
 export abstract class ServiceBase<Entity, CreateDto = void, UpdateDto = void> {
