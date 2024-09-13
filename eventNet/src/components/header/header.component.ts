@@ -27,7 +27,7 @@ import {
   personCircleOutline,
   settingsOutline,
 } from 'ionicons/icons';
-import { menuHeader } from 'src/shared/data/menu-header';
+import { menuHeader } from 'src/common/shared/data/menu-header';
 
 @Component({
   standalone: true,
@@ -51,7 +51,7 @@ import { menuHeader } from 'src/shared/data/menu-header';
     IonMenuButton,
     IonNavLink,
     RouterLink,
-    NgFor
+    NgFor,
   ],
 })
 export class HeaderComponent {
@@ -65,7 +65,7 @@ export class HeaderComponent {
     });
   }
 
-  items = menuHeader
-  
+  items = menuHeader;
+
   avatarUrl = 'https://ionicframework.com/docs/img/demos/avatar.svg';
 }
