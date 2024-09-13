@@ -1,19 +1,16 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-segment [(ngModel)]="selectedSegment">
-      <ion-segment-button value="official">
-        <ion-label>Oficiais</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="community">
-        <ion-label>Comunidade</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+  <h1></h1>
+  <div *ngFor="let event of events">
+    <ion-card [routerLink]="['/event/',event.id]">
+      <ion-card-header>
+        <ion-card-title>{{ event.title }}</ion-card-title>
+        <ion-card-subtitle
+          >{{formatDate(event.start_datetime,
+          event.end_datetime)}}</ion-card-subtitle
+        >
+      </ion-card-header>
 
-<ion-content *ngIf="selectedSegment == 'official'" class="ion-padding">
-  <official-events></official-events>
-</ion-content>
-<ion-content *ngIf="selectedSegment == 'community'" class="ion-padding">
-  <community-events></community-events>
+      <ion-card-content>{{event.location}}</ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
