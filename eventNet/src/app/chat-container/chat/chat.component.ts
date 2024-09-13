@@ -19,7 +19,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { sendOutline } from 'ionicons/icons';
-import { MessageTypes } from 'src/shared/@types/message';
+import { MessageTypes } from 'src/common/shared/@types/message';
 import { ChatService } from './chat.service';
 
 @Component({

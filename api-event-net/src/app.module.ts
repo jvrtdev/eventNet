@@ -19,6 +19,7 @@ import { EventModule } from './modules/event/event.module';
     ConversationModule,
     ParticipantModule,
     FriendshipModule,
+    EventModule,
     PrismaModule,
   ],
 })
