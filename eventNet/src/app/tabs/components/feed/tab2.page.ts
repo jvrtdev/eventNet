@@ -11,7 +11,7 @@ import {
   IonToolbar,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { chatbubbleOutline, heartOutline, mailOutline, repeatOutline } from 'ionicons/icons';
+import { chatbubbleOutline, heart, heartOutline, mailOutline, repeat, repeatSharp } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tab2',
@@ -31,6 +31,6 @@ import { chatbubbleOutline, heartOutline, mailOutline, repeatOutline } from 'ion
 })
 export class Tab2Page {
   constructor() {
-    addIcons({ chatbubbleOutline, repeatOutline, heartOutline, mailOutline });
+    addIcons({ chatbubbleOutline, repeatSharp, heartOutline, heart, mailOutline });
   }
 }
