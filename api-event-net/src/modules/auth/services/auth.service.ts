@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ServiceBase } from 'src/common/base';
 import { compare } from 'src/common/utils';
@@ -6,6 +6,7 @@ import { CreateAuthDto } from 'src/domain/dtos';
 import { AuthEntity } from 'src/domain/entities';
 import { UserService } from 'src/modules/user/services/user.service';
 
+@Injectable()
 export class AuthService implements ServiceBase<AuthEntity, CreateAuthDto> {
   constructor(
     private readonly jwtService: JwtService,

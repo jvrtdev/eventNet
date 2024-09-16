@@ -8,6 +8,7 @@ import { FriendshipModule } from './modules/friendship/friendship.module';
 import { AddressModule } from './modules/address/address.module';
 import { ProfileModule } from './modules/profile/profile.module';
 import { EventModule } from './modules/event/event.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { EventModule } from './modules/event/event.module';
     ConversationModule,
     ParticipantModule,
     FriendshipModule,
+    AuthModule,
     PrismaModule,
   ],
 })
