@@ -38,4 +38,10 @@ export class FriendshipService
 
     return friendship;
   }
+
+  async getAllFriendsByUserId(userId: string) {
+    const friends = await this.friendshipRepository.findAllFriends(userId)
+    
+    return friends
+  }
 }
