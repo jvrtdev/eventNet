@@ -8,3 +8,7 @@ export * from './conversation';
 export * from './participant';
 export * from './friendship';
 export * from './auth';
+export * from './post';
+export * from './like';
+export * from './comment';
+export * from './repost';

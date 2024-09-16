@@ -21,7 +21,6 @@ import {
 import { addIcons } from 'ionicons';
 import {
   addCircle,
-  arrowBackOutline,
   calendarOutline,
   cartOutline,
   locationOutline,
@@ -29,6 +28,10 @@ import {
   ticket,
   ticketOutline,
 } from 'ionicons/icons';
+import { EventsService } from '../services/events.service';
+import { EventInterface } from 'src/common/shared/@types/event';
+import { GetEventDate } from 'src/common/utils/date/getEventDate';
+import { NgIf } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -51,14 +54,19 @@ import {
     IonButtons,
     IonIcon,
     IonCardSubtitle,
+    NgIf
   ],
 })
 export class EventDetailComponent implements OnInit {
-  id: any;
+  id: string = '';
   valorIngresso = '0,00';
   numberTickets: number = 0;
+  event!: EventInterface;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private readonly eventService: EventsService
+  ) {
     addIcons({
       calendarOutline,
       locationOutline,
@@ -69,7 +77,17 @@ export class EventDetailComponent implements OnInit {
     });
   }
 
+  formatDate(startDate: Date, endDate: Date){
+   return GetEventDate(String(startDate), String(endDate))
+  }
+
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.id = this.activatedRoute.snapshot.paramMap.get('id')!;
+    this.eventService
+      .getDataById(`event/${this.id}`)
+      .subscribe((event: EventInterface) => {
+        this.event = event;
+        console.log(event);
+      });
   }
 }

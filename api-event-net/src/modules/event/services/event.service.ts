@@ -8,12 +8,16 @@ import { EventEntity } from 'src/domain/entities';
 import { EventRepository } from '../repositories/event.repository';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { QueryBuilder } from 'src/common/utils';
+import { ConversationService } from 'src/modules/conversation/services/conversation.service';
 
 @Injectable()
 export class EventService
   implements ServiceBase<EventEntity, CreateEventDto, UpdateEventDto>
 {
-  constructor(private readonly eventRepository: EventRepository) {}
+  constructor(
+    private readonly eventRepository: EventRepository,
+    private readonly conversationService: ConversationService,
+  ) {}
 
   async create(dto: CreateEventDto): Promise<EventEntity> {
     const titleAlreadyExists = await this.eventRepository.findByTitle(
@@ -23,8 +27,13 @@ export class EventService
     if (titleAlreadyExists)
       throw new HttpException('Title already exists', HttpStatus.BAD_REQUEST);
 
-    const event = await this.eventRepository.create(dto);
+    const { id, ...conversation } = await this.conversationService.create({
+      isGroup: true,
+    });
 
+    dto.conversationId = id
+    const event = await this.eventRepository.create(dto);
+    
     return event;
   }
 

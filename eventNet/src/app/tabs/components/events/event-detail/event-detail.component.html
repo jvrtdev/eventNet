@@ -5,19 +5,20 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding space-y-5">
+
+<ion-content class="ion-padding space-y-5" *ngIf="event">
   <ion-text>
-    <h1 class="text-2xl font-bold">UNISUAMJS</h1>
+    <h1 class="text-2xl font-bold">{{event.title}}</h1>
   </ion-text>
 
   <ion-text class="flex items-center gap-2 text-sm">
     <ion-icon name="calendar-outline" class="text-xl"></ion-icon>
-    <p>07 set - 2024 • 23:00 > 08 set - 2024 • 09:30</p>
+     <p>{{formatDate(event.start_datetime, event.end_datetime)}}</p>
   </ion-text>
 
   <ion-text class="flex items-center gap-2 text-sm">
     <ion-icon name="location-outline" class="text-xl"></ion-icon>
-    <p>Evento presencial em KOMPLEXO TEMPO, São Paulo - SP</p>
+    <p>{{event.location}}</p>
   </ion-text>
 
   <ion-card class="rounded-xl">
@@ -62,12 +63,7 @@
     </ion-text>
 
     <ion-text>
-      Desbravando o Futuro da Web com JavaScript O UnisuamJs é um evento de
-      destaque no calendário tecnológico da Universidade Unisuam, projetado para
-      fomentar o aprendizado e a troca de experiências sobre JavaScript, uma das
-      linguagens de programação mais importantes e versáteis do mercado. Este
-      evento oferece uma plataforma para explorar as últimas tendências,
-      melhores práticas e ferramentas emergentes no ecossistema JavaScript.
+      {{event.description}}
     </ion-text>
     <ion-button>Entrar no chat</ion-button>
   </div>

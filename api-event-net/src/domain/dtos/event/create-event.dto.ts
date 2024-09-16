@@ -1,9 +1,13 @@
-import { IsDate, IsNotEmpty, IsString } from 'class-validator';
+import { IsDate, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateEventDto {
   @IsString()
   @IsNotEmpty()
   title: string;
+
+  @IsString()
+  @IsNotEmpty()
+  conversationId: string
 
   @IsString()
   @IsNotEmpty()
@@ -20,6 +24,10 @@ export class CreateEventDto {
   @IsString()
   @IsNotEmpty()
   location: string;
+
+  @IsString()
+  @IsOptional()
+  qr_code?: string
 
   @IsString()
   @IsNotEmpty()
