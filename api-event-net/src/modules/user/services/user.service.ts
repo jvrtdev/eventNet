@@ -68,6 +68,14 @@ export class UserService
     return user;
   }
 
+  async findByUserEmail(userEmail: string): Promise<UserEntity> {
+    const user = await this.userRepository.findByEmail(userEmail);
+
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+
+    return user;
+  }
+
   async findByUserName(userName: string): Promise<UserEntity> {
     const user = await this.userRepository.findByUserName(userName);
 
