@@ -9,9 +9,8 @@ export class PostRepository extends RepositoryFactory<
   CreatePostDto,
   UpdatePostDto
 > {
-
   constructor() {
-    super('post')
+    super('post');
   }
 
   findAll(query: QueryBuilderEntity): Promise<PostEntity[]> {
@@ -22,7 +21,7 @@ export class PostRepository extends RepositoryFactory<
         likes: true,
         reposts: true,
         owner: true,
-        _count: true
+        _count: true,
       },
     });
   }
@@ -37,8 +36,48 @@ export class PostRepository extends RepositoryFactory<
         reposts: true,
         likes: true,
         owner: true,
-        _count: true
+        _count: true,
       },
+    });
+  }
+
+  findAllByUserIds(userIds: string[]): Promise<PostEntity[]> {
+    return this.prismaService.post.findMany({
+      where: {
+        ownerId: {
+          in: userIds,
+        },
+      },
+
+      include: { owner: true },
+    });
+  }
+
+  findAllPostsLikedByFriends(friendIds: string[]): Promise<PostEntity[]> {
+    return this.prismaService.post.findMany({
+      where: {
+        likes: {
+          some: {
+            userId: { in: friendIds },
+          },
+        },
+      },
+      include: { owner: true },
+    });
+  }
+
+  findAllPostsCommentedByFriends(friendIds: string[]): Promise<PostEntity[]> {
+    return this.prismaService.post.findMany({
+      where: {
+        comments: {
+          some: {
+            userId: {
+              in: friendIds,
+            },
+          },
+        },
+      },
+      include: {owner: true}
     });
   }
 }
