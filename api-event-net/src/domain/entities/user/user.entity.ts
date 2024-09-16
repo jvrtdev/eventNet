@@ -13,4 +13,5 @@ export class UserEntity implements User {
   createdAt: Date;
   profile?: ProfileEntity;
   address?: AddressEntity;
+  token?: string | null;
 }

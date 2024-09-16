@@ -6,6 +6,7 @@ import { UserEntity } from 'src/domain/entities';
 import { hash, QueryBuilder } from 'src/common/utils';
 import { ProfileService } from 'src/modules/profile/services/profile.service';
 import { AddressService } from 'src/modules/address/services/address.service';
+import { AuthService } from 'src/modules/auth/services/auth.service';
 
 @Injectable()
 export class UserService
@@ -15,6 +16,7 @@ export class UserService
     private readonly userRepository: UserRepository,
     private readonly profileService: ProfileService,
     private readonly addressService: AddressService,
+    private readonly authService: AuthService,
   ) {}
 
   async createUser(dto: CreateUserDto): Promise<UserEntity> {
@@ -42,11 +44,21 @@ export class UserService
 
     const user = await this.userRepository.create(dto);
 
-    user.profile = await this.profileService.create({ userId: user.id });
+    const profile = await this.profileService.create({ userId: user.id });
 
-    user.address = await this.addressService.create({ userId: user.id });
+    const address = await this.addressService.create({ userId: user.id });
 
-    return user;
+    const { token } = await this.authService.create({
+      login: user.email,
+      password: user.password,
+    });
+
+    return {
+      ...user,
+      token,
+      profile,
+      address,
+    };
   }
 
   async findAll(queryParams: QueryParamsDto): Promise<UserEntity[]> {

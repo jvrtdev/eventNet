@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ServiceBase } from 'src/common/base';
 import { compare, isValidEmail } from 'src/common/utils';
@@ -10,6 +16,7 @@ import { UserService } from 'src/modules/user/services/user.service';
 export class AuthService implements ServiceBase<AuthEntity, CreateAuthDto> {
   constructor(
     private readonly jwtService: JwtService,
+    @Inject(forwardRef(() => UserService))
     private readonly userService: UserService,
   ) {}
 
