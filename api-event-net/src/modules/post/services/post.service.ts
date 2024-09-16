@@ -33,4 +33,26 @@ export class PostService
 
     return post;
   }
+
+  async findAllPostsByUsersId(userIds: string[]): Promise<PostEntity[]> {
+    const posts = await this.postRepository.findAllByUserIds(userIds);
+    
+    return posts;
+  }
+
+  async findAllPostsLikedByFriends(userIds: string[]): Promise<PostEntity[]> {
+    const postsLiked =
+      await this.postRepository.findAllPostsLikedByFriends(userIds);
+    
+    return postsLiked;
+  }
+
+  async findAllPostsCommentedByFriends(
+    userIds: string[],
+  ): Promise<PostEntity[]> {
+    const postsCommented =
+      await this.postRepository.findAllPostsCommentedByFriends(userIds);
+
+    return postsCommented;
+  }
 }
