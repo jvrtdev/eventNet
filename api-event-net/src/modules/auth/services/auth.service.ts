@@ -30,7 +30,7 @@ export class AuthService implements ServiceBase<AuthEntity, CreateAuthDto> {
     if (!passwordIsEqual)
       throw new HttpException('Password invalid', HttpStatus.UNAUTHORIZED);
 
-    const payload = { userId: login.id };
+    const payload = { sub: login.id };
 
     const token = this.jwtService.sign(payload);
 

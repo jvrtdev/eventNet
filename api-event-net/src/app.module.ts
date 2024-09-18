@@ -14,6 +14,8 @@ import { ProfileModule } from './modules/profile/profile.module';
 import { RepostModule } from './modules/repost/repost.module';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './modules/auth/guards/auth.guard';
 
 @Module({
   imports: [
@@ -33,6 +35,12 @@ import { AuthModule } from './modules/auth/auth.module';
     EventModule,
     AuthModule,
     PrismaModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
   ],
 })
 export class AppModule {}
