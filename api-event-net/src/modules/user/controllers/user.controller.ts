@@ -11,11 +11,13 @@ import {
 import { CreateUserDto, QueryParamsDto, UpdateUserDto } from 'src/domain/dtos';
 import { UserService } from '../services/user.service';
 import { UserEntity } from 'src/domain/entities';
+import { IsPublic } from 'src/common/decorators';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @IsPublic()
   @Post()
   createUser(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
     return this.userService.createUser(createUserDto);
