@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   IonBackButton,
   IonButton,
@@ -54,7 +54,8 @@ import { NgIf } from '@angular/common';
     IonButtons,
     IonIcon,
     IonCardSubtitle,
-    NgIf
+    NgIf,
+    RouterLink
   ],
 })
 export class EventDetailComponent implements OnInit {
