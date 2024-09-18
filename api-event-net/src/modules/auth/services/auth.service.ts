@@ -21,11 +21,8 @@ export class AuthService implements ServiceBase<AuthEntity, CreateAuthDto> {
   ) {}
 
   async create(dto: CreateAuthDto): Promise<AuthEntity> {
-    if (isValidEmail(dto.login))
-      var user = await this.userService.findByUserEmail(dto.login);
-
-    const login = user
-      ? user
+    const login = isValidEmail(dto.login)
+      ? await this.userService.findByUserEmail(dto.login)
       : await this.userService.findByUserName(dto.login);
 
     const passwordIsEqual = compare(dto.password, login.password);
@@ -33,7 +30,9 @@ export class AuthService implements ServiceBase<AuthEntity, CreateAuthDto> {
     if (!passwordIsEqual)
       throw new HttpException('Password invalid', HttpStatus.UNAUTHORIZED);
 
-    const token = this.jwtService.sign(login.id);
+    const payload = { userId: login.id };
+
+    const token = this.jwtService.sign(payload);
 
     return { token };
   }
