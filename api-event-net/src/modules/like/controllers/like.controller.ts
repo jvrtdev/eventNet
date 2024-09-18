@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { LikeService } from '../services/like.service';
 import { CreateLikeDto } from '@dtos';
 import { LikeEntity } from '@entities';

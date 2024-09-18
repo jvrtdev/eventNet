@@ -32,7 +32,8 @@ export class ConversationService
   async findByConversationId(
     conversationId: string,
   ): Promise<ConversationEntity> {
-    const conversation = this.conversationRepository.findByConversationId(conversationId);
-    return conversation
+    const conversation =
+      this.conversationRepository.findByConversationId(conversationId);
+    return conversation;
   }
 }

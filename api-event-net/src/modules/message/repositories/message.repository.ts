@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { RepositoryFactory } from 'src/common/factories';
-import { CreateMessageDto, UpdateMessageDto } from 'src/domain/dtos';
-import { MessageEntity, QueryBuilderEntity } from 'src/domain/entities';
+import { RepositoryFactory } from '@factories';
+import { CreateMessageDto, UpdateMessageDto } from '@dtos';
+import { MessageEntity } from '@entities';
 
 @Injectable()
 export class MessageRepository extends RepositoryFactory<
@@ -13,9 +13,11 @@ export class MessageRepository extends RepositoryFactory<
     super('message');
   }
 
-  findAllMessagesByConversationId(conversationId: string): Promise<MessageEntity[] | null> {
+  findAllMessagesByConversationId(
+    conversationId: string,
+  ): Promise<MessageEntity[] | null> {
     return this.prismaService.message.findMany({
-      where: { conversationId: conversationId }
+      where: { conversationId: conversationId },
     });
   }
 }

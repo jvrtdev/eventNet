@@ -1,5 +1,3 @@
-import { CreateEventDto } from 'src/domain/dtos';
-
 export const EventsData = [
   {
     title: 'UNISUAMJS',

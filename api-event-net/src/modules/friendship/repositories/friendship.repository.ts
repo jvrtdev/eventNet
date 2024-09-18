@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { RepositoryFactory } from 'src/common/factories';
-import { CreateFriendshipDto, CreateParticipantDto } from 'src/domain/dtos';
-import { FriendshipEntity } from 'src/domain/entities';
+import { RepositoryFactory } from '@factories';
+import { CreateFriendshipDto } from '@dtos';
+import { FriendshipEntity } from '@entities';
 
 @Injectable()
 export class FriendshipRepository extends RepositoryFactory<

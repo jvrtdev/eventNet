@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { RepositoryFactory } from 'src/common/factories';
-import { CreateEventDto, UpdateEventDto } from 'src/domain/dtos';
-import { EventEntity, QueryBuilderEntity } from 'src/domain/entities';
+import { RepositoryFactory } from '@factories';
+import { CreateEventDto, UpdateEventDto } from '@dtos';
+import { EventEntity, QueryBuilderEntity } from '@entities';
 
 @Injectable()
 export class EventRepository extends RepositoryFactory<

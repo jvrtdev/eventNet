@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { RepositoryFactory } from 'src/common/factories';
-import { CreateRepostDto, UpdateRepostDto } from 'src/domain/dtos';
-import { RepostEntity } from 'src/domain/entities';
+import { RepositoryFactory } from '@factories';
+import { CreateRepostDto, UpdateRepostDto } from '@dtos';
+import { RepostEntity } from '@entities';
 
 @Injectable()
 export class RepostRepository extends RepositoryFactory<

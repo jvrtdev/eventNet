@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { RepositoryFactory } from 'src/common/factories';
-import { CreateConversationDto } from 'src/domain/dtos/conversation';
-import { QueryBuilderEntity } from 'src/domain/entities';
-import { ConversationEntity } from 'src/domain/entities/conversation';
+import { RepositoryFactory } from '@factories';
+import { CreateConversationDto } from '@dtos';
+import { ConversationEntity, QueryBuilderEntity } from '@entities';
 
 @Injectable()
 export class ConversationRepository extends RepositoryFactory<
@@ -20,14 +19,15 @@ export class ConversationRepository extends RepositoryFactory<
   findByConversationId(conversationId: string): Promise<ConversationEntity> {
     return this.prismaService.conversation.findFirst({
       where: { id: conversationId },
-      include: { 
+      include: {
         Event: true,
         friendship: {
           select: {
-            friend: true
+            friend: true,
           },
-        }, 
-        message: true },
+        },
+        message: true,
+      },
     });
   }
 }

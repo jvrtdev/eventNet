@@ -1,1 +1,1 @@
-export * from './repost.entity'
+export * from './repost.entity';

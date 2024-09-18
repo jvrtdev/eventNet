@@ -1,5 +1,4 @@
-import { Message } from '@prisma/client';
-import { IsBoolean, IsDate, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateMessageDto {
   @IsString()
@@ -13,7 +12,6 @@ export class CreateMessageDto {
   @IsBoolean()
   @IsOptional()
   isRead?: boolean;
-
 
   @IsString()
   @IsNotEmpty()

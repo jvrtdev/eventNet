@@ -1,7 +1,9 @@
-import { RepositoryFactory } from 'src/common/factories';
-import { CreateAddressDto, UpdateAddressDto } from 'src/domain/dtos';
-import { AddressEntity } from 'src/domain/entities';
+import { RepositoryFactory } from '@factories';
+import { CreateAddressDto, UpdateAddressDto } from '@dtos';
+import { AddressEntity } from '@entities';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class AddressRepository extends RepositoryFactory<
   AddressEntity,
   CreateAddressDto,

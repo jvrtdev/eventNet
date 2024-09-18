@@ -21,7 +21,7 @@ export class MessageGateway
     this.server.emit('msgToClient', payload, client.id);
   }
 
-  afterInit(server: Server) {
+  afterInit() {
     this.logger.log('init');
   }
 

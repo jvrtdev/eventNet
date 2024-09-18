@@ -7,7 +7,7 @@ export class CreateEventDto {
 
   @IsString()
   @IsNotEmpty()
-  conversationId: string
+  conversationId: string;
 
   @IsString()
   @IsNotEmpty()
@@ -27,7 +27,7 @@ export class CreateEventDto {
 
   @IsString()
   @IsOptional()
-  qr_code?: string
+  qr_code?: string;
 
   @IsString()
   @IsNotEmpty()

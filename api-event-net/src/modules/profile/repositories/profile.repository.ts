@@ -1,7 +1,9 @@
-import { RepositoryFactory } from 'src/common/factories';
-import { CreateProfileDto, UpdateProfileDto } from 'src/domain/dtos';
-import { ProfileEntity } from 'src/domain/entities';
+import { RepositoryFactory } from '@factories';
+import { CreateProfileDto, UpdateProfileDto } from '@dtos';
+import { ProfileEntity } from '@entities';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class ProfileRepository extends RepositoryFactory<
   ProfileEntity,
   CreateProfileDto,

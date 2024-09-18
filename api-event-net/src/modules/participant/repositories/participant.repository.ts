@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { RepositoryFactory } from 'src/common/factories';
-import { CreateParticipantDto } from 'src/domain/dtos/participant';
-import { ParticipantEntity, QueryBuilderEntity } from 'src/domain/entities';
+import { RepositoryFactory } from '@factories';
+import { CreateParticipantDto } from '@dtos';
+import { ParticipantEntity, QueryBuilderEntity } from '@entities';
 
 @Injectable()
 export class ParticipantRepository extends RepositoryFactory<
@@ -22,4 +22,3 @@ export class ParticipantRepository extends RepositoryFactory<
     });
   }
 }
-

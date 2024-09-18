@@ -1,7 +1,6 @@
-import { Repost } from "@prisma/client";
+import { Repost } from '@prisma/client';
 
-
-export class RepostEntity implements Repost{
+export class RepostEntity implements Repost {
   id: string;
   postId: string;
   userId: string;
