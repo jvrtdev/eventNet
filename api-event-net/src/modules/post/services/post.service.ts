@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { ServiceBase } from 'src/common/base';
-import { CreatePostDto, QueryParamsDto, UpdatePostDto } from 'src/domain/dtos';
-import { PostEntity } from 'src/domain/entities';
+import { ServiceBase } from '@bases';
+import { CreatePostDto, QueryParamsDto, UpdatePostDto } from '@dtos';
+import { PostEntity } from '@entities';
 import { PostRepository } from '../repositories/post.repository';
-import { QueryBuilder } from 'src/common/utils';
+import { QueryBuilder } from '@utils';
 
 @Injectable()
 export class PostService
@@ -36,14 +36,14 @@ export class PostService
 
   async findAllPostsByUsersId(userIds: string[]): Promise<PostEntity[]> {
     const posts = await this.postRepository.findAllByUserIds(userIds);
-    
+
     return posts;
   }
 
   async findAllPostsLikedByFriends(userIds: string[]): Promise<PostEntity[]> {
     const postsLiked =
       await this.postRepository.findAllPostsLikedByFriends(userIds);
-    
+
     return postsLiked;
   }
 

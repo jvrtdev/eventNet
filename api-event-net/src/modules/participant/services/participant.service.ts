@@ -1,10 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { ServiceBase } from 'src/common/base';
-import { CreateParticipantDto } from 'src/domain/dtos/participant';
-import { ParticipantEntity } from 'src/domain/entities';
+import { ServiceBase } from '@bases';
+import { CreateParticipantDto, QueryParamsDto } from '@dtos';
+import { ParticipantEntity } from '@entities';
 import { ParticipantRepository } from '../repositories/participant.repository';
-import { QueryParamsDto } from 'src/domain/dtos';
-import { QueryBuilder } from 'src/common/utils';
+import { QueryBuilder } from '@utils';
 
 @Injectable()
 export class ParticipantService

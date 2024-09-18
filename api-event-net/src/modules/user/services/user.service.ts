@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { CreateUserDto, QueryParamsDto, UpdateUserDto } from 'src/domain/dtos';
-import { ServiceBase } from 'src/common/base';
+import { CreateUserDto, QueryParamsDto, UpdateUserDto } from '@dtos';
+import { ServiceBase } from '@bases';
 import { UserRepository } from '../repositories/user.repository';
-import { UserEntity } from 'src/domain/entities';
-import { hash, QueryBuilder } from 'src/common/utils';
+import { UserEntity } from '@entities';
+import { hash, QueryBuilder } from '@utils';
 import { ProfileService } from 'src/modules/profile/services/profile.service';
 import { AddressService } from 'src/modules/address/services/address.service';
 import { AuthService } from 'src/modules/auth/services/auth.service';

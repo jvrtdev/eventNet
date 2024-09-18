@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ServiceBase } from 'src/common/base';
-import { CreateLikeDto } from 'src/domain/dtos';
-import { LikeEntity } from 'src/domain/entities';
+import { ServiceBase } from '@bases';
+import { CreateLikeDto } from '@dtos';
+import { LikeEntity } from '@entities';
 import { LikeRepository } from '../repositories/like.repository';
 
 @Injectable()

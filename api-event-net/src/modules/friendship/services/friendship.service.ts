@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ServiceBase } from 'src/common/base';
-import { CreateFriendshipDto, CreateParticipantDto } from 'src/domain/dtos';
-import { FriendshipEntity } from 'src/domain/entities';
+import { ServiceBase } from '@bases';
+import { CreateFriendshipDto, CreateParticipantDto } from '@dtos';
+import { FriendshipEntity } from '@entities';
 import { FriendshipRepository } from '../repositories/friendship.repository';
 import { ConversationService } from 'src/modules/conversation/services/conversation.service';
 import { ParticipantService } from 'src/modules/participant/services/participant.service';
@@ -40,8 +40,8 @@ export class FriendshipService
   }
 
   async getAllFriendsByUserId(userId: string) {
-    const friends = await this.friendshipRepository.findAllFriends(userId)
-    
-    return friends
+    const friends = await this.friendshipRepository.findAllFriends(userId);
+
+    return friends;
   }
 }

@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
-import { ConversationEntity } from 'src/domain/entities';
+import { ConversationEntity } from '@entities';
 import { ConversationService } from '../services/conversation.service';
-import { QueryParamsDto } from 'src/domain/dtos';
+import { QueryParamsDto } from '@dtos';
 
 @Controller('conversation')
 export class ConversationController {

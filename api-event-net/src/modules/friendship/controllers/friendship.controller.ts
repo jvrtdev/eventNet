@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { FriendshipService } from '../services/friendship.service';
-import { CreateFriendshipDto } from 'src/domain/dtos';
-import { FriendshipEntity } from 'src/domain/entities';
+import { CreateFriendshipDto } from '@dtos';
+import { FriendshipEntity } from '@entities';
 
 @Controller('friendship')
 export class FriendshipController {

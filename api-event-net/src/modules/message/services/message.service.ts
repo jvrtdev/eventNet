@@ -1,11 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { ServiceBase } from 'src/common/base';
-import {
-  CreateMessageDto,
-  QueryParamsDto,
-  UpdateMessageDto,
-} from 'src/domain/dtos';
-import { MessageEntity } from 'src/domain/entities';
+import { ServiceBase } from '@bases';
+import { CreateMessageDto, UpdateMessageDto } from '@dtos';
+import { MessageEntity } from '@entities';
 import { MessageRepository } from '../repositories/message.repository';
 
 @Injectable()

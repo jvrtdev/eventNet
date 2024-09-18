@@ -9,12 +9,8 @@ import {
   Query,
 } from '@nestjs/common';
 import { EventService } from '../services/event.service';
-import {
-  CreateEventDto,
-  QueryParamsDto,
-  UpdateEventDto,
-} from 'src/domain/dtos';
-import { EventEntity } from 'src/domain/entities';
+import { CreateEventDto, QueryParamsDto, UpdateEventDto } from '@dtos';
+import { EventEntity } from '@entities';
 
 @Controller('event')
 export class EventController {

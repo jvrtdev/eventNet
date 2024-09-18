@@ -1,6 +1,6 @@
-import { ServiceBase } from 'src/common/base';
-import { CreateAddressDto, UpdateAddressDto } from 'src/domain/dtos';
-import { AddressEntity } from 'src/domain/entities';
+import { ServiceBase } from '@bases';
+import { CreateAddressDto, UpdateAddressDto } from '@dtos';
+import { AddressEntity } from '@entities';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { AddressRepository } from '../repositories/address.repository';
 

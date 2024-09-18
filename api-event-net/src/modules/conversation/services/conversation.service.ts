@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { ServiceBase } from 'src/common/base';
-import { QueryBuilder } from 'src/common/utils';
-import { QueryParamsDto } from 'src/domain/dtos';
-import { CreateConversationDto } from 'src/domain/dtos/conversation';
-import { ConversationEntity } from 'src/domain/entities/conversation';
+import { ServiceBase } from '@bases';
+import { QueryBuilder } from '@utils';
+import { CreateConversationDto, QueryParamsDto } from '@dtos';
+import { ConversationEntity } from '@entities';
 import { ConversationRepository } from '../repositories/conversation.repository';
 
 @Injectable()

@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { CreateRepostDto } from 'src/domain/dtos';
-import { RepostEntity } from 'src/domain/entities';
+import { CreateRepostDto } from '@dtos';
+import { RepostEntity } from '@entities';
 import { RepostService } from '../services/repost.service';
 
 @Controller('repost')

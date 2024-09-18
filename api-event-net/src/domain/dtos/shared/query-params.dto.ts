@@ -1,5 +1,5 @@
 import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
-import { IsSort } from 'src/common/validators';
+import { IsSort } from '@validators';
 
 export class QueryParamsDto {
   @IsNumber()

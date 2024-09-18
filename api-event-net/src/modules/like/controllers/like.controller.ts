@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { LikeService } from '../services/like.service';
-import { CreateLikeDto } from 'src/domain/dtos';
-import { LikeEntity } from 'src/domain/entities';
+import { CreateLikeDto } from '@dtos';
+import { LikeEntity } from '@entities';
 
 @Controller('like')
 export class LikeController {
@@ -11,5 +11,4 @@ export class LikeController {
   createLike(@Body() createLikeDto: CreateLikeDto): Promise<LikeEntity> {
     return this.likeService.create(createLikeDto);
   }
-
 }

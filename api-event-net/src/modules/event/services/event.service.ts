@@ -1,13 +1,9 @@
-import { ServiceBase } from 'src/common/base';
-import {
-  CreateEventDto,
-  QueryParamsDto,
-  UpdateEventDto,
-} from 'src/domain/dtos';
-import { EventEntity } from 'src/domain/entities';
+import { ServiceBase } from '@bases';
+import { CreateEventDto, QueryParamsDto, UpdateEventDto } from '@dtos';
+import { EventEntity } from '@entities';
 import { EventRepository } from '../repositories/event.repository';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { QueryBuilder } from 'src/common/utils';
+import { QueryBuilder } from '@utils';
 import { ConversationService } from 'src/modules/conversation/services/conversation.service';
 
 @Injectable()

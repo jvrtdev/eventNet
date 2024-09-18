@@ -1,6 +1,6 @@
-import { ServiceBase } from 'src/common/base';
-import { CreateProfileDto, UpdateProfileDto } from 'src/domain/dtos';
-import { ProfileEntity } from 'src/domain/entities';
+import { ServiceBase } from '@bases';
+import { CreateProfileDto, UpdateProfileDto } from '@dtos';
+import { ProfileEntity } from '@entities';
 import { ProfileRepository } from '../repositories/profile.repository';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 

@@ -8,9 +8,8 @@ import {
   Query,
 } from '@nestjs/common';
 import { ParticipantService } from '../services/participant.service';
-import { ParticipantEntity } from 'src/domain/entities';
-import { CreateParticipantDto } from 'src/domain/dtos/participant';
-import { QueryParamsDto } from 'src/domain/dtos';
+import { ParticipantEntity } from '@entities';
+import { CreateParticipantDto, QueryParamsDto } from '@dtos';
 
 @Controller('participant')
 export class ParticipantController {

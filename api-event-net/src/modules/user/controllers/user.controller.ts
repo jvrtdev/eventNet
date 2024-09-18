@@ -8,10 +8,10 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { CreateUserDto, QueryParamsDto, UpdateUserDto } from 'src/domain/dtos';
+import { CreateUserDto, QueryParamsDto, UpdateUserDto } from '@dtos';
 import { UserService } from '../services/user.service';
-import { UserEntity } from 'src/domain/entities';
-import { IsPublic } from 'src/common/decorators';
+import { UserEntity } from '@entities';
+import { IsPublic } from '@decorators';
 
 @Controller('user')
 export class UserController {

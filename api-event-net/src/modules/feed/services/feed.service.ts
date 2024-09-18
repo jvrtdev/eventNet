@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ServiceBase } from 'src/common/base';
-import { PostEntity } from 'src/domain/entities';
+import { PostEntity } from '@entities';
 import { FriendshipService } from 'src/modules/friendship/services/friendship.service';
 import { PostService } from 'src/modules/post/services/post.service';
 
