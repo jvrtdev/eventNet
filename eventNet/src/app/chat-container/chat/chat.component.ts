@@ -19,7 +19,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { sendOutline } from 'ionicons/icons';
-import { MessageTypes } from 'src/common/shared/@types/message';
+import { MessageInterface } from 'src/common/shared/@types/message';
 import { ChatService } from './chat.service';
 
 @Component({
@@ -46,8 +46,8 @@ import { ChatService } from './chat.service';
 export class ChatComponent implements OnInit {
   id: any;
 
-  message: MessageTypes = { name: '', text: '' };
-  messages: MessageTypes[] = [];
+  message!: MessageInterface
+  messages: MessageInterface[] = [];
 
   constructor(
     private chatService: ChatService,
@@ -58,7 +58,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id'); //rota dinamica por id implementada
-    this.message.name = 'User' + (Math.random() * 10).toFixed(2);
+    //this.message.name = 'User' + (Math.random() * 10).toFixed(2);
     this.chatService.receiveMessage().subscribe((message) => {
       this.messages.push(message);
     });
@@ -66,6 +66,6 @@ export class ChatComponent implements OnInit {
 
   sendMessage() {
     this.chatService.sendMessage(this.message);
-    this.message.text = '';
+    this.message.content = '';
   }
 }

@@ -13,10 +13,10 @@
   >
     <div class="flex flex-col">
       <ion-text>
-        <strong>{{ message.name }}</strong>
+        <strong>{{ message.conversationId }}</strong>
       </ion-text>
       <ion-text>
-        <p>{{ message.text }}</p>
+        <p>{{ message.content }}</p>
       </ion-text>
     </div>
   </div>
@@ -25,7 +25,7 @@
 <ion-footer>
   <ion-item>
     <ion-textarea
-      [(ngModel)]="message.text"
+      [(ngModel)]="message.content"
       placeholder="Digite sua mensagem"
       class="p-4"
     />
