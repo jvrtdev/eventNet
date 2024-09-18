@@ -6,6 +6,7 @@ import { UserPreferencesComponent } from 'src/app/user-preferences/user-preferen
 import { EditAccountComponent } from './user-preferences/components/edit-account/edit-account.component';
 import { DarkmodePreferencesComponent } from './user-preferences/components/darkmode-preferences/darkmode-preferences.component';
 import { PrivacyPreferencesComponent } from './user-preferences/components/privacy-preferences/privacy-preferences.component';
+import { PostDetailsComponent } from './tabs/components/feed/components/post-details/post-details.component';
 
 export const routes: Routes = [
   {
@@ -39,5 +40,9 @@ export const routes: Routes = [
   {
     path: 'preferences/privacy',
     component: PrivacyPreferencesComponent
+  },
+  {
+    path: 'post/:id',
+    component: PostDetailsComponent
   }
 ];

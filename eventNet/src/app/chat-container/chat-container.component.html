@@ -5,14 +5,21 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="">
-  <ion-item [routerLink]="['/chat/2']">
+<ion-content *ngIf="friends">
+  <div *ngIf="friends.length == 0">
+    Você não tem networks ainda
+  </div>
+  <div *ngFor="let friend of friends">
+    <ion-item [routerLink]="['/chat/', friend.conversationId]">
     <ion-avatar slot="start">
       <img
         alt="Silhouette of a person's head"
         src="https://ionicframework.com/docs/img/demos/avatar.svg"
       />
     </ion-avatar>
-    <ion-label>{{username}}</ion-label>
+
+    <ion-label>{{friend.friend?.name}}</ion-label>
   </ion-item>
+  </div>
+  
 </ion-content>

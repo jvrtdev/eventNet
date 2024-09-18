@@ -65,6 +65,6 @@
     <ion-text>
       {{event.description}}
     </ion-text>
-    <ion-button>Entrar no chat</ion-button>
+    <ion-button [routerLink]="['/chat/',event.conversationId]">Entrar no chat</ion-button>
   </div>
 </ion-content>

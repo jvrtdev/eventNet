@@ -1,4 +1,9 @@
-export interface MessageTypes{
-  name: string
-  text: string
+export interface MessageInterface {
+  id: string;
+  content: string;
+  conversationId: string;
+  isRead: boolean;
+  senderId: string;
+  timeStamp?: Date;
+  createdAt: Date;
 }

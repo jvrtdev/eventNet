@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
-import { MessageTypes } from 'src/common/shared/@types/message';
+import { MessageInterface } from 'src/common/shared/@types/message';
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +13,11 @@ export class ChatService {
     this.socket = io('http://localhost:3000');
   }
 
-  sendMessage(message: MessageTypes) {
+  sendMessage(message: MessageInterface) {
     this.socket.emit('msgToServer', message);
   }
 
-  receiveMessage(): Observable<MessageTypes> {
+  receiveMessage(): Observable<MessageInterface> {
     return new Observable((observer) => {
       this.socket.on('msgToClient', (msgToClient) => {
         observer.next(msgToClient);

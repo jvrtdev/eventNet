@@ -1,7 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { FriendshipService } from '../services/friendship.service';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CreateFriendshipDto } from 'src/domain/dtos';
 import { FriendshipEntity } from 'src/domain/entities';
+import { FriendshipService } from '../services/friendship.service';
 
 @Controller('friendship')
 export class FriendshipController {
@@ -12,5 +12,12 @@ export class FriendshipController {
     @Body() createFriendshipDto: CreateFriendshipDto,
   ): Promise<FriendshipEntity> {
     return this.friendshipService.create(createFriendshipDto);
+  }
+
+  @Get(':userId')
+  findAllFriendsByUserId(
+    @Param('userId') userId: string,
+  ): Promise<FriendshipEntity[] | null> {
+    return this.friendshipService.getAllFriendsByUserId(userId);
   }
 }

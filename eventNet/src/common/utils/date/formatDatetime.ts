@@ -13,7 +13,7 @@ export function FormatDatetime(datetime: string) {
     year: date[2],
     hour: hour,
     utc: utc,
-    date: dateTimeParam[0].split('-').reverse().join('-'),
+    date: dateTimeParam[0].split('-').reverse().join('/'),
   };
 
   return formattedDate;
