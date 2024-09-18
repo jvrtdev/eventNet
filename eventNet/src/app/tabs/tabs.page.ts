@@ -17,7 +17,7 @@ import {
   homeOutline,
   ticketOutline,
 } from 'ionicons/icons';
-import { HeaderComponent } from 'src/components/header/header.component';
+import { HeaderComponent } from 'src/common/shared/components/header/header.component';
 
 @Component({
   selector: 'app-tabs',
@@ -30,16 +30,15 @@ import { HeaderComponent } from 'src/components/header/header.component';
     IonTabButton,
     IonIcon,
     IonLabel,
-    
-    HeaderComponent,
 
+    HeaderComponent,
   ],
 })
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
-  
-  component = HeaderComponent
-  
+
+  component = HeaderComponent;
+
   constructor() {
     addIcons({
       calendarOutline,

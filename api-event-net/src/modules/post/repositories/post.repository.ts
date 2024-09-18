@@ -32,7 +32,13 @@ export class PostRepository extends RepositoryFactory<
         id,
       },
       include: {
-        comments: true,
+        comments: {
+          select: {
+            user: true,
+            text: true,
+            createdAt: true,
+          },
+        },
         reposts: true,
         likes: true,
         owner: true,
@@ -48,8 +54,7 @@ export class PostRepository extends RepositoryFactory<
           in: userIds,
         },
       },
-
-      include: { owner: true },
+      include: { owner: true, _count: true },
     });
   }
 
@@ -62,7 +67,7 @@ export class PostRepository extends RepositoryFactory<
           },
         },
       },
-      include: { owner: true },
+      include: { owner: true, likes: true, _count: true },
     });
   }
 
@@ -77,7 +82,15 @@ export class PostRepository extends RepositoryFactory<
           },
         },
       },
-      include: {owner: true}
+      include: {
+        owner: true,
+        comments: {
+          select: {
+            user: true,
+          },
+        },
+        _count: true,
+      },
     });
   }
 }

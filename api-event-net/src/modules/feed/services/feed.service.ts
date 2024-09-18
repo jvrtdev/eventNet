@@ -24,7 +24,7 @@ export class FeedService {
     const postsCommentedByFriends =
       await this.postService.findAllPostsCommentedByFriends(friendsId);
 
-    //adicionar repostByFriends
+    // falta adicionar postsRepostByFriends
 
     const combinedPosts = [
       ...postByFriends,

@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { FriendshipService } from '../services/friendship.service';
 import { CreateFriendshipDto } from '@dtos';
 import { FriendshipEntity } from '@entities';
@@ -12,5 +12,12 @@ export class FriendshipController {
     @Body() createFriendshipDto: CreateFriendshipDto,
   ): Promise<FriendshipEntity> {
     return this.friendshipService.create(createFriendshipDto);
+  }
+
+  @Get(':userId')
+  findAllFriendsByUserId(
+    @Param('userId') userId: string,
+  ): Promise<FriendshipEntity[] | null> {
+    return this.friendshipService.getAllFriendsByUserId(userId);
   }
 }

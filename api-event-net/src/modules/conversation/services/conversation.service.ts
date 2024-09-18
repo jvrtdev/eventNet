@@ -28,4 +28,11 @@ export class ConversationService
 
     return conversations;
   }
+
+  async findByConversationId(
+    conversationId: string,
+  ): Promise<ConversationEntity> {
+    const conversation = this.conversationRepository.findByConversationId(conversationId);
+    return conversation
+  }
 }
