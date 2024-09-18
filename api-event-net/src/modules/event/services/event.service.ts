@@ -27,13 +27,13 @@ export class EventService
     if (titleAlreadyExists)
       throw new HttpException('Title already exists', HttpStatus.BAD_REQUEST);
 
-    const { id, ...conversation } = await this.conversationService.create({
+    const { id } = await this.conversationService.create({
       isGroup: true,
     });
 
-    dto.conversationId = id
+    dto.conversationId = id;
     const event = await this.eventRepository.create(dto);
-    
+
     return event;
   }
 
