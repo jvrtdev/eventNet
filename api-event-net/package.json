@@ -17,7 +17,10 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "seed:user": "ts-node prisma/seeds/user.ts",
+    "seed:event": "ts-node prisma/seeds/event.ts",
+    "prisma:seed": "npm run seed:user && npm run seed:event"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.1",
