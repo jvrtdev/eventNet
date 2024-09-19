@@ -24,7 +24,6 @@ async function eventSeed() {
         qr_code: '',
         image: '',
       },
-
       {
         title: 'ReactConf Brasil',
         conversationId: conversationIds[1],
@@ -36,7 +35,6 @@ async function eventSeed() {
         qr_code: '',
         image: '',
       },
-
       {
         title: 'Node Summit',
         conversationId: conversationIds[2],
@@ -48,7 +46,6 @@ async function eventSeed() {
         qr_code: '',
         image: '',
       },
-
       {
         title: 'Vue.js Brasil',
         conversationId: conversationIds[3],
@@ -60,7 +57,6 @@ async function eventSeed() {
         qr_code: '',
         image: '',
       },
-
       {
         title: 'DevOps Summit',
         conversationId: conversationIds[4],
@@ -72,7 +68,6 @@ async function eventSeed() {
         qr_code: '',
         image: '',
       },
-
       {
         title: 'AI & Machine Learning Conference',
         conversationId: conversationIds[5],
