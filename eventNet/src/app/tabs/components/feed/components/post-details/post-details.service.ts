@@ -1,14 +1,13 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { ApiServiceFactory } from "src/common/factories/api.factory";
-import { PostInterface } from "src/common/shared/@types/post";
-
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { PostInterface } from '@core/shared/@types/post';
+import { ApiServiceFactory } from 'src/core/common/factories/api.factory';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class PostDetailsService extends ApiServiceFactory<PostInterface>{
+export class PostDetailsService extends ApiServiceFactory<PostInterface> {
   constructor(http: HttpClient) {
-    super(http)
+    super(http);
   }
 }

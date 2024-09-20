@@ -11,8 +11,6 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { PostInterface } from 'src/common/shared/@types/post';
-import { PostDetailsService } from './post-details.service';
 import { addIcons } from 'ionicons';
 import {
   chatbubbleOutline,
@@ -21,9 +19,10 @@ import {
   mailOutline,
   repeatSharp,
 } from 'ionicons/icons';
-import { FormatDatetime } from 'src/common/utils/date/formatDatetime';
-import { formatPostDate } from 'src/common/utils/date/formatPostDate';
-import { CommentComponent } from "../../../../../../common/shared/components/comment/comment.component";
+import { PostInterface } from '@core/shared/@types/post';
+import { formatPostDate } from '@core/common/utils/date/formatPostDate';
+import { CommentComponent } from '@core/components/comment/comment.component';
+import { PostDetailsService } from './post-details.service';
 
 @Component({
   selector: 'post-details-component',
@@ -39,8 +38,8 @@ import { CommentComponent } from "../../../../../../common/shared/components/com
     IonContent,
     NgIf,
     IonIcon,
-    CommentComponent
-],
+    CommentComponent,
+  ],
 })
 export class PostDetailsComponent implements OnInit {
   constructor(
@@ -58,8 +57,8 @@ export class PostDetailsComponent implements OnInit {
   id!: string;
   post!: PostInterface;
 
-  formatDate(date: string){
-    return formatPostDate(date)
+  formatDate(date: string) {
+    return formatPostDate(date);
   }
 
   ngOnInit() {

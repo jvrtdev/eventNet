@@ -17,7 +17,7 @@ import {
   homeOutline,
   ticketOutline,
 } from 'ionicons/icons';
-import { HeaderComponent } from 'src/common/shared/components/header/header.component';
+import { HeaderComponent } from '@core/components/header/header.component';
 
 @Component({
   selector: 'app-tabs',
@@ -30,7 +30,6 @@ import { HeaderComponent } from 'src/common/shared/components/header/header.comp
     IonTabButton,
     IonIcon,
     IonLabel,
-
     HeaderComponent,
   ],
 })

@@ -1,16 +1,26 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
-import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
+import {
+  PreloadAllModules,
+  RouteReuseStrategy,
+  provideRouter,
+  withPreloading,
+} from '@angular/router';
+import {
+  IonicRouteStrategy,
+  provideIonicAngular,
+} from '@ionic/angular/standalone';
 
-import { routes } from './app/app.routes';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage-angular';
 import { AppComponent } from './app/app.component';
-import { provideHttpClient } from '@angular/common/http';
+import { routes } from './app/app.routes';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([AuthInterceptor])),
     provideRouter(routes, withPreloading(PreloadAllModules)),
   ],
 });

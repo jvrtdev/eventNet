@@ -1,6 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import {
   IonCard,
   IonCardContent,
@@ -15,12 +16,11 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { OfficialEventsComponent } from './components/official-events/official-events.component';
+import { EventInterface } from '@core/shared/@types/event';
+import { GetEventDate } from 'src/core/common/utils/date/getEventDate';
 import { CommunityEventsComponent } from './components/community-events/community-events.component';
+import { OfficialEventsComponent } from './components/official-events/official-events.component';
 import { EventsService } from './services/events.service';
-import { RouterLink } from '@angular/router';
-import { EventInterface } from 'src/common/shared/@types/event';
-import { GetEventDate } from 'src/common/utils/date/getEventDate';
 
 @Component({
   standalone: true,

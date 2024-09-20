@@ -12,8 +12,8 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { FriendshipInterface } from 'src/common/shared/@types/friendship';
-import { FriendshipService } from 'src/shared/api/services/friendship.service';
+import { FriendshipInterface } from '@core/shared/@types/friendship';
+import { FriendshipService } from 'src/core/services/user/friendship.service';
 
 @Component({
   standalone: true,

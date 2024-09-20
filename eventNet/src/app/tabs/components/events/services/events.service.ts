@@ -1,20 +1,18 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { ApiServiceFactory } from "src/common/factories/api.factory";
-import { EventInterface } from "src/common/shared/@types/event";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { EventInterface } from '@core/shared/@types/event';
+import { ApiServiceFactory } from 'src/core/common/factories/api.factory';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class EventsService extends ApiServiceFactory<EventInterface>{
+export class EventsService extends ApiServiceFactory<EventInterface> {
   constructor(http: HttpClient) {
-    super(http)
+    super(http);
   }
 
-  getTudo(endpoint: string):Observable<any> {
-    return this.http.get(`${this.baseUrl}/${endpoint}`)
+  getTudo(endpoint: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${endpoint}`);
   }
-
-  
 }

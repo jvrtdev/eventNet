@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
@@ -28,10 +29,9 @@ import {
   ticket,
   ticketOutline,
 } from 'ionicons/icons';
-import { EventsService } from '../services/events.service';
 import { EventInterface } from 'src/common/shared/@types/event';
-import { GetEventDate } from 'src/common/utils/date/getEventDate';
-import { NgIf } from '@angular/common';
+import { GetEventDate } from 'src/core/common/utils/date/getEventDate';
+import { EventsService } from '../services/events.service';
 
 @Component({
   standalone: true,
@@ -55,7 +55,7 @@ import { NgIf } from '@angular/common';
     IonIcon,
     IonCardSubtitle,
     NgIf,
-    RouterLink
+    RouterLink,
   ],
 })
 export class EventDetailComponent implements OnInit {
@@ -78,8 +78,8 @@ export class EventDetailComponent implements OnInit {
     });
   }
 
-  formatDate(startDate: Date, endDate: Date){
-   return GetEventDate(String(startDate), String(endDate))
+  formatDate(startDate: Date, endDate: Date) {
+    return GetEventDate(String(startDate), String(endDate));
   }
 
   ngOnInit() {
