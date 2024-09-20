@@ -13,7 +13,7 @@ import {
 import { addIcons } from 'ionicons';
 import { chatbubbleOutline, heart, heartOutline, mailOutline, repeat, repeatSharp } from 'ionicons/icons';
 import { FeedService } from './services/feed.service';
-import { PostInterface } from 'src/common/shared/@types/post';
+import { PostInterface } from '@core/shared/@types/post';
 import { NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -38,7 +38,7 @@ import { RouterLink } from '@angular/router';
 })
 export class Tab2Page implements OnInit {
   feed!: PostInterface[]
-  private userId = "e8330aaf-57aa-449a-90fb-8148f94e5596"
+  private userId = "b03c28ab-4d65-4813-a52d-4323efc4a2d0"
 
   constructor(private readonly feedService: FeedService) {
     addIcons({ chatbubbleOutline, repeatSharp, heartOutline, heart, mailOutline });
