@@ -4,7 +4,14 @@ const prisma = new PrismaClient();
 
 async function eventSeed() {
   await prisma.conversation.createMany({
-    data: [{}, {}, {}, {}, {}, {}],
+    data: [
+      { isGroup: true },
+      { isGroup: true },
+      { isGroup: true },
+      { isGroup: true },
+      { isGroup: true },
+      { isGroup: true },
+    ],
   });
 
   const conversations = await prisma.conversation.findMany();
