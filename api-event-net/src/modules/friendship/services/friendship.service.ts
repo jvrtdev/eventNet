@@ -58,6 +58,8 @@ export class FriendshipService
   async remove(id: string): Promise<FriendshipEntity> {
     const friendship = await this.findById(id);
 
+    await this.conversationService.remove(friendship.conversationId);
+
     const remove = this.friendshipRepository.delete(friendship.id);
 
     if (!remove)

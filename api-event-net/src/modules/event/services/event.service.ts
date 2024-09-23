@@ -74,6 +74,8 @@ export class EventService
   async remove(id: string): Promise<EventEntity> {
     const event = await this.findById(id);
 
+    await this.conversationService.remove(event.conversationId);
+
     const remove = await this.eventRepository.delete(event.id);
 
     if (!remove)
