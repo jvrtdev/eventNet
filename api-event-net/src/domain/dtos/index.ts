@@ -6,7 +6,6 @@ export * from './message';
 export * from './chat';
 export * from './participant';
 export * from './conversation';
-export * from './friendship';
 export * from './event';
 export * from './post';
 export * from './like';
