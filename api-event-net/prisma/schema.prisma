@@ -27,9 +27,6 @@ model User {
   userReposts  Repost[]
   userEvent    UserEvent[]
 
-  friendshipsFriend Friendship[] @relation("FriendshipsFriend")
-  friendshipsUser   Friendship[] @relation("FriendshipsUser")
-
   @@map("users")
 }
 
@@ -92,30 +89,15 @@ model UserEvent {
   @@map("user_event")
 }
 
-model Friendship {
-  id             String            @id @default(uuid())
-  userId         String
-  friendId       String
-  conversationId String
-  status         FriendshipStatus? @default(pending)
-  createdAt      DateTime          @default(now()) @db.Timestamp(6)
-
-  conversation Conversation @relation(fields: [conversationId], references: [id])
-  friend       User         @relation("FriendshipsFriend", fields: [friendId], references: [id])
-  user         User         @relation("FriendshipsUser", fields: [userId], references: [id])
-
-  @@map("friendships")
-}
-
 model Conversation {
-  id        String   @id @default(uuid())
-  isGroup   Boolean  @default(false)
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp(6)
+  id        String            @id @default(uuid())
+  isGroup   Boolean           @default(false)
+  status    FriendshipStatus? @default(pending)
+  createdAt DateTime          @default(now()) @map("created_at") @db.Timestamp(6)
 
   Event       Event[]
   message     Message[]
   participant Participant[]
-  friendship  Friendship[]
 
   @@map("conversations")
 }
