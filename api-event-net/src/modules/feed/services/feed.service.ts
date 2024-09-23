@@ -11,7 +11,7 @@ export class FeedService {
   ) {}
 
   async getUserFeed(userId: string): Promise<PostEntity[]> {
-    const friends = await this.friendshipService.getAllFriendsByUserId(userId);
+    const friends = await this.friendshipService.findAllFriendsByUserId(userId);
 
     const friendsId = friends.map((friend) => friend.friendId);
 

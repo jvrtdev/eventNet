@@ -16,9 +16,11 @@ export class ConversationRepository extends RepositoryFactory<
     return this.prismaService.conversation.findMany(query);
   }
 
-  findByConversationId(conversationId: string): Promise<ConversationEntity> {
+  findById(id: string): Promise<ConversationEntity> {
     return this.prismaService.conversation.findFirst({
-      where: { id: conversationId },
+      where: {
+        id,
+      },
       include: {
         Event: true,
         friendship: {

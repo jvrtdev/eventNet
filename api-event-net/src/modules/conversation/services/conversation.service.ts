@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ServiceBase } from '@bases';
 import { QueryBuilder } from '@utils';
 import { CreateConversationDto, QueryParamsDto } from '@dtos';
@@ -13,7 +13,7 @@ export class ConversationService
     private readonly conversationRepository: ConversationRepository,
   ) {}
 
-  async create(dto?: CreateConversationDto): Promise<ConversationEntity> {
+  async create(dto: CreateConversationDto): Promise<ConversationEntity> {
     const conversation = await this.conversationRepository.create(dto);
 
     return conversation;
@@ -29,11 +29,23 @@ export class ConversationService
     return conversations;
   }
 
-  async findByConversationId(
-    conversationId: string,
-  ): Promise<ConversationEntity> {
-    const conversation =
-      this.conversationRepository.findByConversationId(conversationId);
+  async findById(id: string): Promise<ConversationEntity> {
+    const conversation = await this.conversationRepository.findById(id);
+
+    if (!conversation)
+      throw new HttpException('Coversation not found', HttpStatus.NOT_FOUND);
+
     return conversation;
+  }
+
+  async remove(id: string): Promise<ConversationEntity> {
+    const conversation = await this.findById(id);
+
+    const remove = this.conversationRepository.delete(conversation.id);
+
+    if (!remove)
+      throw new HttpException('Failed to remove', HttpStatus.NOT_ACCEPTABLE);
+
+    return remove;
   }
 }

@@ -17,7 +17,7 @@ export class FriendshipController {
   @Get(':userId')
   findAllFriendsByUserId(
     @Param('userId') userId: string,
-  ): Promise<FriendshipEntity[] | null> {
-    return this.friendshipService.getAllFriendsByUserId(userId);
+  ): Promise<FriendshipEntity[]> {
+    return this.friendshipService.findAllFriendsByUserId(userId);
   }
 }

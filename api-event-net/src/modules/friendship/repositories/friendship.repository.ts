@@ -12,13 +12,21 @@ export class FriendshipRepository extends RepositoryFactory<
     super('friendship');
   }
 
-  findAllFriends(userId: string): Promise<FriendshipEntity[]> {
+  findAllFriendsByUserId(userId: string): Promise<FriendshipEntity[]> {
     return this.prismaService.friendship.findMany({
       where: {
-        userId: userId,
+        userId,
       },
       include: {
         friend: true,
+      },
+    });
+  }
+
+  findById(id: string): Promise<FriendshipEntity> {
+    return this.prismaService.friendship.findFirst({
+      where: {
+        id,
       },
     });
   }

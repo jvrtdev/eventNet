@@ -12,10 +12,8 @@ export class ConversationController {
     return this.conversationService.findAll(queryParams);
   }
 
-  @Get(':conversationId')
-  findByConversationId(
-    @Param('conversationId') conversationId: string,
-  ): Promise<ConversationEntity> {
-    return this.conversationService.findByConversationId(conversationId);
+  @Get(':id')
+  findByConversationId(@Param('id') id: string): Promise<ConversationEntity> {
+    return this.conversationService.findById(id);
   }
 }

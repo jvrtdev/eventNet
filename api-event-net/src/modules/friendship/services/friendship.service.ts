@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ServiceBase } from '@bases';
 import { CreateFriendshipDto, CreateParticipantDto } from '@dtos';
 import { FriendshipEntity } from '@entities';
@@ -17,7 +17,7 @@ export class FriendshipService
   ) {}
 
   async create(dto: CreateFriendshipDto): Promise<FriendshipEntity> {
-    const conversation = await this.conversationService.create();
+    const conversation = await this.conversationService.create({});
 
     dto.conversationId = conversation.id;
 
@@ -39,9 +39,30 @@ export class FriendshipService
     return friendship;
   }
 
-  async getAllFriendsByUserId(userId: string) {
-    const friends = await this.friendshipRepository.findAllFriends(userId);
+  async findAllFriendsByUserId(userId: string): Promise<FriendshipEntity[]> {
+    const friends =
+      await this.friendshipRepository.findAllFriendsByUserId(userId);
 
     return friends;
+  }
+
+  async findById(id: string): Promise<FriendshipEntity> {
+    const friendship = await this.friendshipRepository.findById(id);
+
+    if (!friendship)
+      throw new HttpException('Friendship not found', HttpStatus.NOT_FOUND);
+
+    return friendship;
+  }
+
+  async remove(id: string): Promise<FriendshipEntity> {
+    const friendship = await this.findById(id);
+
+    const remove = this.friendshipRepository.delete(friendship.id);
+
+    if (!remove)
+      throw new HttpException('Failed to remove', HttpStatus.NOT_ACCEPTABLE);
+
+    return remove;
   }
 }
