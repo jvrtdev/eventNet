@@ -1,7 +1,15 @@
-import { IsBoolean, IsOptional } from 'class-validator';
+import { IsBoolean, IsOptional, IsUUID } from 'class-validator';
 
 export class CreateConversationDto {
   @IsBoolean()
   @IsOptional()
   isGroup?: boolean;
+
+  @IsUUID()
+  @IsOptional()
+  senderId?: string;
+
+  @IsUUID()
+  @IsOptional()
+  recipientId?: string;
 }
