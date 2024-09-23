@@ -1,7 +1,7 @@
 import { $Enums } from '@prisma/client';
 
 export class CreateFriendshipDto {
-  conversationId: string;
+  conversationId?: string;
   userId: string;
   friendId: string;
   status?: $Enums.FriendshipStatus;

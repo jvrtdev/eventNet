@@ -4,6 +4,7 @@ import { QueryBuilder } from '@utils';
 import { CreateConversationDto, QueryParamsDto } from '@dtos';
 import { ConversationEntity } from '@entities';
 import { ConversationRepository } from '../repositories/conversation.repository';
+import { ParticipantService } from 'src/modules/participant/services/participant.service';
 
 @Injectable()
 export class ConversationService
@@ -11,6 +12,7 @@ export class ConversationService
 {
   constructor(
     private readonly conversationRepository: ConversationRepository,
+    private readonly participantService: ParticipantService,
   ) {}
 
   async create(dto: CreateConversationDto): Promise<ConversationEntity> {
@@ -40,6 +42,8 @@ export class ConversationService
 
   async remove(id: string): Promise<ConversationEntity> {
     const conversation = await this.findById(id);
+
+    await this.participantService.remove(conversation.id);
 
     const remove = this.conversationRepository.delete(conversation.id);
 
