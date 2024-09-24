@@ -5,12 +5,12 @@ const prisma = new PrismaClient();
 async function eventSeed() {
   await prisma.conversation.createMany({
     data: [
-      { isGroup: true },
-      { isGroup: true },
-      { isGroup: true },
-      { isGroup: true },
-      { isGroup: true },
-      { isGroup: true },
+      { isGroup: true, status: null },
+      { isGroup: true, status: null },
+      { isGroup: true, status: null },
+      { isGroup: true, status: null },
+      { isGroup: true, status: null },
+      { isGroup: true, status: null },
     ],
   });
 
