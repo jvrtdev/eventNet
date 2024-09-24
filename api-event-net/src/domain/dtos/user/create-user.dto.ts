@@ -1,4 +1,6 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { CreateAddressDto, UpdateAddressDto } from '../address';
+import { CreateProfileDto, UpdateProfileDto } from '../profile';
 
 export class CreateUserDto {
   @IsString()
@@ -20,4 +22,10 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   phone: string;
+
+  @IsOptional()
+  address?: CreateAddressDto | UpdateAddressDto;
+
+  @IsOptional()
+  profile?: CreateProfileDto | UpdateProfileDto;
 }
