@@ -1,4 +1,4 @@
-import { IsBoolean, IsOptional, IsUUID } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsOptional, IsUUID } from 'class-validator';
 
 export class CreateConversationDto {
   @IsBoolean()
@@ -12,4 +12,7 @@ export class CreateConversationDto {
   @IsUUID()
   @IsOptional()
   recipientId?: string;
+
+  @IsNotEmpty()
+  status: string | null;
 }

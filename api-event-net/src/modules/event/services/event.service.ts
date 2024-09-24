@@ -25,6 +25,7 @@ export class EventService
 
     const { id } = await this.conversationService.create({
       isGroup: true,
+      status: null,
     });
 
     dto.conversationId = id;
