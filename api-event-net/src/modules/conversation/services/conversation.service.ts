@@ -82,9 +82,7 @@ export class ConversationService
   async remove(id: string): Promise<ConversationEntity> {
     const conversation = await this.findById(id);
 
-    await this.participantService.remove(conversation.id);
-
-    const remove = this.conversationRepository.delete(conversation.id);
+    const remove = await this.conversationRepository.delete(conversation.id);
 
     if (!remove)
       throw new HttpException('Failed to remove', HttpStatus.NOT_ACCEPTABLE);
