@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { RepositoryFactory } from '@factories';
-import { CreateConversationDto } from '@dtos';
+import { CreateConversationDto, UpdateConversationDto } from '@dtos';
 import { ConversationEntity, QueryBuilderEntity } from '@entities';
 
 @Injectable()
 export class ConversationRepository extends RepositoryFactory<
   ConversationEntity,
-  CreateConversationDto
+  CreateConversationDto,
+  UpdateConversationDto
 > {
   constructor() {
     super('conversation');
@@ -22,12 +23,8 @@ export class ConversationRepository extends RepositoryFactory<
         id,
       },
       include: {
-        Event: true,
-        friendship: {
-          select: {
-            friend: true,
-          },
-        },
+        event: true,
+        participant: true,
         message: true,
       },
     });

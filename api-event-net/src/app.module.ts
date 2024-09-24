@@ -5,7 +5,6 @@ import { CommentModule } from './modules/comment/comment.module';
 import { ConversationModule } from './modules/conversation/conversation.module';
 import { EventModule } from './modules/event/event.module';
 import { FeedModule } from './modules/feed/feed.module';
-import { FriendshipModule } from './modules/friendship/friendship.module';
 import { LikeModule } from './modules/like/like.module';
 import { MessageModule } from './modules/message/message.module';
 import { ParticipantModule } from './modules/participant/participant.module';
@@ -26,7 +25,6 @@ import { AuthGuard } from './modules/auth/guards/auth.guard';
     MessageModule,
     ConversationModule,
     ParticipantModule,
-    FriendshipModule,
     PostModule,
     RepostModule,
     LikeModule,

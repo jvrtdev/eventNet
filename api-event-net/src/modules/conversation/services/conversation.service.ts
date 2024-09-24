@@ -1,14 +1,24 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ServiceBase } from '@bases';
 import { QueryBuilder } from '@utils';
-import { CreateConversationDto, QueryParamsDto } from '@dtos';
+import {
+  CreateConversationDto,
+  CreateParticipantDto,
+  QueryParamsDto,
+  UpdateConversationDto,
+} from '@dtos';
 import { ConversationEntity } from '@entities';
 import { ConversationRepository } from '../repositories/conversation.repository';
 import { ParticipantService } from 'src/modules/participant/services/participant.service';
 
 @Injectable()
 export class ConversationService
-  implements ServiceBase<ConversationEntity, CreateConversationDto>
+  implements
+    ServiceBase<
+      ConversationEntity,
+      CreateConversationDto,
+      UpdateConversationDto
+    >
 {
   constructor(
     private readonly conversationRepository: ConversationRepository,
@@ -16,7 +26,22 @@ export class ConversationService
   ) {}
 
   async create(dto: CreateConversationDto): Promise<ConversationEntity> {
-    const conversation = await this.conversationRepository.create(dto);
+    const { senderId, recipientId, ...data } = dto;
+
+    const conversation = await this.conversationRepository.create({ ...data });
+
+    const participantData: CreateParticipantDto[] = [
+      {
+        conversationId: conversation.id,
+        userId: senderId,
+      },
+      {
+        conversationId: conversation.id,
+        userId: recipientId,
+      },
+    ];
+
+    await this.participantService.createMany(participantData);
 
     return conversation;
   }
@@ -38,6 +63,20 @@ export class ConversationService
       throw new HttpException('Coversation not found', HttpStatus.NOT_FOUND);
 
     return conversation;
+  }
+
+  async update(dto: UpdateConversationDto): Promise<ConversationEntity> {
+    const conversation = await this.findById(dto.id);
+
+    const update = await this.conversationRepository.update({
+      ...dto,
+      id: conversation.id,
+    });
+
+    if (!update)
+      throw new HttpException('Failed to update', HttpStatus.NOT_ACCEPTABLE);
+
+    return update;
   }
 
   async remove(id: string): Promise<ConversationEntity> {
