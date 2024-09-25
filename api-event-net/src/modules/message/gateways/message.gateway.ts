@@ -1,5 +1,7 @@
 import { Logger } from '@nestjs/common';
 import {
+  ConnectedSocket,
+  MessageBody,
   OnGatewayConnection,
   OnGatewayDisconnect,
   OnGatewayInit,
@@ -8,6 +10,8 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
+import { MessageService } from '../services/message.service';
+import { CreateMessageDto } from '@dtos';
 
 @WebSocketGateway({ cors: true })
 export class MessageGateway
@@ -16,9 +20,16 @@ export class MessageGateway
   @WebSocketServer() server: Server;
   private logger: Logger = new Logger('ChatGateway');
 
+  constructor(private readonly messageService: MessageService) {}
+
   @SubscribeMessage('msgToServer')
-  handleMessage(client: Socket, payload: string): void {
-    this.server.emit('msgToClient', payload, client.id);
+  async handleMessage(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() payload: CreateMessageDto,
+  ): Promise<void> {
+    const message = await this.messageService.create(payload);
+
+    this.server.emit('msgToClient', message, client.id);
   }
 
   afterInit() {

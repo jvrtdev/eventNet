@@ -1,16 +1,10 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { CreateMessageDto } from '@dtos';
+import { Controller, Get, Param } from '@nestjs/common';
 import { MessageEntity } from '@entities';
 import { MessageService } from '../services/message.service';
 
 @Controller('message')
 export class MessageController {
   constructor(private readonly messageService: MessageService) {}
-
-  @Post()
-  create(@Body() dto: CreateMessageDto): Promise<MessageEntity> {
-    return this.messageService.create(dto);
-  }
 
   @Get(':conversationId')
   getAllMessagesByConversationId(
