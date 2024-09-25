@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
-import { MessageInterface } from 'src/common/shared/@types/message';
+import { MessageInterface } from '@core/shared/@types/message';
 
 @Injectable({
   providedIn: 'root',

@@ -1,3 +1,6 @@
+import { AddressInterface } from "./address"
+import { ProfileInterface } from "./profile"
+
 export interface UserInterface{
   createdAt?: Date,
   email: string
@@ -8,4 +11,6 @@ export interface UserInterface{
   role?: string
   userName: string
   token?: string
+  address: AddressInterface
+  profile: ProfileInterface
 }

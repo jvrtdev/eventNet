@@ -10,11 +10,12 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (!this.authService.isAuthenticated()) {
-      this.router.navigate(['/chat']);
+      this.router.navigate(['/home']);
       console.log("Nao autenticado")
+      this.authService.logout()
       return false;
     }
-    return true;
     console.log("Autenticado!")
+    return true;
   }
 }
