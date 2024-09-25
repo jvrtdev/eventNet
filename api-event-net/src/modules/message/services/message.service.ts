@@ -11,11 +11,16 @@ export class MessageService
   constructor(private readonly messageRepository: MessageRepository) {}
 
   async create(dto: CreateMessageDto): Promise<MessageEntity> {
-    if (!dto.content) {
-      throw new HttpException('Mensagem inválida!', HttpStatus.BAD_REQUEST);
-    }
-
     const message = await this.messageRepository.create(dto);
+
+    return message;
+  }
+
+  async findById(id: string): Promise<MessageEntity> {
+    const message = await this.messageRepository.findbyId(id);
+
+    if (!message)
+      throw new HttpException('Message not found', HttpStatus.NOT_FOUND);
 
     return message;
   }
@@ -29,5 +34,30 @@ export class MessageService
       );
 
     return messages;
+  }
+
+  async update(dto: UpdateMessageDto): Promise<MessageEntity> {
+    const message = await this.findById(dto.id);
+
+    const update = await this.messageRepository.update({
+      ...dto,
+      id: message.id,
+    });
+
+    if (!update)
+      throw new HttpException('Failed to update', HttpStatus.NOT_ACCEPTABLE);
+
+    return update;
+  }
+
+  async remove(id: string): Promise<MessageEntity> {
+    const message = await this.findById(id);
+
+    const remove = await this.messageRepository.delete(message.id);
+
+    if (!remove)
+      throw new HttpException('Failed to remove', HttpStatus.NOT_ACCEPTABLE);
+
+    return remove;
   }
 }

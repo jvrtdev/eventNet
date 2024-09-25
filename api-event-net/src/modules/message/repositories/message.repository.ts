@@ -17,7 +17,17 @@ export class MessageRepository extends RepositoryFactory<
     conversationId: string,
   ): Promise<MessageEntity[] | null> {
     return this.prismaService.message.findMany({
-      where: { conversationId: conversationId },
+      where: {
+        conversationId,
+      },
+    });
+  }
+
+  findbyId(id: string): Promise<MessageEntity> {
+    return this.prismaService.message.findFirst({
+      where: {
+        id,
+      },
     });
   }
 }
