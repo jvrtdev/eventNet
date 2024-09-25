@@ -20,6 +20,8 @@ export class UserService
   ) {}
 
   async createUser(dto: CreateUserDto): Promise<UserEntity> {
+    const {profile: profileData, address: addressData, ...userData } = dto
+    
     const emailAlreadyExists = await this.userRepository.findByEmail(dto.email);
 
     if (emailAlreadyExists)
@@ -42,11 +44,11 @@ export class UserService
 
     dto.password = await hash(dto.password);
 
-    const user = await this.userRepository.create(dto);
+    const user = await this.userRepository.create(userData);
 
-    const profile = await this.profileService.create({ userId: user.id });
+    const profile = await this.profileService.create({ userId: user.id, ...profileData });
 
-    const address = await this.addressService.create({ userId: user.id });
+    const address = await this.addressService.create({ userId: user.id, ...addressData });
 
     const { token } = await this.authService.create({
       login: user.email,
