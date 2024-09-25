@@ -27,7 +27,7 @@ import {
   personCircleOutline,
   settingsOutline,
 } from 'ionicons/icons';
-import { menuHeader } from 'src/common/shared/data/menu-header';
+import { menuHeader } from '@core/shared/data/menu-header';
 
 @Component({
   standalone: true,

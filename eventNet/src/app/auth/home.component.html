@@ -1,0 +1,16 @@
+<ion-content class="ion-padding ">
+  <img [src]="logo" alt="logo do eventnet" class="m-auto w-40 h-40 mb-4">
+
+  <ion-text>
+    <h1 class="font-bold text-2xl text-center">Bem vindo ao eventNet!👋</h1>
+  </ion-text>
+  <ion-text>
+    <h3 class="text-slate-400 text-center">Explore eventos e se conecte com os usuarios!</h3>
+  </ion-text>
+
+  <div class="flex flex-col justify-center mt-10">
+    <ion-button shape="round" expand="block" [routerLink]="['/sign-up']">Crie sua conta</ion-button>
+    <span class="m-auto text-slate-400">ou</span>
+    <ion-button shape="round" expand="block" [routerLink]="['/login']">Faça login</ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-text>
+    <h1 class="font-bold text-2xl text-center">Endereço</h1>
+  </ion-text>
+  <ion-text>
+    <h3 class="text-slate-400 text-center">
+      Com seu endereço vamos te manter informados dos eventos e usuarios ao
+      seu redor!
+    </h3>
+  </ion-text>
+  
+
+  <form [formGroup]="step2Form" class="space-y-2 mt-10">
+    <ion-item lines="none" class="rounded-xl">
+      <ion-select
+        aria-label="state"
+        interface="popover"
+        placeholder="Selecione seu Estado"
+        formControlName="state"
+      >
+        <ion-select-option
+          *ngFor="let state of states"
+          value="{{ state.sigla }}"
+        >
+          {{ state.nome }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none" class="rounded-xl">
+      <ion-select
+        aria-label="city"
+        interface="popover"
+        placeholder="Selecione sua Cidade"
+        formControlName="city"
+      >
+        <ion-select-option
+          *ngFor="let city of citiesByState"
+          value="{{ city.nome }}"
+        >
+          {{ city.nome }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="none" class="rounded-xl">
+      <ion-input labelPlacement="floating" formControlName="neighborhood">
+        <div slot="label">Bairro</div>
+      </ion-input>
+    </ion-item>
+    
+
+    <footer class="flex justify-end">
+      <ion-button
+        shape="round"
+        class="max-w-fit"
+        type="submit"
+        (click)="nextStep()"
+        [disabled]="step2Form.invalid"
+      >
+        Próximo <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </footer>
+  </form>
+</ion-content>

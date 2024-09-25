@@ -29,7 +29,7 @@ import {
   ticket,
   ticketOutline,
 } from 'ionicons/icons';
-import { EventInterface } from 'src/common/shared/@types/event';
+import { EventInterface } from '@core/shared/@types/event';
 import { GetEventDate } from 'src/core/common/utils/date/getEventDate';
 import { EventsService } from '../services/events.service';
 

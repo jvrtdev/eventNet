@@ -4,52 +4,60 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
-import { AuthInterface } from 'src/common/shared/@types/auth';
-import { UserInterface } from 'src/common/shared/@types/user';
+import { catchError, Observable, tap, throwError } from 'rxjs';
+import { AuthInterface } from '@core/shared/@types/auth';
+import { UserInterface } from '@core/shared/@types/user';
 import { ApiServiceFactory } from 'src/core/common/factories/api.factory';
 import { parseToken } from 'src/core/common/utils/parseToken';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService extends ApiServiceFactory<AuthInterface> {
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, private router: Router) {
     super(http);
   }
 
-  async login(data: UserInterface): Promise<AuthInterface> {
-    const response = this.http
+  login(data: Pick<UserInterface, 'email' | 'userName' | 'password'>) {
+    return this.http
       .post<UserInterface>(`${this.baseUrl}/auth/login`, data)
-      .pipe(catchError(this.handleError))
-      .subscribe((token) => {
-        token.token;
-      });
-    console.log('resposta da requisição:', response);
-
-    localStorage.setItem('token', JSON.stringify(response));
-    localStorage.setItem('user', parseToken(String(response)));
-
-    const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user');
-
-    console.log('Itens do ionicStorage/n token:', token, 'user:', user);
-    return { isAuthenticated: true, token: token ?? '', user: user ?? '' };
+      .pipe(
+        tap((response) => {
+          localStorage.setItem('token', JSON.stringify(response.token));
+          localStorage.setItem('user', parseToken(String(response)));
+        }),
+        catchError(this.handleError)
+      );
+  }
+  create(data: UserInterface) {
+    return this.http.post<UserInterface>(`${this.baseUrl}/user`, data).pipe(
+      tap((response) => {
+        const user = parseToken(response.token!)
+        localStorage.setItem('token', response.token!);
+        localStorage.setItem('user', JSON.stringify(user));
+      }),
+      catchError(this.handleError)
+    );
   }
 
-  async logout() {
+  logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    this.router.navigate(['/home']);
   }
 
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'Ocorreu um erro inesperado';
+    let errorMessage = `Ocorreu um erro inesperado: ${error}`;
     if (error.status === 0) {
       errorMessage = 'Não foi possível conectar ao servidor.';
+      console.log(errorMessage);
     } else if (error.status === 401) {
       errorMessage = 'Login ou senha inválidos.';
+      console.log(errorMessage);
     } else if (error.status === 500) {
       errorMessage = 'Erro no servidor. Tente novamente mais tarde.';
+      console.log(errorMessage);
     }
     return throwError(() => new Error(errorMessage));
   }
