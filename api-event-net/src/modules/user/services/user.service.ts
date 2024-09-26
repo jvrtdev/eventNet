@@ -39,10 +39,11 @@ export class UserService
 
     const phoneAlreadyExists = await this.userRepository.findByPhone(dto.phone);
 
-    if (phoneAlreadyExists)
+    if (phoneAlreadyExists) {
       throw new HttpException('Phone already exists', HttpStatus.BAD_REQUEST);
+    }
 
-    dto.password = await hash(dto.password);
+    data.password = await hash(dto.password);
 
     const user = await this.userRepository.create(data);
 
@@ -57,8 +58,8 @@ export class UserService
     });
 
     const { token } = await this.authService.create({
-      login: user.email,
-      password: user.password,
+      login: dto.email,
+      password: dto.password,
     });
 
     return {

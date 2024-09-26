@@ -25,7 +25,7 @@ export class AuthService implements ServiceBase<AuthEntity, CreateAuthDto> {
       ? await this.userService.findByUserEmail(dto.login)
       : await this.userService.findByUserName(dto.login);
 
-    const passwordIsEqual = compare(dto.password, login.password);
+    const passwordIsEqual = await compare(dto.password, login.password);
 
     if (!passwordIsEqual)
       throw new HttpException('Password invalid', HttpStatus.UNAUTHORIZED);
