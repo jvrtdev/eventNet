@@ -91,15 +91,6 @@ const profileData = [
     userId: 'c88b0d74-5a70-41fa-8df2-78b9e6f7af2e',
     createdAt: '2024-09-19T21:26:10.589Z',
   },
-  {
-    bio: 'Consultor de TI',
-    avatar: 'https://example.com/avatar6.jpg',
-    github: 'https://github.com/usuario6',
-    linkedin: 'https://linkedin.com/in/usuario6',
-    instagram: null,
-    userId: '36a57eae-1a36-4d2a-b5e7-3c6199d52b5a',
-    createdAt: '2024-09-19T21:26:10.589Z',
-  },
 ];
 
 const addresseData = [
@@ -132,12 +123,6 @@ const addresseData = [
     state: 'RS',
     neighborhood: 'Cidade Baixa',
     userId: 'c88b0d74-5a70-41fa-8df2-78b9e6f7af2e',
-  },
-  {
-    city: 'Florianópolis',
-    state: 'SC',
-    neighborhood: 'Lagoa da Conceição',
-    userId: '36a57eae-1a36-4d2a-b5e7-3c6199d52b5a',
   },
 ];
 
