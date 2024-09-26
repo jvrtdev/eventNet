@@ -1,15 +1,26 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { ServiceBase } from '@bases';
 import { CreateParticipantDto, QueryParamsDto } from '@dtos';
 import { ParticipantEntity } from '@entities';
 import { ParticipantRepository } from '../repositories/participant.repository';
 import { QueryBuilder } from '@utils';
+import { ConversationService } from 'src/modules/conversation/services/conversation.service';
 
 @Injectable()
 export class ParticipantService
   implements ServiceBase<ParticipantEntity, CreateParticipantDto>
 {
-  constructor(private readonly participantRepository: ParticipantRepository) {}
+  constructor(
+    private readonly participantRepository: ParticipantRepository,
+    @Inject(forwardRef(() => ConversationService))
+    private readonly conversationService: ConversationService,
+  ) {}
 
   async createMany(dto: CreateParticipantDto[]): Promise<ParticipantEntity[]> {
     const participants = await this.participantRepository.createMany(dto);
@@ -32,6 +43,36 @@ export class ParticipantService
     const data = await this.participantRepository.findAll(query);
 
     return data;
+  }
+
+  async findAllParticipantsByUserId(
+    userId: string,
+  ): Promise<ParticipantEntity[]> {
+    const participants =
+      await this.participantRepository.findAllParticipantsByUserId(userId);
+
+    return participants;
+  }
+
+  async findAllFriendsByUserId(userId: string) {
+    const participants = await this.findAllParticipantsByUserId(userId);
+
+    const conversationsIds = participants.map(
+      (participant) => participant.conversationId,
+    );
+
+    const conversationAccepteds =
+      await this.conversationService.findAllConversationsWithStatusAcceptedByConversationsIds(
+        conversationsIds,
+      );
+
+    const ParticipantsFromThisConversations =
+      await this.participantRepository.findAllParticipantsByConversationsIds(
+        conversationAccepteds,
+        userId,
+      );
+
+    return ParticipantsFromThisConversations;
   }
 
   async findById(id: string): Promise<ParticipantEntity> {

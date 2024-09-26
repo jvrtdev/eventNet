@@ -17,6 +17,20 @@ export class ConversationRepository extends RepositoryFactory<
     return this.prismaService.conversation.findMany(query);
   }
 
+  findAllConversationsWithStatusAcceptedByConversationsIds(
+    conversationsIds: string[],
+  ): Promise<ConversationEntity[]> {
+    return this.prismaService.conversation.findMany({
+      where: {
+        id: {
+          in: conversationsIds,
+        },
+        isGroup: false,
+        status: 'accepted',
+      },
+    });
+  }
+
   findById(id: string): Promise<ConversationEntity> {
     return this.prismaService.conversation.findFirst({
       where: {

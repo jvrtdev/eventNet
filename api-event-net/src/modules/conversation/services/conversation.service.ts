@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { ServiceBase } from '@bases';
 import { QueryBuilder } from '@utils';
 import {
@@ -22,6 +28,7 @@ export class ConversationService
 {
   constructor(
     private readonly conversationRepository: ConversationRepository,
+    @Inject(forwardRef(() => ParticipantService))
     private readonly participantService: ParticipantService,
   ) {}
 
@@ -54,6 +61,21 @@ export class ConversationService
     const conversations = await this.conversationRepository.findAll(query);
 
     return conversations;
+  }
+
+  async findAllConversationsWithStatusAcceptedByConversationsIds(
+    conversationsIds: string[],
+  ): Promise<string[]> {
+    const conversations =
+      await this.conversationRepository.findAllConversationsWithStatusAcceptedByConversationsIds(
+        conversationsIds,
+      );
+
+    const conversationsAccepteds = conversations.map(
+      (conversation) => conversation.id,
+    );
+
+    return conversationsAccepteds;
   }
 
   async findById(id: string): Promise<ConversationEntity> {

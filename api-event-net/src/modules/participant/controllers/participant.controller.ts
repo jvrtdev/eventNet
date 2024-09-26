@@ -27,13 +27,18 @@ export class ParticipantController {
     return this.participantService.findAll(queryParams);
   }
 
+  @Get('user/:userId')
+  findAllFriendsByUserId(@Param('userId') userId: string) {
+    return this.participantService.findAllFriendsByUserId(userId);
+  }
+
   @Get(':id')
-  findById(@Param() id: string): Promise<ParticipantEntity> {
+  findById(@Param('id') id: string): Promise<ParticipantEntity> {
     return this.participantService.findById(id);
   }
 
   @Delete(':id')
-  removeParticipant(@Param() id: string): Promise<ParticipantEntity> {
+  removeParticipant(@Param('id') id: string): Promise<ParticipantEntity> {
     return this.participantService.remove(id);
   }
 }
