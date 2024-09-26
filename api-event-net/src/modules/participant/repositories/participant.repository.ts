@@ -37,6 +37,18 @@ export class ParticipantRepository extends RepositoryFactory<
           not: userId,
         },
       },
+      include: {
+        user: {
+          select: {
+            name: true,
+            profile: {
+              select: {
+                avatar: true,
+              },
+            },
+          },
+        },
+      },
     });
   }
 

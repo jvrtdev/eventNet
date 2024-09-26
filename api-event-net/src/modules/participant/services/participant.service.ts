@@ -54,7 +54,7 @@ export class ParticipantService
     return participants;
   }
 
-  async findAllFriendsByUserId(userId: string) {
+  async findAllFriendsByUserId(userId: string): Promise<ParticipantEntity[]> {
     const participants = await this.findAllParticipantsByUserId(userId);
 
     const conversationsIds = participants.map(

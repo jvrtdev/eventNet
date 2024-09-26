@@ -28,7 +28,9 @@ export class ParticipantController {
   }
 
   @Get('user/:userId')
-  findAllFriendsByUserId(@Param('userId') userId: string) {
+  findAllFriendsByUserId(
+    @Param('userId') userId: string,
+  ): Promise<ParticipantEntity[]> {
     return this.participantService.findAllFriendsByUserId(userId);
   }
 
