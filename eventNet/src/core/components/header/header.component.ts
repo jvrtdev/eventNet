@@ -28,6 +28,8 @@ import {
   settingsOutline,
 } from 'ionicons/icons';
 import { menuHeader } from '@core/shared/data/menu-header';
+import { AuthService } from '@core/services/auth.service';
+import { ToastComponent } from '@core/shared/components/toast.component';
 
 @Component({
   standalone: true,
@@ -55,7 +57,7 @@ import { menuHeader } from '@core/shared/data/menu-header';
   ],
 })
 export class HeaderComponent {
-  constructor() {
+  constructor(private authService: AuthService, private toast: ToastComponent) {
     addIcons({
       chatbubblesOutline,
       personCircleOutline,
@@ -63,6 +65,15 @@ export class HeaderComponent {
       settingsOutline,
       exitOutline,
     });
+  }
+
+  handleLogout(){
+    this.toast.setToast({
+      label: "Usuario desconectado",
+      color: "secondary",
+      icon: "information-circle"
+    })
+    this.authService.logout()
   }
 
   items = menuHeader;

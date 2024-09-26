@@ -6,6 +6,38 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  
+<ion-content class="ion-padding">
+  <img [src]="logo" alt="logo do eventnet" class="m-auto w-40 h-40 mb-4">
+
+  <ion-text>
+    <h1 class="font-bold text-2xl text-center">Login</h1>
+  </ion-text>
+  <ion-text>
+    <h3 class="text-slate-400 text-center">Faça login para explorar eventos e se conectar com os usuarios!</h3>
+  </ion-text>
+
+  <form [formGroup]="formLogin" class="space-y-2 mt-10">
+    <ion-item lines="none" class="rounded-xl">
+      <ion-input labelPlacement="floating" formControlName="login" placeholder="Entre com Email ou Username">
+        <div slot="label">Login</div>
+      </ion-input>
+    </ion-item>
+    <ion-item lines="none" class="rounded-xl">
+      <ion-input labelPlacement="floating" type="password" formControlName="password">
+        <div slot="label">Senha</div>
+      </ion-input>
+    </ion-item>
+
+    <footer class="flex justify-end">
+      <ion-button
+        shape="round"
+        class="max-w-fit"
+        type="submit"
+        (click)="handleLogin()"
+        [disabled]="formLogin.invalid"
+      >
+        Entrar <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </footer>
+    </form>
 </ion-content>
