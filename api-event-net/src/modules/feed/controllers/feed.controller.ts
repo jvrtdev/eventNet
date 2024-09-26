@@ -6,8 +6,8 @@ import { FeedService } from '../services/feed.service';
 export class FeedController {
   constructor(private readonly feedService: FeedService) {}
 
-  // @Get(':userId')
-  // getUserFeed(@Param('userId') userId: string): Promise<PostEntity[]> {
-  //   return this.feedService.getUserFeed(userId);
-  // }
+  @Get(':userId')
+  getUserFeed(@Param('userId') userId: string): Promise<PostEntity[]> {
+    return this.feedService.getUserFeed(userId);
+  }
 }
