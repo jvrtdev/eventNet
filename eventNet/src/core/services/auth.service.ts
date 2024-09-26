@@ -4,12 +4,12 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 import { AuthInterface } from '@core/shared/@types/auth';
 import { UserInterface } from '@core/shared/@types/user';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { ApiServiceFactory } from 'src/core/common/factories/api.factory';
 import { parseToken } from 'src/core/common/utils/parseToken';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -20,20 +20,19 @@ export class AuthService extends ApiServiceFactory<AuthInterface> {
   }
 
   login(data: Pick<UserInterface, 'email' | 'userName' | 'password'>) {
-    return this.http
-      .post<UserInterface>(`${this.baseUrl}/auth/login`, data)
-      .pipe(
-        tap((response) => {
-          localStorage.setItem('token', JSON.stringify(response.token));
-          localStorage.setItem('user', parseToken(String(response)));
-        }),
-        catchError(this.handleError)
-      );
+    return this.http.post<UserInterface>(`${this.baseUrl}/auth`, data).pipe(
+      tap((response) => {
+        const user = parseToken(String(response.token));
+        localStorage.setItem('token', response.token!);
+        localStorage.setItem('user', JSON.stringify(user));
+      }),
+      catchError(this.handleError)
+    );
   }
   create(data: UserInterface) {
     return this.http.post<UserInterface>(`${this.baseUrl}/user`, data).pipe(
       tap((response) => {
-        const user = parseToken(response.token!)
+        const user = parseToken(response.token!);
         localStorage.setItem('token', response.token!);
         localStorage.setItem('user', JSON.stringify(user));
       }),
