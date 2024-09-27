@@ -7,10 +7,11 @@ import { MessageInterface } from '@core/shared/@types/message';
   providedIn: 'root',
 })
 export class ChatService {
+  private baseUrl = "http://localhost:3000"
   private socket: Socket;
 
   constructor() {
-    this.socket = io('http://localhost:3000');
+    this.socket = io(this.baseUrl);
   }
 
   sendMessage(message: MessageInterface) {
