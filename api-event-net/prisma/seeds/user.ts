@@ -8,7 +8,7 @@ const userData = [
     name: 'Ana Silva',
     userName: 'ana.silva',
     email: 'ana.silva@example.com',
-    password: 'seed1234',
+    password: '$2b$10$3XELlt3h6NTwSopOV1oixOBt.T5wCfGtIykaO9WzVy0JmpqhgNzoC',
     phone: '+55 11 91234-5678',
   },
   {
@@ -16,7 +16,7 @@ const userData = [
     name: 'Carlos Oliveira',
     userName: 'carlos.oliveira',
     email: 'carlos.oliveira@example.com',
-    password: 'seed1234',
+    password: '$2b$10$3XELlt3h6NTwSopOV1oixOBt.T5wCfGtIykaO9WzVy0JmpqhgNzoC',
     phone: '+55 21 98765-4321',
   },
   {
@@ -24,7 +24,7 @@ const userData = [
     name: 'Mariana Costa',
     userName: 'mariana.costa',
     email: 'mariana.costa@example.com',
-    password: 'seed1234',
+    password: '$2b$10$3XELlt3h6NTwSopOV1oixOBt.T5wCfGtIykaO9WzVy0JmpqhgNzoC',
     phone: '+55 31 99876-5432',
   },
   {
@@ -32,7 +32,7 @@ const userData = [
     name: 'Rafael Santos',
     userName: 'rafael.santos',
     email: 'rafael.santos@example.com',
-    password: 'seed1234',
+    password: '$2b$10$3XELlt3h6NTwSopOV1oixOBt.T5wCfGtIykaO9WzVy0JmpqhgNzoC',
     phone: '+55 19 99765-4321',
   },
   {
@@ -40,7 +40,7 @@ const userData = [
     name: 'Juliana Almeida',
     userName: 'juliana.almeida',
     email: 'juliana.almeida@example.com',
-    password: 'seed1234',
+    password: '$2b$10$3XELlt3h6NTwSopOV1oixOBt.T5wCfGtIykaO9WzVy0JmpqhgNzoC',
     phone: '+55 41 99654-3210',
   },
 ];
