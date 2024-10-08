@@ -47,7 +47,7 @@ export class AuthService extends ApiServiceFactory<AuthInterface> {
   }
 
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = `Ocorreu um erro inesperado: ${error}`;
+    let errorMessage = `Ocorreu um erro inesperado: ${error.message}`;
     if (error.status === 0) {
       errorMessage = 'Não foi possível conectar ao servidor.';
       console.log(errorMessage);

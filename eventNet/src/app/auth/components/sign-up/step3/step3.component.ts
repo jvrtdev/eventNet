@@ -62,7 +62,7 @@ export class SignUpStep3Component implements OnInit {
           this.router.navigate(['/']);
         },
         error: (error) => {
-          console.log(error)
+          console.log(error)()
         }
       })
     }

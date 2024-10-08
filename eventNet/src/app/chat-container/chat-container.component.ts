@@ -14,6 +14,7 @@ import {
 } from '@ionic/angular/standalone';
 import { FriendshipInterface } from '@core/shared/@types/friendship';
 import { FriendshipService } from 'src/core/services/user/friendship.service';
+import { getUserId } from '@core/common/utils/getUserId';
 
 @Component({
   standalone: true,
@@ -36,8 +37,8 @@ import { FriendshipService } from 'src/core/services/user/friendship.service';
 })
 export class ChatContainerComponent implements OnInit {
   constructor(private readonly friendshipService: FriendshipService) {}
-  userId: string = 'b03c28ab-4d65-4813-a52d-4323efc4a2d0';
   friends!: FriendshipInterface[];
+  userId = getUserId()
 
   ngOnInit() {
     this.friendshipService
