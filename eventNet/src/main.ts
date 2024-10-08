@@ -11,7 +11,6 @@ import {
 } from '@ionic/angular/standalone';
 
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { IonicStorageModule } from '@ionic/storage-angular';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
