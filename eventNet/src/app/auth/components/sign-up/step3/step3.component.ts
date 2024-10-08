@@ -19,6 +19,7 @@ import { SignUpService } from '../sign-up.service';
 import { addIcons } from 'ionicons';
 import { arrowForwardOutline } from 'ionicons/icons';
 import { AuthService } from '@core/services/auth.service';
+import { ToastComponent } from '@core/shared/components/toast.component';
 
 @Component({
   standalone: true,
@@ -44,7 +45,8 @@ export class SignUpStep3Component implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private signUpService: SignUpService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private toast: ToastComponent
   ) {
     addIcons({arrowForwardOutline})
   }
@@ -63,6 +65,11 @@ export class SignUpStep3Component implements OnInit {
         },
         error: (error) => {
           console.log(error)
+          this.toast.setToast({
+            label: error.message,
+            icon: 'close-circle',
+            color: 'danger',
+          });
         }
       })
     }
