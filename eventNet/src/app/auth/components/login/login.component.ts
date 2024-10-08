@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
         error: (error) => {
           console.log(error);
           this.toast.setToast({
-            label: 'Erro ao fazer login!',
+            label: error.message,
             icon: 'close-circle',
             color: 'danger',
           });
