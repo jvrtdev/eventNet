@@ -3,21 +3,40 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img
+            alt="Silhouette of a person's head"
+            src="https://ionicframework.com/docs/img/demos/avatar.svg"
+          />
+        </ion-avatar>
+
+        <ion-label *ngIf="receiver">{{ receiver.name }}</ion-label>
+      </ion-item>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding space-y-3">
-  <div
-    *ngFor="let message of messages"
-    class="bg-blue-800 text-white p-1 max-w-fit self-end rounded-e-lg"
-  
-  >
-    <div class="flex flex-col">
-      <ion-text>
-        <strong>{{ message.conversationId }}</strong>
-      </ion-text>
-      <ion-text>
-        <p>{{ message.content }}</p>
-      </ion-text>
+
+<ion-content class="ion-padding space-y-3 flex" *ngIf="messages">
+  <div *ngFor="let message of messages">
+    <div
+      [ngClass]="
+        sender.sub != message.senderId
+          ? 'bg-slate-100 text-black p-1 max-w-fit justify-self-start rounded-e-lg '
+          : 'bg-blue-800 text-white p-1 max-w-fit justify-self-end rounded-l-lg '
+      "
+    >
+      <div class="flex flex-col w-full">
+        <ion-text>
+          <strong>{{
+            sender.sub != message.senderId ? receiver.name : sender.name
+          }}</strong>
+        </ion-text>
+        <ion-text>
+          <p>{{ message.content }}</p>
+        </ion-text>
+      </div>
     </div>
   </div>
 </ion-content>

@@ -1,28 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { io, Socket } from 'socket.io-client';
 import { MessageInterface } from '@core/shared/@types/message';
+import { UserInterface } from '@core/shared/@types/user';
+import { HttpClient } from '@angular/common/http';
+import { ApiServiceFactory } from '@core/common/factories/api.factory';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ChatService {
-  private baseUrl = "http://localhost:3000"
-  private socket: Socket;
-
-  constructor() {
-    this.socket = io(this.baseUrl);
+export class ChatService extends ApiServiceFactory<MessageInterface> {
+  constructor(http: HttpClient) {
+    super(http);
   }
 
-  sendMessage(message: MessageInterface) {
-    this.socket.emit('msgToServer', message);
+  getMessagesByConversationId(
+    endpoint: string
+  ): Observable<MessageInterface[]> {
+    return this.http.get<MessageInterface[]>(`${this.baseUrl}/${endpoint}`);
   }
 
-  receiveMessage(): Observable<MessageInterface> {
-    return new Observable((observer) => {
-      this.socket.on('msgToClient', (msgToClient) => {
-        observer.next(msgToClient);
-      });
-    });
+  getReceiverByConversationId(endpoint: string): Observable<UserInterface> {
+    return this.http.get<UserInterface>(`${this.baseUrl}/${endpoint}`);
   }
 }

@@ -12,7 +12,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { FriendshipInterface } from '@core/shared/@types/friendship';
+import { ParticipantInterface } from '@core/shared/@types/participant';
 import { FriendshipService } from 'src/core/services/user/friendship.service';
 import { getUserId } from '@core/common/utils/getUserId';
 
@@ -32,20 +32,20 @@ import { getUserId } from '@core/common/utils/getUserId';
     IonLabel,
     RouterLink,
     NgFor,
-    NgIf
+    NgIf,
   ],
 })
 export class ChatContainerComponent implements OnInit {
   constructor(private readonly friendshipService: FriendshipService) {}
-  friends!: FriendshipInterface[];
-  userId = getUserId()
+  friends!: ParticipantInterface[];
+  userId = getUserId();
 
   ngOnInit() {
     this.friendshipService
-      .findAllFriendsByUserId(`friendship/${this.userId}`)
-      .subscribe((friend: FriendshipInterface[]) => {
+      .findAllFriendsByUserId(`participant/user/${this.userId}`)
+      .subscribe((friend: ParticipantInterface[]) => {
         this.friends = friend;
-        console.log(friend)
+        console.log(friend);
       });
   }
 }

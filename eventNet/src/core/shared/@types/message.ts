@@ -1,9 +1,11 @@
+import { UserInterface } from '@core/shared/@types/user';
+
 export interface MessageInterface {
-  id: string;
+  id?: string;
   content: string;
   conversationId: string;
-  isRead: boolean;
+  isRead?: boolean;
   senderId: string;
-  timeStamp?: Date;
-  createdAt: Date;
+  createdAt?: Date;
+  receiver?: UserInterface;
 }
