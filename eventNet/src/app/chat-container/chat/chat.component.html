@@ -2,10 +2,8 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-item>
-        <ion-avatar slot="start">
+      <ion-item class="flex items-center gap-2 w-full">
+        <ion-avatar>
           <img
             alt="Silhouette of a person's head"
             src="https://ionicframework.com/docs/img/demos/avatar.svg"
@@ -15,24 +13,28 @@
         <ion-label *ngIf="receiver">{{ receiver.name }}</ion-label>
       </ion-item>
     </ion-buttons>
+    <ion-buttons slot="end"> </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding space-y-3 flex" *ngIf="messages">
-  <div *ngFor="let message of messages">
+<ion-content class="ion-padding space-y-3 flex w-full" *ngIf="messages">
+  <div
+    *ngFor="let message of messages"
+    class="w-full grid justify-items-stretch"
+  >
     <div
       [ngClass]="
         sender.sub != message.senderId
-          ? 'bg-slate-100 text-black p-1 max-w-fit justify-self-start rounded-e-lg '
-          : 'bg-blue-800 text-white p-1 max-w-fit justify-self-end rounded-l-lg '
+          ? 'bg-slate-100 text-black p-2 max-w-fit justify-self-start rounded-bl-2xl rounded-e-2xl'
+          : 'bg-blue-800 text-white p-2 max-w-fit justify-self-end rounded-br-2xl rounded-l-2xl'
       "
     >
-      <div class="flex flex-col w-full">
-        <ion-text>
+      <div class="flex flex-col">
+        <!-- <ion-text *ngIf="if isGroup">
           <strong>{{
             sender.sub != message.senderId ? receiver.name : sender.name
           }}</strong>
-        </ion-text>
+        </ion-text> -->
         <ion-text>
           <p>{{ message.content }}</p>
         </ion-text>
