@@ -1,9 +1,13 @@
-import { NgFor, NgIf, NgClass } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ActivatedRoute } from '@angular/router';
+import { getUser } from '@core/common/utils/getUser';
+import { MessageInterface } from '@core/shared/@types/message';
+import { UserInterface } from '@core/shared/@types/user';
 import {
+  IonAvatar,
   IonBackButton,
   IonButton,
   IonButtons,
@@ -13,19 +17,15 @@ import {
   IonIcon,
   IonInput,
   IonItem,
+  IonLabel,
   IonText,
   IonTextarea,
   IonToolbar,
-  IonLabel,
-  IonAvatar,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { sendOutline } from 'ionicons/icons';
-import { MessageInterface } from '@core/shared/@types/message';
-import { UserInterface } from '@core/shared/@types/user';
 import { ChatGateway } from './chat.gateway';
 import { ChatService } from './chat.service';
-import { getUser } from '@core/common/utils/getUser';
 
 @Component({
   standalone: true,
@@ -69,7 +69,6 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.conversationId = this.route.snapshot.paramMap.get('conversationId')!;
     this.sender = getUser();
     console.log('Sender => ', this.sender);
 
