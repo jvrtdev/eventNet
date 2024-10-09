@@ -1,6 +1,10 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { getUser } from '@core/common/utils/getUser';
+import { AuthService } from '@core/services/auth.service';
+import { ToastComponent } from '@core/shared/components/toast.component';
+import { menuHeader } from '@core/shared/data/menu-header';
 import {
   IonAvatar,
   IonButton,
@@ -27,9 +31,6 @@ import {
   personCircleOutline,
   settingsOutline,
 } from 'ionicons/icons';
-import { menuHeader } from '@core/shared/data/menu-header';
-import { AuthService } from '@core/services/auth.service';
-import { ToastComponent } from '@core/shared/components/toast.component';
 
 @Component({
   standalone: true,
@@ -65,15 +66,18 @@ export class HeaderComponent {
       settingsOutline,
       exitOutline,
     });
-  }
 
-  handleLogout(){
+    this.user = getUser();
+  }
+  user: any;
+
+  handleLogout() {
     this.toast.setToast({
-      label: "Usuario desconectado",
-      color: "secondary",
-      icon: "information-circle"
-    })
-    this.authService.logout()
+      label: 'Usuario desconectado',
+      color: 'secondary',
+      icon: 'information-circle',
+    });
+    this.authService.logout();
   }
 
   items = menuHeader;
