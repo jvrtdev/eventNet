@@ -1,18 +1,19 @@
 import { Routes } from '@angular/router';
 import { UserPreferencesComponent } from 'src/app/user-preferences/user-preferences.component';
 import { AuthGuard } from '../core/guards/auth.guard';
+import { LoginComponent } from './auth/components/login/login.component';
+import { SignUpComponent } from './auth/components/sign-up/step1/sign-up.component';
+import { SignUpStep2Component } from './auth/components/sign-up/step2/step2.component';
+import { SignUpStep3Component } from './auth/components/sign-up/step3/step3.component';
+import { HomeComponent } from './auth/home.component';
 import { ChatContainerComponent } from './chat-container/chat-container.component';
 import { ChatComponent } from './chat-container/chat/chat.component';
 import { EventDetailComponent } from './tabs/components/events/event-detail/event-detail.component';
+import { CreatePostComponent } from './tabs/components/feed/components/create-post/create-post.component';
 import { PostDetailsComponent } from './tabs/components/feed/components/post-details/post-details.component';
 import { DarkmodePreferencesComponent } from './user-preferences/components/darkmode-preferences/darkmode-preferences.component';
 import { EditAccountComponent } from './user-preferences/components/edit-account/edit-account.component';
 import { PrivacyPreferencesComponent } from './user-preferences/components/privacy-preferences/privacy-preferences.component';
-import { LoginComponent } from './auth/components/login/login.component';
-import { SignUpComponent } from './auth/components/sign-up/step1/sign-up.component';
-import { HomeComponent } from './auth/home.component';
-import { SignUpStep2Component } from './auth/components/sign-up/step2/step2.component';
-import { SignUpStep3Component } from './auth/components/sign-up/step3/step3.component';
 
 export const routes: Routes = [
   {
@@ -58,6 +59,11 @@ export const routes: Routes = [
   {
     path: 'post/:id',
     component: PostDetailsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'post',
+    component: CreatePostComponent,
     canActivate: [AuthGuard],
   },
   {

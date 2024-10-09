@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons class="flex items-center justify-between">
+      <ion-back-button></ion-back-button>
+      <ion-title>Post</ion-title>
+      <ion-button>Postar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="post">
+    <div class="flex flex-col flex-nowrap gap-2 w-full h-full">
+      <div class="flex text-base gap-1">
+        <img
+          alt="Silhouette of a person's head"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+          class="w-14 h-14 min-h-fit min-w-fit rounded-full"
+        />
+        <div class="flex flex-col">
+          <ion-text class="">{{ user.name }}</ion-text>
+          <ion-text class="text-slate-400"> &#64;{{ user.userName }} </ion-text>
+        </div>
+      </div>
+      <div class="flex flex-col w-full h-full mt-2">
+        <ion-item lines="none" class="h-full rounded-xl">
+          <ion-textarea
+            formControlName="text"
+            placeholder="O que está acontecendo ?"
+            maxlength="200"
+            class="h-full min-h-80"
+          >
+          </ion-textarea>
+        </ion-item>
+      </div>
+    </div>
+  </form>
+</ion-content>
