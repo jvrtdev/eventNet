@@ -10,7 +10,7 @@ export class LikeService implements ServiceBase<LikeEntity, CreateLikeDto> {
   constructor(private readonly likeRepository: LikeRepository) {}
 
   async create(dto: CreateLikeDto): Promise<LikeEntity> {
-    const like = this.likeRepository.create(dto);
+    const like = await this.likeRepository.create(dto);
 
     return like;
   }
