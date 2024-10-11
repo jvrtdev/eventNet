@@ -1,5 +1,5 @@
 <ion-content class="" *ngIf="feed">
-  <ion-fab class="absolute bottom-1 right-1">
+  <ion-fab class="absolute bottom-2 right-2" [routerLink]="['/post']">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
@@ -8,7 +8,6 @@
   <div
     class="border-slate-500 border-y border-opacity-20"
     *ngFor="let post of feed"
-    [routerLink]="['/post/',post.id]"
   >
     <!-- <span class="text-slate-400 flex items-center ml-11 space-x-1">
       <ion-icon name="heart" color=""></ion-icon>
@@ -19,16 +18,21 @@
         alt="Silhouette of a person's head"
         src="https://ionicframework.com/docs/img/demos/avatar.svg"
         class="w-12 h-12 min-h-fit min-w-fit rounded-full"
+        id="profile"
       />
       <div class="flex flex-col w-full h-full">
         <div class="flex items-center space-x-1">
-          <ion-text class="text-lg">{{post.owner?.name}}</ion-text>
-          <ion-text class="text-slate-400"
-            >&#64;{{post.owner?.userName}}</ion-text
-          >
-          <ion-text class="text-slate-400">·3h</ion-text>
+          <label for="profile" [routerLink]="['/profile/',post.ownerId]">
+            <ion-text class="text-lg">{{post.owner?.name}}</ion-text>
+            <ion-text class="text-slate-400"
+              >&#64;{{post.owner?.userName}}</ion-text
+            >
+            <ion-text class="text-slate-400">·3h</ion-text>
+          </label>
         </div>
-        <p class="text-start font-light">{{post.text}}</p>
+        <p class="text-start font-light" [routerLink]="['/post/',post.id]">
+          {{post.text}}
+        </p>
         <footer class="flex items-center justify-between text-2xl my-1 pr-20">
           <div class="flex items-center gap-1">
             <ion-icon name="chatbubble-outline"></ion-icon>

@@ -12,6 +12,7 @@ import {
   IonFabButton,
   IonHeader,
   IonIcon,
+  IonLabel,
   IonText,
   IonTitle,
   IonToolbar,
@@ -47,6 +48,7 @@ import { FeedService } from './services/feed.service';
     NgFor,
     NgIf,
     RouterLink,
+    IonLabel,
   ],
 })
 export class Tab2Page implements OnInit {

@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" *ngIf="post">
+<ion-content class="ion-padding" *ngIf="post && comment">
   <div class="">
     <!-- <span class="text-slate-400 flex items-center ml-11 space-x-1">
       <ion-icon name="heart" color=""></ion-icon>
@@ -63,4 +63,16 @@
       <comment-component [comments]="post.comments"></comment-component>
     </div>
   </div>
+  <ion-footer class="absolute bottom-0 right-0 w-full">
+    <ion-item>
+      <ion-textarea
+        [(ngModel)]="comment.text"
+        placeholder="Digite sua mensagem"
+        class="p-4"
+      />
+      <ion-button [disabled]="!comment.text" (click)="createComment()"
+        ><ion-icon name="send-outline" size="large"></ion-icon
+      ></ion-button>
+    </ion-item>
+  </ion-footer>
 </ion-content>

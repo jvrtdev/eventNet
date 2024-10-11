@@ -22,6 +22,8 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { logoGithub, logoInstagram, logoLinkedin } from 'ionicons/icons';
 import { PostService } from '../../services/post.service';
 
 @Component({
@@ -49,7 +51,9 @@ export class CreatePostComponent implements OnInit {
     private postService: PostService,
     private router: Router,
     private toast: ToastComponent
-  ) {}
+  ) {
+    addIcons({ logoLinkedin, logoInstagram, logoGithub });
+  }
 
   post!: FormGroup;
   user: any;
