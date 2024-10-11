@@ -92,6 +92,7 @@ export class PostDetailsComponent implements OnInit {
         .subscribe((response) => {
           console.log(response);
         });
+      this.post.comments?.push(this.comment);
       this.comment.text = '';
     }
   }

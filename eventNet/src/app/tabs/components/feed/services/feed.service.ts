@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ApiServiceFactory } from '@core/common/factories/api.factory';
 import { CommentInterface } from '@core/shared/@types/comment';
 import { LikeInterface } from '@core/shared/@types/like';
 import { PostInterface } from '@core/shared/@types/post';
-import { ApiServiceFactory } from '@core/common/factories/api.factory';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,9 @@ export class FeedService extends ApiServiceFactory<PostInterface> {
     return this.http.post<LikeInterface>(`${this.baseUrl}/${endpoint}`, data);
   }
 
-  unlikePost() {}
+  unlikePost(endpoint: string): Observable<LikeInterface> {
+    return this.http.delete<LikeInterface>(`${this.baseUrl}/${endpoint}`);
+  }
 
   commentPost(
     endpoint: string,
