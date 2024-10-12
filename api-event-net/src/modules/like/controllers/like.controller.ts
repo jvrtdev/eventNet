@@ -30,6 +30,11 @@ export class LikeController {
     return this.likeService.findById(id);
   }
 
+  @Get('count/:postId')
+  count(@Param('postId') postId: string): Promise<number> {
+    return this.likeService.count(postId);
+  }
+
   @Delete(':id')
   removeLike(@Param('id') id: string): Promise<LikeEntity> {
     return this.likeService.remove(id);

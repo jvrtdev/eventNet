@@ -34,6 +34,14 @@ export class LikeService implements ServiceBase<LikeEntity, CreateLikeDto> {
     return like;
   }
 
+  async count(postId: string): Promise<number> {
+    const like = await this.likeRepository.count({
+      postId,
+    });
+
+    return like;
+  }
+
   async remove(id: string): Promise<LikeEntity> {
     const like = await this.findById(id);
 

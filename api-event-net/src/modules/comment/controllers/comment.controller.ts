@@ -33,6 +33,11 @@ export class CommentController {
     return this.commentService.findById(id);
   }
 
+  @Get('count/:postId')
+  count(@Param('postId') postId: string): Promise<number> {
+    return this.commentService.count(postId);
+  }
+
   @Put(':id')
   updateUser(
     @Param('id') id: string,

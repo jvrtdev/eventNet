@@ -37,6 +37,14 @@ export class CommentSevice
     return comment;
   }
 
+  async count(postId: string): Promise<number> {
+    const comments = await this.commentRepository.count({
+      postId,
+    });
+
+    return comments;
+  }
+
   async update(dto: UpdateCommentDto): Promise<CommentEntity> {
     const comment = await this.findById(dto.id);
 
