@@ -1,5 +1,13 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { CreateRepostDto } from '@dtos';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { CreateRepostDto, UpdateRepostDto } from '@dtos';
 import { RepostEntity } from '@entities';
 import { RepostService } from '../services/repost.service';
 
@@ -17,5 +25,19 @@ export class RepostController {
   @Get(':id')
   findRepostById(@Param('id') id: string): Promise<RepostEntity | null> {
     return this.repostService.findById(id);
+  }
+
+  @Put(':id')
+  updateRepost(
+    @Param('id') id: string,
+    @Body() updateRepostDto: UpdateRepostDto,
+  ): Promise<RepostEntity> {
+    updateRepostDto.id = id;
+    return this.repostService.update(updateRepostDto);
+  }
+
+  @Delete(':id')
+  removeRepost(@Param('id') id: string): Promise<RepostEntity> {
+    return this.repostService.remove(id);
   }
 }

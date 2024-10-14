@@ -12,7 +12,9 @@ export class PostService
   constructor(private readonly postRepository: PostRepository) {}
 
   async create(dto: CreatePostDto): Promise<PostEntity> {
-    return await this.postRepository.create(dto);
+    const post = await this.postRepository.create(dto);
+
+    return post;
   }
 
   async findAll(queryParams: QueryParamsDto): Promise<PostEntity[]> {
