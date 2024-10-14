@@ -26,32 +26,11 @@ export class PostRepository extends RepositoryFactory<
     });
   }
 
-  findById(id: string): Promise<PostEntity | null> {
-    return this.prismaService.post.findFirst({
-      where: {
-        id,
-      },
-      include: {
-        comments: {
-          select: {
-            user: true,
-            text: true,
-            createdAt: true,
-          },
-        },
-        reposts: true,
-        likes: true,
-        owner: true,
-        _count: true,
-      },
-    });
-  }
-
-  findAllByUserIds(userIds: string[]): Promise<PostEntity[]> {
+  findAllPostsByUsersIds(usersIds: string[]): Promise<PostEntity[]> {
     return this.prismaService.post.findMany({
       where: {
         ownerId: {
-          in: userIds,
+          in: usersIds,
         },
       },
       include: { owner: true, _count: true },
@@ -89,6 +68,27 @@ export class PostRepository extends RepositoryFactory<
             user: true,
           },
         },
+        _count: true,
+      },
+    });
+  }
+
+  findById(id: string): Promise<PostEntity | null> {
+    return this.prismaService.post.findFirst({
+      where: {
+        id,
+      },
+      include: {
+        comments: {
+          select: {
+            user: true,
+            text: true,
+            createdAt: true,
+          },
+        },
+        reposts: true,
+        likes: true,
+        owner: true,
         _count: true,
       },
     });

@@ -17,7 +17,7 @@ export class FeedService {
     const friendsId = friends.map((friend) => friend.userId);
 
     const postByFriends =
-      await this.postService.findAllPostsByUsersId(friendsId);
+      await this.postService.findAllPostsByUsersIds(friendsId);
 
     const postsLikedByFriends =
       await this.postService.findAllPostsLikedByFriends(friendsId);

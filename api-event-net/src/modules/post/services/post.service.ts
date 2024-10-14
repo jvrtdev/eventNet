@@ -26,16 +26,8 @@ export class PostService
     return data;
   }
 
-  async findById(id: string): Promise<PostEntity> {
-    const post = await this.postRepository.findById(id);
-
-    if (!post) throw new HttpException('Post not found', HttpStatus.NOT_FOUND);
-
-    return post;
-  }
-
-  async findAllPostsByUsersId(userIds: string[]): Promise<PostEntity[]> {
-    const posts = await this.postRepository.findAllByUserIds(userIds);
+  async findAllPostsByUsersIds(usersIds: string[]): Promise<PostEntity[]> {
+    const posts = await this.postRepository.findAllPostsByUsersIds(usersIds);
 
     return posts;
   }
@@ -54,5 +46,38 @@ export class PostService
       await this.postRepository.findAllPostsCommentedByFriends(userIds);
 
     return postsCommented;
+  }
+
+  async findById(id: string): Promise<PostEntity> {
+    const post = await this.postRepository.findById(id);
+
+    if (!post) throw new HttpException('Post not found', HttpStatus.NOT_FOUND);
+
+    return post;
+  }
+
+  async update(dto: UpdatePostDto): Promise<PostEntity> {
+    const post = await this.findById(dto.id);
+
+    const update = await this.postRepository.update({
+      ...dto,
+      id: post.id,
+    });
+
+    if (!update)
+      throw new HttpException('Failed to update', HttpStatus.NOT_ACCEPTABLE);
+
+    return update;
+  }
+
+  async remove(id: string): Promise<PostEntity> {
+    const post = await this.findById(id);
+
+    const remove = await this.postRepository.delete(post.id);
+
+    if (!remove)
+      throw new HttpException('Failed to remove', HttpStatus.NOT_ACCEPTABLE);
+
+    return remove;
   }
 }
