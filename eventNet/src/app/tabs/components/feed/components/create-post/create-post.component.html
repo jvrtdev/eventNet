@@ -3,7 +3,9 @@
     <ion-buttons class="flex items-center justify-between">
       <ion-back-button></ion-back-button>
       <ion-title>Post</ion-title>
-      <ion-button>Postar</ion-button>
+      <ion-button (click)="createPost()" [disabled]="post.invalid"
+        >Postar</ion-button
+      >
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

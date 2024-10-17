@@ -1,5 +1,5 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ActivatedRoute } from '@angular/router';
@@ -60,6 +60,23 @@ export class ChatComponent implements OnInit {
   sender!: { sub: string; name: string; userName: string };
   receiver!: UserInterface;
 
+  @ViewChild(IonContent, { static: false }) content!: IonContent;
+
+  scrollToBottom() {
+    setTimeout(() => {
+      this.content.scrollToBottom(300);
+    }, 100); // Delay curto para garantir que a mensagem seja renderizada
+  }
+  scrollToBottomOnInit() {
+    setTimeout(() => {
+      this.content.scrollToBottom(300); // 300ms para a rolagem suave
+    }, 500); // Ajuste o tempo se necessário para garantir que as mensagens sejam carregadas
+  }
+
+  ionViewDidEnter() {
+    this.scrollToBottom(); // Rola o scroll para o final ao abrir o chat
+  }
+
   constructor(
     private chatGateway: ChatGateway,
     private route: ActivatedRoute,
@@ -99,10 +116,12 @@ export class ChatComponent implements OnInit {
     this.chatGateway.receiveMessage().subscribe((message) => {
       this.messages.push(message);
     });
+    this.scrollToBottomOnInit();
   }
 
   sendMessage() {
     this.chatGateway.sendMessage(this.message);
     this.message.content = '';
+    this.scrollToBottom();
   }
 }

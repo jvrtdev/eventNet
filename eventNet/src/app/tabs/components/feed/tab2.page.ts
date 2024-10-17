@@ -12,6 +12,7 @@ import {
   IonFabButton,
   IonHeader,
   IonIcon,
+  IonLabel,
   IonText,
   IonTitle,
   IonToolbar,
@@ -47,6 +48,7 @@ import { FeedService } from './services/feed.service';
     NgFor,
     NgIf,
     RouterLink,
+    IonLabel,
   ],
 })
 export class Tab2Page implements OnInit {
@@ -64,8 +66,23 @@ export class Tab2Page implements OnInit {
     });
   }
 
+  createLike(postId: string) {
+    this.feedService
+      .likePost('like', {
+        postId: postId,
+        userId: this.userId,
+      })
+      .subscribe((like) => {
+        console.log(like);
+      });
+  }
+  removeLike(likeId: string) {
+    this.feedService.unlikePost(`like/${likeId}`).subscribe((like) => {
+      console.log(like);
+    });
+  }
+
   ngOnInit(): void {
-    //getFeedByUserId
     this.feedService
       .getFeedByUserId('feed/' + this.userId)
       .subscribe((feed: PostInterface[]) => {

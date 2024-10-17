@@ -16,7 +16,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding space-y-3 flex w-full" *ngIf="messages">
+<ion-content
+  class="ion-padding space-y-3 flex w-full"
+  *ngIf="messages"
+  #content
+>
   <div
     *ngFor="let message of messages"
     class="w-full grid justify-items-stretch"
@@ -49,7 +53,7 @@
       placeholder="Digite sua mensagem"
       class="p-4"
     />
-    <ion-button (click)="sendMessage()"
+    <ion-button [disabled]="!message.content" (click)="sendMessage()"
       ><ion-icon name="send-outline" size="large"></ion-icon
     ></ion-button>
   </ion-item>

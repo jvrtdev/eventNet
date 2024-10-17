@@ -14,6 +14,7 @@ import { PostDetailsComponent } from './tabs/components/feed/components/post-det
 import { DarkmodePreferencesComponent } from './user-preferences/components/darkmode-preferences/darkmode-preferences.component';
 import { EditAccountComponent } from './user-preferences/components/edit-account/edit-account.component';
 import { PrivacyPreferencesComponent } from './user-preferences/components/privacy-preferences/privacy-preferences.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 export const routes: Routes = [
   {
@@ -64,6 +65,11 @@ export const routes: Routes = [
   {
     path: 'post',
     component: CreatePostComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'profile/:id',
+    component: UserProfileComponent,
     canActivate: [AuthGuard],
   },
   {

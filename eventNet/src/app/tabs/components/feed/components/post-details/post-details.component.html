@@ -2,65 +2,86 @@
   <ion-toolbar>
     <ion-buttons>
       <ion-back-button></ion-back-button>
-      <ion-title>Post</ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" *ngIf="post">
-  <div class="">
-    <!-- <span class="text-slate-400 flex items-center ml-11 space-x-1">
+<ion-content class="ion-padding" *ngIf="post && comment">
+  <!-- <div class=""> -->
+  <!-- <span class="text-slate-400 flex items-center ml-11 space-x-1">
       <ion-icon name="heart" color=""></ion-icon>
       <ion-text>João curtiu</ion-text>
     </span> -->
-    <div class="flex flex-col flex-nowrap gap-2 w-full">
-      <div class="flex text-base gap-1">
-        <img
-          alt="Silhouette of a person's head"
-          src="https://ionicframework.com/docs/img/demos/avatar.svg"
-          class="w-14 h-14 min-h-fit min-w-fit rounded-full"
-        />
-        <div class="flex flex-col">
-          <ion-text class="">{{ post.owner?.name }}</ion-text>
-          <ion-text class="text-slate-400">
-            &#64;{{ post.owner?.userName }}
-          </ion-text>
-        </div>
+  <div class="flex flex-col flex-nowrap gap-2 w-full h-full">
+    <div class="flex text-base gap-1">
+      <img
+        alt="Silhouette of a person's head"
+        src="https://ionicframework.com/docs/img/demos/avatar.svg"
+        class="w-14 h-14 min-h-fit min-w-fit rounded-full"
+      />
+      <div class="flex flex-col">
+        <ion-text class="">{{ post.owner?.name }}</ion-text>
+        <ion-text class="text-slate-400">
+          &#64;{{ post.owner?.userName }}
+        </ion-text>
       </div>
-      <div class="flex flex-col w-full h-full">
-        <p class="text-start font-light my-4 text-lg">{{ post.text }}</p>
-        <span class="text-slate-400">{{ formatDate(post.createdAt!) }}</span>
-        <section
-          class="border-y border-slate-400 border-opacity-30 w-full my-2 p-2 text-slate-400"
-        >
-          <span>{{ post._count.reposts }} Reposts </span>
-          <span> {{ post._count.likes }} Likes</span>
-        </section>
-
-        <footer
-          class="flex items-center w-full justify-between text-2xl my-1 px-2"
-        >
-          <div class="flex items-center gap-1">
-            <ion-icon name="chatbubble-outline"></ion-icon>
-            <span class="text-base">{{ post._count.comments }}</span>
-          </div>
-
-          <div class="flex items-center gap-1">
-            <ion-icon name="repeat-sharp"></ion-icon>
-            <span class="text-base">{{ post._count.reposts }}</span>
-          </div>
-
-          <div class="flex items-center gap-1">
-            <ion-icon name="heart-outline"></ion-icon>
-            <span class="text-base">{{ post._count.likes }}</span>
-          </div>
-
-          <div class="flex items-center gap-1">
-            <ion-icon name="mail-outline"></ion-icon>
-          </div>
-        </footer>
-      </div>
-      <comment-component [comments]="post.comments"></comment-component>
     </div>
+    <div class="flex flex-col w-full h-full">
+      <p class="text-start font-light my-4 text-lg">{{ post.text }}</p>
+      <span class="text-slate-400">{{ formatDate(post.createdAt!) }}</span>
+      <section
+        class="border-y border-slate-400 border-opacity-30 w-full my-2 p-2 text-slate-400"
+      >
+        <span>{{ post._count.reposts }} Reposts </span>
+        <span> {{ post._count.likes }} Likes</span>
+      </section>
+
+      <footer
+        class="flex items-center w-full justify-between text-2xl my-1 px-2"
+      >
+        <div class="flex items-center gap-1">
+          <ion-icon name="chatbubble-outline"></ion-icon>
+          <span class="text-base">{{ post._count.comments }}</span>
+        </div>
+
+        <div class="flex items-center gap-1">
+          <ion-icon name="repeat-sharp"></ion-icon>
+          <span class="text-base">{{ post._count.reposts }}</span>
+        </div>
+
+        <div class="flex items-center gap-1">
+          <ion-icon name="heart-outline"></ion-icon>
+          <span class="text-base">{{ post._count.likes }}</span>
+        </div>
+
+        <div class="flex items-center gap-1">
+          <ion-icon name="mail-outline"></ion-icon>
+        </div>
+      </footer>
+    </div>
+    <comment-component
+      class="my-4"
+      [comments]="post.comments"
+    ></comment-component>
+    <ion-footer
+      class="sticky bottom-0 right-0 w-full bg-none shadow-none"
+      *ngIf="comment"
+    >
+      <ion-item class="h-20 rounded-full flex">
+        <ion-textarea
+          [(ngModel)]="comment.text"
+          placeholder="Escreva seu comentario"
+          class="p-4"
+        />
+        <ion-button
+          [disabled]="!comment.text"
+          (click)="createComment()"
+          class="rounded-full"
+        >
+          <ion-icon name="send-outline" size="large"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-footer>
   </div>
+  <!-- </div> -->
 </ion-content>

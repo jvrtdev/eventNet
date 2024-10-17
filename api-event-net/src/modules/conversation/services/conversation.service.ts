@@ -37,18 +37,20 @@ export class ConversationService
 
     const conversation = await this.conversationRepository.create({ ...data });
 
-    const participantData: CreateParticipantDto[] = [
-      {
-        conversationId: conversation.id,
-        userId: senderId,
-      },
-      {
-        conversationId: conversation.id,
-        userId: recipientId,
-      },
-    ];
+    if (!dto.isGroup) {
+      const participantData: CreateParticipantDto[] = [
+        {
+          conversationId: conversation.id,
+          userId: senderId,
+        },
+        {
+          conversationId: conversation.id,
+          userId: recipientId,
+        },
+      ];
 
-    await this.participantService.createMany(participantData);
+      await this.participantService.createMany(participantData);
+    }
 
     return conversation;
   }

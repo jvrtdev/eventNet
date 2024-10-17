@@ -2,9 +2,16 @@ import { ServiceBase } from '@bases';
 import { CreateEventDto, QueryParamsDto, UpdateEventDto } from '@dtos';
 import { EventEntity } from '@entities';
 import { EventRepository } from '../repositories/event.repository';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { QueryBuilder } from '@utils';
 import { ConversationService } from 'src/modules/conversation/services/conversation.service';
+import { UserEventService } from 'src/modules/userEvent/services/userEvent.service';
 
 @Injectable()
 export class EventService
@@ -13,11 +20,15 @@ export class EventService
   constructor(
     private readonly eventRepository: EventRepository,
     private readonly conversationService: ConversationService,
+    @Inject(forwardRef(() => UserEventService))
+    private readonly userEventService: UserEventService,
   ) {}
 
   async create(dto: CreateEventDto): Promise<EventEntity> {
+    const { userId, ...data } = dto;
+
     const titleAlreadyExists = await this.eventRepository.findByTitle(
-      dto.title,
+      data.title,
     );
 
     if (titleAlreadyExists)
@@ -28,8 +39,16 @@ export class EventService
       status: null,
     });
 
-    dto.conversationId = id;
-    const event = await this.eventRepository.create(dto);
+    data.conversationId = id;
+    const event = await this.eventRepository.create({
+      ...data,
+    });
+
+    this.userEventService.create({
+      userId,
+      eventId: event.id,
+      role: 'owner',
+    });
 
     return event;
   }

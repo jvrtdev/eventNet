@@ -1,6 +1,6 @@
-import { CommentInterface } from "./comment";
-import { LikeInterface } from "./like";
-import { UserInterface } from "./user";
+import { CommentInterface } from './comment';
+import { LikeInterface } from './like';
+import { UserInterface } from './user';
 
 export interface PostInterface {
   id?: string;
@@ -8,13 +8,13 @@ export interface PostInterface {
   updatedAt?: string;
   text: string;
   ownerId: string;
-  owner?: UserInterface
-  comments?: CommentInterface;
-  likes?: LikeInterface;
+  owner?: UserInterface;
+  comments?: CommentInterface[];
+  likes?: LikeInterface[];
   reposts?: any;
   _count: {
-    comments: number
-    likes: number
-    reposts: number
-  }
+    comments: number;
+    likes: number;
+    reposts: number;
+  };
 }

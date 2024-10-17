@@ -15,6 +15,7 @@ import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './modules/auth/guards/auth.guard';
+import { UserEventModule } from './modules/userEvent/userEvent.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { AuthGuard } from './modules/auth/guards/auth.guard';
     EventModule,
     AuthModule,
     PrismaModule,
+    UserEventModule,
   ],
   providers: [
     {
