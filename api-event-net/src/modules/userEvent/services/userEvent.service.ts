@@ -5,7 +5,13 @@ import { UserEventRepository } from '../repositories/userEvent.reposiory';
 import { ParticipantService } from 'src/modules/participant/services/participant.service';
 import { EventService } from 'src/modules/event/services/event.service';
 import { QueryBuilder } from '@utils';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 
 @Injectable()
 export class UserEventService
@@ -15,6 +21,7 @@ export class UserEventService
   constructor(
     private readonly userEventRepository: UserEventRepository,
     private readonly participantService: ParticipantService,
+    @Inject(forwardRef(() => EventService))
     private readonly eventService: EventService,
   ) {}
 

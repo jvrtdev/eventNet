@@ -11,6 +11,10 @@ export class CreateEventDto {
 
   @IsString()
   @IsNotEmpty()
+  userId?: string;
+
+  @IsString()
+  @IsNotEmpty()
   description: string;
 
   @IsDate()
