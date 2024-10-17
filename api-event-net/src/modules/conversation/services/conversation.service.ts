@@ -37,7 +37,7 @@ export class ConversationService
 
     const conversation = await this.conversationRepository.create({ ...data });
 
-    if (senderId != null && recipientId != null) {
+    if (!dto.isGroup) {
       const participantData: CreateParticipantDto[] = [
         {
           conversationId: conversation.id,

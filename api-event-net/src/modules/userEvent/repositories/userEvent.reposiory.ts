@@ -19,6 +19,14 @@ export class UserEventRepository extends RepositoryFactory<
     });
   }
 
+  findAllUserEventsByEventId(eventId: string): Promise<UserEventEntity[]> {
+    return this.prismaService.userEvent.findMany({
+      where: {
+        eventId,
+      },
+    });
+  }
+
   findById(id: string): Promise<UserEventEntity> {
     return this.prismaService.userEvent.findFirst({
       where: {

@@ -1,14 +1,14 @@
 import { $Enums } from '@prisma/client';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateParticipantDto {
   @IsString()
   @IsNotEmpty()
   conversationId: string;
 
-  @IsString()
+  @IsEnum($Enums.ParticipantRole)
   @IsNotEmpty()
-  role?: $Enums.ParticipantRole;
+  role?: string;
 
   @IsString()
   @IsNotEmpty()
