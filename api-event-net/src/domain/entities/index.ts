@@ -12,3 +12,4 @@ export * from './like';
 export * from './comment';
 export * from './repost';
 export * from './userEvent';
+export * from './conversationRequest';

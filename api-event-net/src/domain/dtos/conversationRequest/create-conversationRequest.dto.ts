@@ -1,6 +1,10 @@
 import { IsNotEmpty, IsUUID } from 'class-validator';
 
-export class ConversationRequestDto {
+export class CreateConversationRequestDto {
+  @IsUUID()
+  @IsNotEmpty()
+  conversationId: string;
+
   @IsUUID()
   @IsNotEmpty()
   recipientId: string;

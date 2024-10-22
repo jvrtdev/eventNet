@@ -13,3 +13,4 @@ export * from './comment';
 export * from './repost';
 export * from './auth';
 export * from './userEvent';
+export * from './conversationRequest';
