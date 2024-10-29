@@ -16,6 +16,7 @@ import {
 import { ConversationEntity } from '@entities';
 import { ConversationRepository } from '../repositories/conversation.repository';
 import { ParticipantService } from 'src/modules/participant/services/participant.service';
+import { ConversationRequestService } from 'src/modules/conversationRequest/services/conversationRequest.service';
 
 @Injectable()
 export class ConversationService
@@ -30,6 +31,8 @@ export class ConversationService
     private readonly conversationRepository: ConversationRepository,
     @Inject(forwardRef(() => ParticipantService))
     private readonly participantService: ParticipantService,
+    @Inject(forwardRef(() => ConversationRequestService))
+    private readonly conversationRequestService: ConversationRequestService,
   ) {}
 
   async create(dto: CreateConversationDto): Promise<ConversationEntity> {
@@ -50,6 +53,12 @@ export class ConversationService
       ];
 
       await this.participantService.createMany(participantData);
+
+      await this.conversationRequestService.create({
+        senderId,
+        recipientId,
+        conversationId: conversation.id,
+      });
     }
 
     return conversation;

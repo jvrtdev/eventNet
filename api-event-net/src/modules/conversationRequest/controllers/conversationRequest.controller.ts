@@ -1,12 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { conversationRequestService } from '../services/conversationRequest.service';
+import { ConversationRequestService } from '../services/conversationRequest.service';
 import { ConversationRequestEntity } from '@entities';
 import { CreateConversationRequestDto } from '@dtos';
 
 @Controller('conversationRequest')
 export class ConversationRequestController {
   constructor(
-    private readonly conversationRequestService: conversationRequestService,
+    private readonly conversationRequestService: ConversationRequestService,
   ) {}
 
   @Post()

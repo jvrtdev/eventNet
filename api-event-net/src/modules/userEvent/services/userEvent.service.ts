@@ -36,7 +36,7 @@ export class UserEventService
       var role = 'admin';
     }
 
-    this.participantService.create({
+    await this.participantService.create({
       userId: userEvent.userId,
       conversationId,
       role,

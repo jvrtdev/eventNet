@@ -1,19 +1,35 @@
 import { ServiceBase } from '@bases';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { ConversationRequestEntity } from '@entities';
 import { CreateConversationRequestDto } from '@dtos';
 import { ConversationRequestRepository } from '../repositories/conversationRequest.repository';
 import { ConversationService } from 'src/modules/conversation/services/conversation.service';
 
 @Injectable()
-export class conversationRequestService
+export class ConversationRequestService
   implements
     ServiceBase<ConversationRequestEntity, CreateConversationRequestDto>
 {
   constructor(
     private readonly conversationRequestRepository: ConversationRequestRepository,
+    @Inject(forwardRef(() => ConversationService))
     private readonly conversationService: ConversationService,
   ) {}
+
+  async create(
+    dto: CreateConversationRequestDto,
+  ): Promise<ConversationRequestEntity> {
+    const conversationRequest =
+      await this.conversationRequestRepository.create(dto);
+
+    return conversationRequest;
+  }
 
   async findAll(): Promise<ConversationRequestEntity[]> {
     const data = await this.conversationRequestRepository.findAll();
@@ -39,15 +55,6 @@ export class conversationRequestService
     return conversationRequest;
   }
 
-  async create(
-    dto: CreateConversationRequestDto,
-  ): Promise<ConversationRequestEntity> {
-    const conversationRequest =
-      await this.conversationRequestRepository.create(dto);
-
-    return conversationRequest;
-  }
-
   async remove(id: string): Promise<ConversationRequestEntity> {
     const conversationRequest = await this.findById(id);
 
@@ -64,19 +71,27 @@ export class conversationRequestService
   async accepted(id: string): Promise<ConversationRequestEntity> {
     const conversationRequest = await this.findById(id);
 
-    this.conversationService.update({
+    const conversationRequestRemoved = await this.remove(
+      conversationRequest.id,
+    );
+
+    await this.conversationService.update({
       id: conversationRequest.conversationId,
       status: 'accepted',
     });
 
-    return this.remove(conversationRequest.id);
+    return conversationRequestRemoved;
   }
 
   async refused(id: string): Promise<ConversationRequestEntity> {
     const conversationRequest = await this.findById(id);
 
-    this.conversationService.remove(conversationRequest.conversationId);
+    const conversationRequestRemoved = await this.remove(
+      conversationRequest.id,
+    );
 
-    return this.remove(conversationRequest.id);
+    await this.conversationService.remove(conversationRequest.conversationId);
+
+    return conversationRequestRemoved;
   }
 }

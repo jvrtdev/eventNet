@@ -44,7 +44,7 @@ export class EventService
       ...data,
     });
 
-    this.userEventService.create({
+    await this.userEventService.create({
       userId,
       eventId: event.id,
       role: 'owner',
