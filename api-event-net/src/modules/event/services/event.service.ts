@@ -1,10 +1,11 @@
 import { ServiceBase } from '@bases';
 import { CreateEventDto, QueryParamsDto, UpdateEventDto } from '@dtos';
 import { EventEntity } from '@entities';
-import { EventRepository } from '../repositories/event.repository';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { QueryBuilder } from '@utils';
+import QRCodeUtil from 'src/common/utils/qrcode/qrcode.util';
 import { ConversationService } from 'src/modules/conversation/services/conversation.service';
+import { EventRepository } from '../repositories/event.repository';
 
 @Injectable()
 export class EventService
@@ -31,6 +32,12 @@ export class EventService
     dto.conversationId = id;
     const event = await this.eventRepository.create(dto);
 
+    // const qrCodeUrl = await QRCodeUtil(event.id);
+
+    // const eventUpdated = await this.eventRepository.update({
+    //   id: event.id,
+    //   qr_code: qrCodeUrl,
+    // });
     return event;
   }
 

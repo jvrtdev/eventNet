@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { PostService } from '../services/post.service';
 import { CreatePostDto, QueryParamsDto } from '@dtos';
 import { PostEntity } from '@entities';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { PostService } from '../services/post.service';
 
 @Controller('post')
 export class PostController {
@@ -20,5 +20,10 @@ export class PostController {
   @Get(':id')
   findPostById(@Param('id') id: string): Promise<PostEntity> {
     return this.postService.findById(id);
+  }
+
+  @Get('user/:id')
+  findAllPostsByUserId(@Param('id') id: string): Promise<PostEntity[]> {
+    return this.postService.findAllPostsByUsersId([id]);
   }
 }

@@ -58,11 +58,12 @@
           <ion-icon name="mail-outline"></ion-icon>
         </div>
       </footer>
+      <comment-component
+        class="my-4"
+        [comments]="post.comments"
+      ></comment-component>
     </div>
-    <comment-component
-      class="my-4"
-      [comments]="post.comments"
-    ></comment-component>
+
     <ion-footer
       class="sticky bottom-0 right-0 w-full bg-none shadow-none"
       *ngIf="comment"

@@ -1,4 +1,10 @@
 import {
+  CreateConversationDto,
+  QueryParamsDto,
+  UpdateConversationDto,
+} from '@dtos';
+import { ConversationEntity } from '@entities';
+import {
   Body,
   Controller,
   Delete,
@@ -8,13 +14,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { ConversationEntity } from '@entities';
 import { ConversationService } from '../services/conversation.service';
-import {
-  CreateConversationDto,
-  QueryParamsDto,
-  UpdateConversationDto,
-} from '@dtos';
 
 @Controller('conversation')
 export class ConversationController {
@@ -28,6 +28,13 @@ export class ConversationController {
   @Get()
   findAll(@Query() queryParams: QueryParamsDto): Promise<ConversationEntity[]> {
     return this.conversationService.findAll(queryParams);
+  }
+
+  @Get('pending/:userId')
+  findAllPendingConversationsByUserId(
+    @Param('userId') userId: string,
+  ): Promise<ConversationEntity[]> {
+    return this.conversationService.findAllPendingConversationsByUserId(userId);
   }
 
   @Get(':id')

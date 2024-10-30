@@ -19,6 +19,7 @@ import {
   IonMenuButton,
   IonMenuToggle,
   IonNavLink,
+  IonSearchbar,
   IonText,
   IonTitle,
   IonToolbar,
@@ -37,6 +38,7 @@ import {
   selector: 'app-header',
   templateUrl: './header.component.html',
   imports: [
+    IonSearchbar,
     IonText,
     IonLabel,
     IonItem,

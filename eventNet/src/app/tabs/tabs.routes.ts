@@ -17,6 +17,13 @@ export const routes: Routes = [
           import('./components/feed/tab2.page').then((m) => m.Tab2Page),
       },
       {
+        path: 'notifications',
+        loadComponent: () =>
+          import('./components/notifications/tab4.component').then(
+            (m) => m.Tab4Component
+          ),
+      },
+      {
         path: 'events',
         loadComponent: () =>
           import('./components/events/tab3.page').then((m) => m.Tab3Page),

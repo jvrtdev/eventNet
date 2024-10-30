@@ -1,3 +1,11 @@
+import { ServiceBase } from '@bases';
+import {
+  CreateConversationDto,
+  CreateParticipantDto,
+  QueryParamsDto,
+  UpdateConversationDto,
+} from '@dtos';
+import { ConversationEntity, UserEntity } from '@entities';
 import {
   forwardRef,
   HttpException,
@@ -5,17 +13,9 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
-import { ServiceBase } from '@bases';
 import { QueryBuilder } from '@utils';
-import {
-  CreateConversationDto,
-  CreateParticipantDto,
-  QueryParamsDto,
-  UpdateConversationDto,
-} from '@dtos';
-import { ConversationEntity } from '@entities';
-import { ConversationRepository } from '../repositories/conversation.repository';
 import { ParticipantService } from 'src/modules/participant/services/participant.service';
+import { ConversationRepository } from '../repositories/conversation.repository';
 
 @Injectable()
 export class ConversationService
@@ -61,6 +61,16 @@ export class ConversationService
     const conversations = await this.conversationRepository.findAll(query);
 
     return conversations;
+  }
+  async findAllPendingConversationsByUserId(
+    userId: string,
+  ): Promise<ConversationEntity[]> {
+    const pendingConversations =
+      await this.conversationRepository.findAllPendingConversationsByUserId(
+        userId,
+      );
+
+    return pendingConversations;
   }
 
   async findAllConversationsWithStatusAcceptedByConversationsIds(

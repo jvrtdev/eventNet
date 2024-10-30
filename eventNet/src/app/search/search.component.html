@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-searchbar
+      [(ngModel)]="search"
+      class="rounded-3xl"
+      placeholder="Pesquisar..."
+      (ngModelChange)="onSearchChange()"
+      (keydown.enter)="isExplore()"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="!search" class="flex flex-col">
+    <section class="flex justify-between items-center">
+      <ion-text class="text-lg font-medium"><h2>Recentes</h2></ion-text>
+      <ion-icon
+        name="close-circle-outline"
+        (click)="deleteRecents()"
+      ></ion-icon>
+    </section>
+    <ion-text
+      *ngFor="let item of researchHistory"
+      class="flex justify-between items-center text-base mt-2"
+      (click)="this.search = item; onSearchChange(); isExplore()"
+    >
+      <ion-text>{{ item }}</ion-text>
+      <ion-icon name="return-down-forward"></ion-icon>
+    </ion-text>
+  </div>
+  <div *ngIf="search && !isExploreSearch">
+    <div *ngFor="let user of filteredData.users">
+      <div
+        [routerLink]="['/profile/', user.id]"
+        class="flex items-center space-x-1 text-lg my-2 p-2"
+      >
+        <img
+          alt="Silhouette of a person's head"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+          class="w-12 h-12 min-h-fit min-w-fit rounded-full"
+        />
+        <div class="flex flex-col w-full h-full">
+          <ion-text class="text-lg">{{ user.name }}</ion-text>
+          <ion-text class="text-slate-400 text-sm">
+            &#64;{{ user.userName }}
+          </ion-text>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="search && isExploreSearch" class="flex flex-col">
+    <ion-text class="text-lg font-medium">
+      <h2>Usuarios</h2>
+    </ion-text>
+
+    <div class="overflow-x-scroll h-60 w-full whitespace-nowrap">
+      <ion-card
+        class="inline-block w-60 h-48 mx-2"
+        *ngFor="let user of filteredData.users"
+        [routerLink]="['/profile/', user.id]"
+      >
+        <ion-card-header class="flex flex-col">
+          <img
+            alt="Silhouette of a person's head"
+            src="https://ionicframework.com/docs/img/demos/avatar.svg"
+            class="w-12 h-12 min-h-fit min-w-fit rounded-full"
+          />
+          <ion-text>{{ user.name }}</ion-text>
+          <ion-card-subtitle> &#64;{{ user.userName }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{ user.profile.bio }}
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div class="flex flex-col">
+      <ion-text class="text-lg font-medium mb-4"><h2>Postagens</h2></ion-text>
+      <div *ngFor="let post of filteredData.posts">
+        <div
+          class="flex flex-nowrap gap-2 w-full p-2 border-slate-500 border-y border-opacity-20"
+        >
+          <img
+            alt="Silhouette of a person's head"
+            src="https://ionicframework.com/docs/img/demos/avatar.svg"
+            class="w-12 h-12 min-h-fit min-w-fit rounded-full"
+            id="profile"
+          />
+          <div class="flex flex-col w-full h-full">
+            <div class="flex items-center space-x-1">
+              <label for="profile" [routerLink]="['/profile/', post.ownerId]">
+                <ion-text class="text-lg">{{ post.owner?.name }}</ion-text>
+                <ion-text class="text-slate-400"
+                  >&#64;{{ post.owner?.userName }}</ion-text
+                >
+                <ion-text class="text-slate-400">·3h</ion-text>
+              </label>
+            </div>
+            <p class="text-start font-light" [routerLink]="['/post/', post.id]">
+              {{ post.text }}
+            </p>
+            <footer
+              class="flex items-center justify-between text-base my-1 pr-20"
+            >
+              <div class="flex items-center gap-1">
+                <ion-icon name="chatbubble-outline"></ion-icon>
+                <span>{{ post._count.comments }}</span>
+              </div>
+
+              <div class="flex items-center gap-1">
+                <ion-icon name="repeat-sharp"></ion-icon>
+                <span>{{ post._count.reposts }}</span>
+              </div>
+
+              <div class="flex items-center gap-1">
+                <ion-icon name="heart-outline"></ion-icon>
+                <span>{{ post._count.likes }}</span>
+              </div>
+
+              <div class="flex items-center gap-1">
+                <ion-icon name="mail-outline"></ion-icon>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

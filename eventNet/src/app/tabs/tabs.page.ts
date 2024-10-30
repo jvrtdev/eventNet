@@ -1,4 +1,5 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
+import { HeaderComponent } from '@core/components/header/header.component';
 import {
   IonContent,
   IonHeader,
@@ -15,9 +16,10 @@ import {
   calendarOutline,
   chatbubblesOutline,
   homeOutline,
+  notificationsOutline,
+  searchCircleOutline,
   ticketOutline,
 } from 'ionicons/icons';
-import { HeaderComponent } from '@core/components/header/header.component';
 
 @Component({
   selector: 'app-tabs',
@@ -44,6 +46,8 @@ export class TabsPage {
       ticketOutline,
       homeOutline,
       chatbubblesOutline,
+      searchCircleOutline,
+      notificationsOutline,
     });
   }
 }
