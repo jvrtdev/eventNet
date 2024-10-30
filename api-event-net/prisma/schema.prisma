@@ -48,7 +48,7 @@ model Profile {
   id        String   @id @default(uuid())
   userId    String   @unique @map("user_id")
   bio       String?
-  avatar    String?
+  avatar    String?  @default("https://ionicframework.com/docs/img/demos/avatar.svg")
   github    String?
   linkedin  String?
   instagram String?
