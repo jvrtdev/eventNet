@@ -16,7 +16,27 @@
           class="max-w-40 max-h-40 w-full h-full"
         />
       </ion-avatar>
-      <ion-icon name="settings" size="large"></ion-icon>
+
+      <div *ngIf="isUserProfileOwner">
+        <ion-button shape="round" [routerLink]="[]">
+          <ion-icon name="settings-outline"></ion-icon>
+          <ion-text class="ml-2">Editar</ion-text>
+        </ion-button>
+      </div>
+      <div *ngIf="!isFriend && !isUserProfileOwner">
+        <ion-button (click)="addFriend()">
+          <ion-icon name="person-add-outline"></ion-icon>
+          <ion-text class="ml-2">Conectar</ion-text>
+        </ion-button>
+      </div>
+      <div *ngIf="isFriend">
+        <ion-button
+          [routerLink]="['/chat/', isFriend.conversationId, isFriend.userId]"
+        >
+          <ion-text class="ml-2">Enviar mensagem</ion-text>
+          <ion-icon name="paper-plane"></ion-icon>
+        </ion-button>
+      </div>
     </div>
 
     <div class="flex flex-col">
@@ -40,17 +60,14 @@
     </div>
   </div>
 
-  <section class="w-full">
+  <section class="w-full flex flex-col">
     <ion-segment value="posts" class="w-full border-b border-slate-400">
       <ion-segment-button value="posts">
-        <ion-label class="font-sans">Posts</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="likes">
-        <ion-label class="font-sans">Likes</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="comments">
-        <ion-label class="font-sans">Comentários</ion-label>
+        <ion-label class="font-sans">Publicações</ion-label>
       </ion-segment-button>
     </ion-segment>
+    <div>
+      <post-component [data]="userPosts"></post-component>
+    </div>
   </section>
 </ion-content>

@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { RepositoryFactory } from '@factories';
 import { CreateConversationDto, UpdateConversationDto } from '@dtos';
-import { ConversationEntity, QueryBuilderEntity } from '@entities';
+import { ConversationEntity, QueryBuilderEntity, UserEntity } from '@entities';
+import { RepositoryFactory } from '@factories';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ConversationRepository extends RepositoryFactory<
@@ -15,6 +15,39 @@ export class ConversationRepository extends RepositoryFactory<
 
   findAll(query: QueryBuilderEntity): Promise<ConversationEntity[]> {
     return this.prismaService.conversation.findMany(query);
+  }
+
+  findAllPendingConversationsByUserId(
+    userId: string,
+  ): Promise<ConversationEntity[]> {
+    return this.prismaService.conversation.findMany({
+      where: {
+        participant: {
+          some: {
+            userId: userId,
+          },
+        },
+        status: 'pending',
+      },
+      include: {
+        participant: {
+          select: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                userName: true,
+                profile: {
+                  select: {
+                    avatar: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
   }
 
   findAllConversationsWithStatusAcceptedByConversationsIds(

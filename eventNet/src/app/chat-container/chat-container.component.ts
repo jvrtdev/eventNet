@@ -1,6 +1,8 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { getUserId } from '@core/common/utils/getUserId';
+import { ParticipantInterface } from '@core/shared/@types/participant';
 import {
   IonAvatar,
   IonBackButton,
@@ -12,9 +14,7 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { ParticipantInterface } from '@core/shared/@types/participant';
 import { FriendshipService } from 'src/core/services/user/friendship.service';
-import { getUserId } from '@core/common/utils/getUserId';
 
 @Component({
   standalone: true,
@@ -42,7 +42,7 @@ export class ChatContainerComponent implements OnInit {
 
   ngOnInit() {
     this.friendshipService
-      .findAllFriendsByUserId(`participant/user/${this.userId}`)
+      .findAllFriendsByUserId(this.userId)
       .subscribe((friend: ParticipantInterface[]) => {
         this.friends = friend;
         console.log(friend);

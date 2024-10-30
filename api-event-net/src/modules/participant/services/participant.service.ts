@@ -1,3 +1,6 @@
+import { ServiceBase } from '@bases';
+import { CreateParticipantDto, QueryParamsDto } from '@dtos';
+import { ParticipantEntity } from '@entities';
 import {
   forwardRef,
   HttpException,
@@ -5,12 +8,9 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
-import { ServiceBase } from '@bases';
-import { CreateParticipantDto, QueryParamsDto } from '@dtos';
-import { ParticipantEntity } from '@entities';
-import { ParticipantRepository } from '../repositories/participant.repository';
 import { QueryBuilder } from '@utils';
 import { ConversationService } from 'src/modules/conversation/services/conversation.service';
+import { ParticipantRepository } from '../repositories/participant.repository';
 
 @Injectable()
 export class ParticipantService

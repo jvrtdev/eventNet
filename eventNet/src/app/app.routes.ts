@@ -8,6 +8,7 @@ import { SignUpStep3Component } from './auth/components/sign-up/step3/step3.comp
 import { HomeComponent } from './auth/home.component';
 import { ChatContainerComponent } from './chat-container/chat-container.component';
 import { ChatComponent } from './chat-container/chat/chat.component';
+import { SearchComponent } from './search/search.component';
 import { EventDetailComponent } from './tabs/components/events/event-detail/event-detail.component';
 import { CreatePostComponent } from './tabs/components/feed/components/create-post/create-post.component';
 import { PostDetailsComponent } from './tabs/components/feed/components/post-details/post-details.component';
@@ -70,6 +71,11 @@ export const routes: Routes = [
   {
     path: 'profile/:id',
     component: UserProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'search',
+    component: SearchComponent,
     canActivate: [AuthGuard],
   },
   {

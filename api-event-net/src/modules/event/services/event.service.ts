@@ -1,7 +1,6 @@
 import { ServiceBase } from '@bases';
 import { CreateEventDto, QueryParamsDto, UpdateEventDto } from '@dtos';
 import { EventEntity } from '@entities';
-import { EventRepository } from '../repositories/event.repository';
 import {
   forwardRef,
   HttpException,
@@ -10,8 +9,10 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { QueryBuilder } from '@utils';
+import QRCodeUtil from 'src/common/utils/qrcode/qrcode.util';
 import { ConversationService } from 'src/modules/conversation/services/conversation.service';
 import { UserEventService } from 'src/modules/userEvent/services/userEvent.service';
+import { EventRepository } from '../repositories/event.repository';
 
 @Injectable()
 export class EventService
@@ -50,6 +51,12 @@ export class EventService
       role: 'owner',
     });
 
+    // const qrCodeUrl = await QRCodeUtil(event.id);
+
+    // const eventUpdated = await this.eventRepository.update({
+    //   id: event.id,
+    //   qr_code: qrCodeUrl,
+    // });
     return event;
   }
 
