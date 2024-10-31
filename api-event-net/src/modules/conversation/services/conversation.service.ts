@@ -14,8 +14,8 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { QueryBuilder } from '@utils';
+import { ConversationRequestService } from 'src/modules/conversationRequest/services/conversationRequest.service';
 import { ParticipantService } from 'src/modules/participant/services/participant.service';
-import { ConversationRepository } from '../repositories/conversation.repository';
 
 @Injectable()
 export class ConversationService
@@ -30,6 +30,8 @@ export class ConversationService
     private readonly conversationRepository: ConversationRepository,
     @Inject(forwardRef(() => ParticipantService))
     private readonly participantService: ParticipantService,
+    @Inject(forwardRef(() => ConversationRequestService))
+    private readonly conversationRequestService: ConversationRequestService,
   ) {}
 
   async create(dto: CreateConversationDto): Promise<ConversationEntity> {
@@ -37,18 +39,26 @@ export class ConversationService
 
     const conversation = await this.conversationRepository.create({ ...data });
 
-    const participantData: CreateParticipantDto[] = [
-      {
-        conversationId: conversation.id,
-        userId: senderId,
-      },
-      {
-        conversationId: conversation.id,
-        userId: recipientId,
-      },
-    ];
+    if (!dto.isGroup) {
+      const participantData: CreateParticipantDto[] = [
+        {
+          conversationId: conversation.id,
+          userId: senderId,
+        },
+        {
+          conversationId: conversation.id,
+          userId: recipientId,
+        },
+      ];
 
-    await this.participantService.createMany(participantData);
+      await this.participantService.createMany(participantData);
+
+      await this.conversationRequestService.create({
+        senderId,
+        recipientId,
+        conversationId: conversation.id,
+      });
+    }
 
     return conversation;
   }
