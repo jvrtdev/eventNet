@@ -16,12 +16,36 @@ export class ConversationRequestRepository extends RepositoryFactory<
     return this.prismaService.conversationRequest.findMany();
   }
 
-  findAllByConversationId(
+  findAllConversationsRequestsByConversationId(
     conversationId: string,
   ): Promise<ConversationRequestEntity[]> {
     return this.prismaService.conversationRequest.findMany({
       where: {
         conversationId,
+      },
+    });
+  }
+
+  findAllConversationsRequestsBySenderId(
+    senderId: string,
+  ): Promise<ConversationRequestEntity[]> {
+    return this.prismaService.conversationRequest.findMany({
+      where: {
+        senderId,
+      },
+      include: {
+        recipient: {
+          select: {
+            id: true,
+            name: true,
+            userName: true,
+            profile: {
+              select: {
+                avatar: true,
+              },
+            },
+          },
+        },
       },
     });
   }

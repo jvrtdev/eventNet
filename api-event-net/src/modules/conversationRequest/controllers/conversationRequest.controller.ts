@@ -25,8 +25,17 @@ export class ConversationRequestController {
   findAllConversationsRequestsByConversationId(
     @Param('conversationId') conversationId: string,
   ): Promise<ConversationRequestEntity[]> {
-    return this.conversationRequestService.findAllByConversationId(
+    return this.conversationRequestService.findAllConversationsRequestsByConversationId(
       conversationId,
+    );
+  }
+
+  @Get('user/:senderId')
+  findAllConversationsRequestsBySenderId(
+    @Param('senderId') senderId: string,
+  ): Promise<ConversationRequestEntity[]> {
+    return this.conversationRequestService.findAllConversationsRequestsBySenderId(
+      senderId,
     );
   }
 
