@@ -20,11 +20,7 @@ export class Tab4Component implements OnInit {
     this.notificationsService
       .findAllPendingInvitesByUserId(this.userId)
       .subscribe((invites) => {
-        this.invites = invites.map((invite) =>
-          invite.participant.filter(
-            (participant) => participant.user.id !== this.userId
-          )
-        );
+        this.invites = invites;
         console.log('olha os invites aí ó', invites);
       });
   }
