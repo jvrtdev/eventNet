@@ -5,7 +5,7 @@ import {
   QueryParamsDto,
   UpdateConversationDto,
 } from '@dtos';
-import { ConversationEntity, UserEntity } from '@entities';
+import { ConversationEntity } from '@entities';
 import {
   forwardRef,
   HttpException,
@@ -16,6 +16,7 @@ import {
 import { QueryBuilder } from '@utils';
 import { ConversationRequestService } from 'src/modules/conversationRequest/services/conversationRequest.service';
 import { ParticipantService } from 'src/modules/participant/services/participant.service';
+import { ConversationRepository } from '../repositories/conversation.repository';
 
 @Injectable()
 export class ConversationService
