@@ -5,7 +5,7 @@ import {
   QueryParamsDto,
   UpdateConversationDto,
 } from '@dtos';
-import { ConversationEntity, UserEntity } from '@entities';
+import { ConversationEntity } from '@entities';
 import {
   forwardRef,
   HttpException,
