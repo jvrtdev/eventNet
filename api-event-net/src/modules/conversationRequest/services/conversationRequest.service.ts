@@ -37,12 +37,23 @@ export class ConversationRequestService
     return data;
   }
 
-  async findAllByConversationId(
+  async findAllConversationsRequestsByConversationId(
     conversationId: string,
   ): Promise<ConversationRequestEntity[]> {
     const data =
-      await this.conversationRequestRepository.findAllByConversationId(
+      await this.conversationRequestRepository.findAllConversationsRequestsByConversationId(
         conversationId,
+      );
+
+    return data;
+  }
+
+  async findAllConversationsRequestsBySenderId(
+    senderId: string,
+  ): Promise<ConversationRequestEntity[]> {
+    const data =
+      await this.conversationRequestRepository.findAllConversationsRequestsBySenderId(
+        senderId,
       );
 
     return data;
