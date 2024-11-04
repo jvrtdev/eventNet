@@ -15,7 +15,22 @@ export class NotificationsService extends ApiServiceFactory<unknown> {
     userId: string
   ): Observable<ConversationInterface[]> {
     return this.http.get<ConversationInterface[]>(
-      `${this.baseUrl}/conversation/pending/${userId}`
+      `${this.baseUrl}/conversationRequest/user/recipient/${userId}`
+    );
+  }
+  acceptPendingInvite(
+    conversationRequestId: string
+  ): Observable<ConversationInterface> {
+    return this.http.delete<ConversationInterface>(
+      `${this.baseUrl}/conversationRequest/accepted/${conversationRequestId}`
+    );
+  }
+
+  refusedPendingInvite(
+    conversationRequestId: string
+  ): Observable<ConversationInterface> {
+    return this.http.delete<ConversationInterface>(
+      `${this.baseUrl}/conversationRequest/refused/${conversationRequestId}`
     );
   }
 }
