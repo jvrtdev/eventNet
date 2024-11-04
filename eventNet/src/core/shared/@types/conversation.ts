@@ -8,10 +8,10 @@ export interface ConversationInterface {
   createdAt: Date;
   event?: EventInterface;
   message?: MessageInterface;
-  participant: {
+  participant?: {
     user: UserInterface;
   }[];
-
+  recipient?: UserInterface;
   _count?: {
     event: number;
     message: number;
