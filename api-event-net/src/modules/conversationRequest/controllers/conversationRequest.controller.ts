@@ -1,7 +1,7 @@
+import { CreateConversationRequestDto } from '@dtos';
+import { ConversationRequestEntity } from '@entities';
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ConversationRequestService } from '../services/conversationRequest.service';
-import { ConversationRequestEntity } from '@entities';
-import { CreateConversationRequestDto } from '@dtos';
 
 @Controller('conversationRequest')
 export class ConversationRequestController {
@@ -30,12 +30,20 @@ export class ConversationRequestController {
     );
   }
 
-  @Get('user/:senderId')
+  @Get('user/sender/:senderId')
   findAllConversationsRequestsBySenderId(
     @Param('senderId') senderId: string,
   ): Promise<ConversationRequestEntity[]> {
     return this.conversationRequestService.findAllConversationsRequestsBySenderId(
       senderId,
+    );
+  }
+  @Get('user/recipient/:senderId')
+  findAllConversationsRequestsByRecipientId(
+    @Param('recipientId') recipientId: string,
+  ): Promise<ConversationRequestEntity[]> {
+    return this.conversationRequestService.findAllConversationsRequestsByRecipientId(
+      recipientId,
     );
   }
 
