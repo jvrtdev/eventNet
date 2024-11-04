@@ -1,4 +1,6 @@
 import { ServiceBase } from '@bases';
+import { CreateConversationRequestDto } from '@dtos';
+import { ConversationRequestEntity } from '@entities';
 import {
   forwardRef,
   HttpException,
@@ -6,10 +8,8 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
-import { ConversationRequestEntity } from '@entities';
-import { CreateConversationRequestDto } from '@dtos';
-import { ConversationRequestRepository } from '../repositories/conversationRequest.repository';
 import { ConversationService } from 'src/modules/conversation/services/conversation.service';
+import { ConversationRequestRepository } from '../repositories/conversationRequest.repository';
 
 @Injectable()
 export class ConversationRequestService
@@ -55,6 +55,12 @@ export class ConversationRequestService
       await this.conversationRequestRepository.findAllConversationsRequestsBySenderId(
         senderId,
       );
+
+    return data;
+  }
+
+  async findAllConversationsRequestsByRecipientId(recipientId: string): Promise<ConversationRequestEntity[]>{
+    const data = await this.conversationRequestRepository.findAllConversationsRequestsByRecipientId(recipientId);
 
     return data;
   }
