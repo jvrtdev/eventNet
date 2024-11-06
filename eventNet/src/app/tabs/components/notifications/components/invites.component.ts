@@ -8,6 +8,7 @@ import {
   IonIcon,
   IonItem,
   IonLabel,
+  IonText,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { checkmarkCircleOutline, closeCircleOutline } from 'ionicons/icons';
@@ -16,11 +17,25 @@ import { NotificationsService } from '../notifications.service';
 @Component({
   standalone: true,
   selector: 'invites-component',
-  imports: [RouterLink, NgIf, NgFor, IonItem, IonLabel, IonIcon, IonAvatar],
+  imports: [
+    RouterLink,
+    NgIf,
+    NgFor,
+    IonItem,
+    IonText,
+    IonLabel,
+    IonIcon,
+    IonAvatar,
+  ],
   template: `
     <div *ngIf="invites">
+      <ion-text
+        *ngIf="invites.length === 0"
+        class="text-sm text-slate-400 text-center"
+        >Você não tem solicitações</ion-text
+      >
       <div
-        class="flex items-center justify-between w-full border-y border-slate-300"
+        class="flex items-center justify-between w-full border-y border-slate-400 border-opacity-30 p-2"
         *ngFor="let invite of invites"
       >
         <div class="flex items-center gap-1 w-full">
@@ -28,11 +43,11 @@ import { NotificationsService } from '../notifications.service';
             <img
               alt="Profile person avatar"
               class="w-12 h-12 min-h-fit min-w-fit rounded-full border "
-              src="{{ invite.recipient?.profile?.avatar }}"
+              src="{{ invite.sender?.profile?.avatar }}"
             />
           </ion-avatar>
           <ion-label class="">
-            {{ invite.recipient?.name }}
+            {{ invite.sender?.name }}
           </ion-label>
         </div>
         <div class="flex items-center gap-2 text-3xl">

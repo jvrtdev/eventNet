@@ -11,7 +11,7 @@ export interface ConversationInterface {
   participant?: {
     user: UserInterface;
   }[];
-  recipient?: UserInterface;
+  sender?: UserInterface;
   _count?: {
     event: number;
     message: number;

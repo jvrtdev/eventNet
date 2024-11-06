@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons class="flex items-center justify-between">
+      <ion-back-button></ion-back-button>
+      <ion-title>Evento</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="event" class="space-y-2">
+    <ion-item lines="none" class="rounded-xl">
+      <ion-input
+        labelPlacement="floating"
+        formControlName="title"
+        placeholder="Nome do evento"
+      >
+        <div slot="label"></div>
+      </ion-input>
+    </ion-item>
+    <ion-item lines="none" class="rounded-xl">
+      <ion-input
+        placeholder="Descrição do evento"
+        labelPlacement="floating"
+        type="text"
+        formControlName="description"
+      >
+        <div slot="label">Descrição</div>
+      </ion-input>
+    </ion-item>
+    <ion-item lines="none" class="rounded-xl">
+      <ion-input
+        labelPlacement="floating"
+        type="date"
+        formControlName="start_datetime"
+      >
+        <div slot="label">Data de inicio</div>
+      </ion-input>
+    </ion-item>
+    <ion-item lines="none" class="rounded-xl">
+      <ion-input
+        labelPlacement="floating"
+        type="date"
+        formControlName="end_datetime"
+      >
+        <div slot="label">Data de fim</div>
+      </ion-input>
+    </ion-item>
+    <ion-item lines="none" class="rounded-xl">
+      <ion-input
+        labelPlacement="floating"
+        type="text"
+        formControlName="location"
+      >
+        <div slot="label">Local do evento</div>
+      </ion-input>
+    </ion-item>
+  </form>
+  <ion-button shape="round" (click)="createEvent()" [disabled]="event.invalid"
+    >Criar evento</ion-button
+  >
+</ion-content>

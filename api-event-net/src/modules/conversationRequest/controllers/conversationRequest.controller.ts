@@ -38,7 +38,7 @@ export class ConversationRequestController {
       senderId,
     );
   }
-  @Get('user/recipient/:senderId')
+  @Get('user/recipient/:recipientId')
   findAllConversationsRequestsByRecipientId(
     @Param('recipientId') recipientId: string,
   ): Promise<ConversationRequestEntity[]> {

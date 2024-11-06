@@ -2,6 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { EventInterface } from '@core/shared/@types/event';
 import {
   IonCard,
   IonCardContent,
@@ -9,14 +10,18 @@ import {
   IonCardSubtitle,
   IonCardTitle,
   IonContent,
+  IonFab,
+  IonFabButton,
   IonHeader,
+  IonIcon,
   IonLabel,
   IonSegment,
   IonSegmentButton,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { EventInterface } from '@core/shared/@types/event';
+import { addIcons } from 'ionicons';
+import { add } from 'ionicons/icons';
 import { GetEventDate } from 'src/core/common/utils/date/getEventDate';
 import { CommunityEventsComponent } from './components/community-events/community-events.component';
 import { OfficialEventsComponent } from './components/official-events/official-events.component';
@@ -40,6 +45,9 @@ import { EventsService } from './services/events.service';
     IonSegment,
     IonSegmentButton,
     IonLabel,
+    IonFab,
+    IonIcon,
+    IonFabButton,
     FormsModule,
     NgIf,
     NgFor,
@@ -49,7 +57,9 @@ import { EventsService } from './services/events.service';
   ],
 })
 export class Tab3Page implements OnInit {
-  constructor(private eventService: EventsService) {}
+  constructor(private eventService: EventsService) {
+    addIcons({ add });
+  }
   events: EventInterface[] = [];
 
   formatDate(startDate: Date, endDate: Date): string {
