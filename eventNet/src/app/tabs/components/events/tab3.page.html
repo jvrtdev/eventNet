@@ -1,5 +1,9 @@
 <ion-content class="ion-padding">
-  <h1></h1>
+  <ion-fab class="fixed bottom-2 right-2" [routerLink]="['/event']">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <div *ngFor="let event of events">
     <ion-card [routerLink]="['/event/',event.id]">
       <ion-card-header>

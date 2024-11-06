@@ -58,7 +58,7 @@ export class ConversationRequestRepository extends RepositoryFactory<
         recipientId,
       },
       include: {
-        recipient: {
+        sender: {
           select: {
             id: true,
             name: true,
