@@ -1,5 +1,6 @@
 export interface EventInterface {
   id?: string;
+  userId: string;
   title: string;
   description: string;
   conversationId?: string;
