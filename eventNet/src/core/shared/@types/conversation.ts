@@ -3,6 +3,7 @@ import { MessageInterface } from './message';
 import { UserInterface } from './user';
 
 export interface ConversationInterface {
+  conversationId: string;
   id: string;
   isGroup: boolean;
   createdAt: Date;
