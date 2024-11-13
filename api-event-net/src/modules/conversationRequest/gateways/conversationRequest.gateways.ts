@@ -7,7 +7,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import { ConversationRequestService } from '../services/conversationRequest.service';
 
-@WebSocketGateway(81, { cors: true })
+@WebSocketGateway({ cors: true })
 export class ConversationRequestGateway {
   @WebSocketServer() server: Server;
 
