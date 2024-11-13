@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 
 @Injectable({
@@ -10,9 +11,19 @@ export class NotificationsGateway {
   constructor() {
     this.socket = io(this.baseUrl);
   }
-  acceptInvite() {}
+  acceptInvite(conversationId: string) {
+    this.socket.emit('accepted', conversationId);
+  }
 
-  refuseInvite() {}
+  refuseInvite(conversationId: string) {
+    this.socket.emit('refused', conversationId);
+  }
 
-  receiveInvite() {}
+  receiveInvite() {
+    return new Observable((observer) => {
+      this.socket.on('InviteResponse', (InviteResponse) => {
+        observer.next(InviteResponse);
+      });
+    });
+  }
 }

@@ -12,6 +12,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { checkmarkCircleOutline, closeCircleOutline } from 'ionicons/icons';
+import { NotificationsGateway } from '../notifications.gateway';
 import { NotificationsService } from '../notifications.service';
 
 @Component({
@@ -71,12 +72,13 @@ export class InvitesComponent {
 
   constructor(
     private readonly notificationsService: NotificationsService,
-    private toast: ToastComponent
+    private toast: ToastComponent,
+    private readonly notificationsGateway: NotificationsGateway
   ) {
     addIcons({ checkmarkCircleOutline, closeCircleOutline });
   }
 
-  acceptInvite(invite: ConversationInterface) {
+  /*acceptInvite(invite: ConversationInterface) {
     this.notificationsService.acceptPendingInvite(invite.id).subscribe({
       next: (response) => {
         this.toast.setToast({
@@ -117,5 +119,13 @@ export class InvitesComponent {
         console.log(error);
       },
     });
+  }*/
+
+  acceptInvite(invite: ConversationInterface) {
+    this.notificationsGateway.acceptInvite(invite.id);
+  }
+
+  refuseInvite(invite: ConversationInterface) {
+    this.notificationsGateway.refuseInvite(invite.id);
   }
 }
