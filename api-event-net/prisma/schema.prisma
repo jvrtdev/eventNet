@@ -67,8 +67,8 @@ model Event {
   start_datetime DateTime
   end_datetime   DateTime
   location       String
-  qr_code        String
-  image          String
+  qr_code        String?
+  image          String?
   createdAt      DateTime @default(now()) @map("created_at") @db.Timestamp(6)
 
   userEvent UserEvent[]

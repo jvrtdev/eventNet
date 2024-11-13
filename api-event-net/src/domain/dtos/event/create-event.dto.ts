@@ -35,5 +35,5 @@ export class CreateEventDto {
 
   @IsString()
   @IsNotEmpty()
-  image: string;
+  image?: string;
 }
