@@ -1,3 +1,4 @@
+import { CreateMessageDto } from '@dtos';
 import { Logger } from '@nestjs/common';
 import {
   ConnectedSocket,
@@ -11,9 +12,8 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { MessageService } from '../services/message.service';
-import { CreateMessageDto } from '@dtos';
 
-@WebSocketGateway(80, { cors: true })
+@WebSocketGateway({ cors: true })
 export class MessageGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
