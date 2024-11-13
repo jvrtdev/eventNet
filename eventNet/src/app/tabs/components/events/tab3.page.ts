@@ -30,7 +30,7 @@ import { EventsService } from './services/events.service';
 @Component({
   standalone: true,
   selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
+  templateUrl: './tab3.page.html',
   providers: [EventsService],
   imports: [
     IonCard,

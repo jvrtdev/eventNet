@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import ConverterToIso from '@core/common/utils/date/converterToIso';
 import { getUserId } from '@core/common/utils/getUserId';
 import { ToastComponent } from '@core/shared/components/toast.component';
 import {
@@ -14,6 +15,7 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
+  IonInput,
   IonItem,
   IonTitle,
   IonToolbar,
@@ -26,6 +28,7 @@ import { EventsService } from '../../services/events.service';
   templateUrl: './create-event.component.html',
   imports: [
     IonContent,
+    IonInput,
     IonHeader,
     IonButton,
     IonToolbar,
@@ -46,12 +49,29 @@ export class CreateEventComponent implements OnInit {
     private router: Router
   ) {}
 
+  ngOnInit(): void {
+    this.event = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      start_datetime: ['', Validators.required],
+      end_datetime: ['', Validators.required],
+      location: ['', Validators.required],
+    });
+  }
   createEvent() {
     if (this.event.valid) {
-      console.log(this.event.value);
-
+      let start_datetime = ConverterToIso(this.event.value.start_datetime);
+      let end_datetime = ConverterToIso(this.event.value.end_datetime);
       this.eventService
-        .postData('event', { userId: getUserId(), ...this.event.value })
+        .postData('event', {
+          userId: getUserId(),
+          description: this.event.value.description,
+          start_datetime: start_datetime,
+          end_datetime: end_datetime,
+          title: this.event.value.title,
+          location: this.event.value.location,
+          image: '',
+        })
         .subscribe({
           next: (response) => {
             this.toast.setToast({
@@ -72,15 +92,5 @@ export class CreateEventComponent implements OnInit {
           },
         });
     }
-  }
-
-  ngOnInit(): void {
-    this.event = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      start_datetime: ['', Validators.required],
-      end_datetime: ['', Validators.required],
-      location: ['', Validators.required],
-    });
   }
 }
