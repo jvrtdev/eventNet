@@ -3,6 +3,7 @@ import { getUserId } from '@core/common/utils/getUserId';
 import { ConversationInterface } from '@core/shared/@types/conversation';
 import { IonContent, IonText } from '@ionic/angular/standalone';
 import { InvitesComponent } from './components/invites.component';
+import { NotificationsGateway } from './notifications.gateway';
 import { NotificationsService } from './notifications.service';
 
 @Component({
@@ -14,7 +15,10 @@ import { NotificationsService } from './notifications.service';
 export class Tab4Component implements OnInit {
   userId!: string;
   invites!: any; //ConversationInterface[];
-  constructor(private notificationsService: NotificationsService) {
+  constructor(
+    private notificationsService: NotificationsService,
+    private readonly notificationsGateway: NotificationsGateway
+  ) {
     this.userId = getUserId();
   }
   ngOnInit(): void {
@@ -24,5 +28,9 @@ export class Tab4Component implements OnInit {
         this.invites = invites;
         console.log('olha os invites aí ó', invites);
       });
+
+    this.notificationsGateway.receiveInvite().subscribe((invite) => {
+      this.invites.push(invite);
+    });
   }
 }
