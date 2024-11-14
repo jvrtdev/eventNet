@@ -1,5 +1,5 @@
 services:
-  db:
+  postgres:
     image: postgres
     restart: always
     ports:
@@ -9,8 +9,32 @@ services:
       POSTGRES_PASSWORD: eventPass
       POSTGRES_DB: eventNet
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  nestjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nestjs-app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://eventUser:eventPass@postgres:5432/eventNet?schema=public
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: eventUser
+      DATABASE_PASSWORD: eventPass
+      DATABASE_NAME: eventNet
+      PRISMA_BINARY_TARGETS: linux-musl-openssl-3.0.x
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes:
-  db_data:
-    driver: local
+  postgres_data:
