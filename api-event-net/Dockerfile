@@ -16,9 +16,6 @@ COPY . .
 # generate prisma client
 RUN npx prisma generate
 
-# exec prisma migrations
-RUN npx prisma migrate deploy
-
 # compile app
 RUN npm run build
 
@@ -26,4 +23,6 @@ RUN npm run build
 EXPOSE 3000
 
 # start app
-CMD [ "npm", "run", "start:prod" ]
+# CMD [ "npm", "run", "start:prod" ]
+# start app and exec migrations
+CMD ["sh", "-c", "npx prisma migrate deploy && npm run start:prod"]
