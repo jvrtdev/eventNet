@@ -13,6 +13,12 @@ RUN npm install
 # copy source files
 COPY . .
 
+# generate prisma client
+RUN npx prisma generate
+
+# exec prisma migrations
+RUN npx prisma migrate deploy
+
 # compile app
 RUN npm run build
 
