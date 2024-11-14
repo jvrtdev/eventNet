@@ -6,12 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiServiceFactory<T> {
+  constructor(protected readonly http: HttpClient) {}
 
-  constructor(protected readonly http: HttpClient) {
-    
-  }
-
-  protected baseUrl = 'http://localhost:3000';
+  protected baseUrl = 'https://api-event-net.onrender.com';
 
   getAllData(endpoint: string): Observable<T[]> {
     return this.http.get<T[]>(`${this.baseUrl}/${endpoint}`);
