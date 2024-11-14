@@ -5,9 +5,9 @@ services:
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_USER: eventUser
-      POSTGRES_PASSWORD: eventPass
-      POSTGRES_DB: eventNet
+      POSTGRES_USER: eventnet_user
+      POSTGRES_PASSWORD: 27dG10ObqzkzaGqP6EczZAIfLe9xaZGP
+      POSTGRES_DB: eventnet
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -23,11 +23,11 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgresql://eventUser:eventPass@postgres:5432/eventNet?schema=public
+      DATABASE_URL: postgresql://eventnet_user:27dG10ObqzkzaGqP6EczZAIfLe9xaZGP@dpg-csr10ujgbbvc73au9vt0-a:5432/eventnet?schema=public
       DATABASE_PORT: 5432
-      DATABASE_USERNAME: eventUser
-      DATABASE_PASSWORD: eventPass
-      DATABASE_NAME: eventNet
+      DATABASE_USERNAME: eventnet_user
+      DATABASE_PASSWORD: 27dG10ObqzkzaGqP6EczZAIfLe9xaZGP
+      DATABASE_NAME: eventnet
       PRISMA_BINARY_TARGETS: linux-musl-openssl-3.0.x
     networks:
       - app-network
