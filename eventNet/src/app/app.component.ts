@@ -14,14 +14,14 @@ import { ToastComponent } from '../core/shared/components/toast.component';
 export class AppComponent implements OnInit {
   constructor(private platform: Platform, private router: Router) {}
   ngOnInit(): void {
-    this.platform.ready().then(() => {
-      if (Capacitor.isNativePlatform()) {
-        App.addListener('appUrlOpen', (event: any) => {
-          const url = event.url;
-          const path = url.split('://')[1];
-          this.router.navigate([`/${path}`]);
-        });
-      }
-    });
+    // this.platform.ready().then(() => {
+    //   if (Capacitor.isNativePlatform()) {
+    //     App.addListener('appUrlOpen', (event: any) => {
+    //       const url = event.url;
+    //       const path = url.split('://')[1];
+    //       this.router.navigate([`/${path}`]);
+    //     });
+    //   }
+    // });
   }
 }
