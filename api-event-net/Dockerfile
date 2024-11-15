@@ -25,4 +25,4 @@ EXPOSE 3000
 # start app
 # CMD [ "npm", "run", "start:prod" ]
 # start app and exec migrations
-CMD ["sh", "-c", "npx prisma migrate deploy && npm run start:prod"]
+CMD ["sh", "-c", "npx prisma migrate deploy && npm run prisma:seed &&  npm run start:prod"]
