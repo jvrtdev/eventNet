@@ -9,7 +9,8 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { QueryBuilder } from '@utils';
-import QRCodeUtil from 'src/common/utils/qrcode/qrcode.util';
+
+import generateQrCode from 'src/common/utils/qrcode/generateQrCode';
 import { ConversationService } from 'src/modules/conversation/services/conversation.service';
 import { UserEventService } from 'src/modules/userEvent/services/userEvent.service';
 import { EventRepository } from '../repositories/event.repository';
@@ -45,19 +46,20 @@ export class EventService
       ...data,
     });
 
+    const qrCodeUrl = await generateQrCode(event.id);
+
+    const eventUpdated = await this.eventRepository.update({
+      id: event.id,
+      qr_code: qrCodeUrl,
+    });
+
     await this.userEventService.create({
       userId,
       eventId: event.id,
       role: 'owner',
     });
 
-    // const qrCodeUrl = await QRCodeUtil(event.id);
-
-    // const eventUpdated = await this.eventRepository.update({
-    //   id: event.id,
-    //   qr_code: qrCodeUrl,
-    // });
-    return event;
+    return eventUpdated;
   }
 
   async findAll(queryParams: QueryParamsDto): Promise<EventEntity[]> {
