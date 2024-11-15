@@ -8,6 +8,9 @@ services:
       POSTGRES_USER: eventnet_user
       POSTGRES_PASSWORD: 27dG10ObqzkzaGqP6EczZAIfLe9xaZGP
       POSTGRES_DB: eventnet
+      # POSTGRES_USER: eventUser
+      # POSTGRES_PASSWORD: eventPass
+      # POSTGRES_DB: eventNet
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
