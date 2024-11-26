@@ -1,9 +1,11 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { EventInterface } from '@core/shared/@types/event';
+import { QueryParamsInterface } from '@core/shared/@types/query-params.interface';
 import {
+  InfiniteScrollCustomEvent,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -12,19 +14,13 @@ import {
   IonContent,
   IonFab,
   IonFabButton,
-  IonHeader,
   IonIcon,
-  IonLabel,
-  IonSegment,
-  IonSegmentButton,
-  IonTitle,
-  IonToolbar,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { add } from 'ionicons/icons';
 import { GetEventDate } from 'src/core/common/utils/date/getEventDate';
-import { CommunityEventsComponent } from './components/community-events/community-events.component';
-import { OfficialEventsComponent } from './components/official-events/official-events.component';
 import { EventsService } from './services/events.service';
 
 @Component({
@@ -38,25 +34,25 @@ import { EventsService } from './services/events.service';
     IonCardSubtitle,
     IonCardHeader,
     IonCardContent,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
     IonContent,
-    IonSegment,
-    IonSegmentButton,
-    IonLabel,
     IonFab,
     IonIcon,
     IonFabButton,
     FormsModule,
-    NgIf,
     NgFor,
-    OfficialEventsComponent,
-    CommunityEventsComponent,
     RouterLink,
+    IonInfiniteScroll,
+    IonInfiniteScrollContent,
   ],
 })
 export class Tab3Page implements OnInit {
+  private params: QueryParamsInterface = {
+    page: 1,
+    limit: 10,
+    sort: 'createdAt',
+    filter: 'createdAt',
+  };
+
   constructor(private eventService: EventsService) {
     addIcons({ add });
   }
@@ -66,11 +62,23 @@ export class Tab3Page implements OnInit {
     return GetEventDate(String(startDate), String(endDate));
   }
 
-  ngOnInit() {
+  getEvents() {
     this.eventService
-      .getAllData('event')
+      .getAllData('event', this.params)
       .subscribe((response: EventInterface[]) => {
-        this.events = response;
+        this.events.push(...response);
       });
+  }
+
+  onIonInfinite(ev: InfiniteScrollCustomEvent) {
+    setTimeout(() => {
+      (ev as InfiniteScrollCustomEvent).target.complete();
+      this.params.page++;
+      this.getEvents();
+    }, 500);
+  }
+
+  ngOnInit() {
+    this.getEvents();
   }
 }

@@ -22,7 +22,12 @@ export class UserEventController {
   ): Promise<UserEventEntity> {
     return this.userEventService.create(createUserEventDto);
   }
-
+  @Get(':userId')
+  findAllUserEventByUserId(
+    @Param('userId') userId: string,
+  ): Promise<UserEventEntity[]> {
+    return this.userEventService.findAllUserEventByUserId(userId);
+  }
   @Get()
   findAllUserEvents(
     @Query() queryParams: QueryParamsDto,
@@ -40,6 +45,14 @@ export class UserEventController {
   @Get(':id')
   findUserEventById(@Param('id') id: string): Promise<UserEventEntity> {
     return this.userEventService.findById(id);
+  }
+
+  @Get(':userId/:eventId')
+  findEventParticipantByUserId(
+    @Param('userId') userId: string,
+    @Param('eventId') eventId: string,
+  ): Promise<boolean> {
+    return this.userEventService.findParticipantEventByUserId(userId, eventId);
   }
 
   @Put(':id')

@@ -2,9 +2,12 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { getUser } from '@core/common/utils/getUser';
+import { ConversationInterface } from '@core/shared/@types/conversation';
+import { EventInterface } from '@core/shared/@types/event';
 import { MessageInterface } from '@core/shared/@types/message';
+import { ParticipantInterface } from '@core/shared/@types/participant';
 import { UserInterface } from '@core/shared/@types/user';
 import {
   IonAvatar,
@@ -40,7 +43,6 @@ import { ChatService } from './chat.service';
     IonToolbar,
     IonHeader,
     IonButtons,
-    IonInput,
     IonItem,
     NgFor,
     NgIf,
@@ -54,8 +56,12 @@ import { ChatService } from './chat.service';
 })
 export class ChatComponent implements OnInit {
   conversationId!: string;
-  receiverId!: string;
-  message!: MessageInterface;
+  conversation!: ConversationInterface;
+  message: MessageInterface = {
+    content: '',
+    senderId: '',
+    conversationId: '',
+  };
   messages: MessageInterface[] = [];
   sender!: { sub: string; name: string; userName: string };
   receiver!: UserInterface;
@@ -77,9 +83,17 @@ export class ChatComponent implements OnInit {
     this.scrollToBottom(); // Rola o scroll para o final ao abrir o chat
   }
 
+  navigateTo() {
+    if (!this.conversation.isGroup) {
+      this.router.navigate(['user', this.receiver.id]);
+    }
+    this.router.navigate(['event', this.conversation?.event?.id ?? '']);
+  }
+
   constructor(
     private chatGateway: ChatGateway,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private chatService: ChatService
   ) {
     addIcons({ sendOutline });
@@ -87,19 +101,41 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.sender = getUser();
-    console.log('Sender => ', this.sender);
 
-    this.route.params.subscribe((params) => {
+    this.activatedRoute.params.subscribe((params) => {
       this.conversationId = params['conversationId'];
-      this.receiverId = params['receiverId'];
+      //  this.receiverId = params['receiverId'];
     });
 
     this.chatService
-      .getReceiverByConversationId(`user/${this.receiverId}`)
-      .subscribe((user) => {
-        this.receiver = user;
-        console.log('Receiver => ', user);
+      .getDataById(`conversation/${this.conversationId}`)
+      .subscribe((chat: ConversationInterface) => {
+        console.log(chat);
+        this.conversation = chat;
+        if (!this.conversation.isGroup) {
+          this.receiver.id =
+            chat.participant?.find(
+              (receiver: ParticipantInterface) =>
+                receiver.userId !== this.sender.sub
+            )?.userId ?? '';
+
+          this.chatService
+            .getReceiverByConversationId(`user/${this.receiver.id}`)
+            .subscribe((user) => {
+              this.receiver = user;
+              console.log('Receiver => ', user);
+            });
+        }
       });
+
+    // if (!this.conversation.isGroup) {
+    //   this.chatService
+    //     .getReceiverByConversationId(`user/${this.receiver.id}`)
+    //     .subscribe((user) => {
+    //       this.receiver = user;
+    //       console.log('Receiver => ', user);
+    //     });
+    // }
 
     this.chatService
       .getMessagesByConversationId(`message/${this.conversationId}`)

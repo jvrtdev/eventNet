@@ -2,4 +2,29 @@
   <ion-text>
     <h1 class="text-xl font-bold">Eventos inscritos</h1>
   </ion-text>
+
+  <div *ngFor="let event of events">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ event.event.title }}</ion-card-title>
+        <ion-card-subtitle
+          >{{formatDate(event.event.start_datetime,
+          event.event.end_datetime)}}</ion-card-subtitle
+        >
+      </ion-card-header>
+
+      <ion-card-content class="flex items-center justify-between">
+        {{event.event.location}}
+        <div>
+          <ion-button [routerLink]="['/chat/',event.event.conversationId]"
+            >Chat</ion-button
+          >
+
+          <ion-button [routerLink]="['/event/',event.eventId]"
+            >Ver mais</ion-button
+          >
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

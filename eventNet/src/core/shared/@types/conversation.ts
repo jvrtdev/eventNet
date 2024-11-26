@@ -1,5 +1,6 @@
 import { EventInterface } from './event';
 import { MessageInterface } from './message';
+import { ParticipantInterface } from './participant';
 import { UserInterface } from './user';
 
 export interface ConversationInterface {
@@ -9,9 +10,7 @@ export interface ConversationInterface {
   createdAt: Date;
   event?: EventInterface;
   message?: MessageInterface;
-  participant?: {
-    user: UserInterface;
-  }[];
+  participant: ParticipantInterface[];
   sender?: UserInterface;
   _count?: {
     event: number;

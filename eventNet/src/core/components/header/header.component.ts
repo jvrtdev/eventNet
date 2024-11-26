@@ -1,8 +1,10 @@
-import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { getUser } from '@core/common/utils/getUser';
+import { getUserId } from '@core/common/utils/getUserId';
 import { AuthService } from '@core/services/auth.service';
+import { UserService } from '@core/services/user/user.service';
+import { UserInterface } from '@core/shared/@types/user';
 import { ToastComponent } from '@core/shared/components/toast.component';
 import { menuHeader } from '@core/shared/data/menu-header';
 import {
@@ -39,10 +41,7 @@ import {
   templateUrl: './header.component.html',
   imports: [
     IonSearchbar,
-    IonText,
     IonLabel,
-    IonItem,
-    IonList,
     IonTitle,
     IonIcon,
     IonToolbar,
@@ -53,14 +52,17 @@ import {
     IonMenuToggle,
     IonMenu,
     IonContent,
-    IonMenuButton,
-    IonNavLink,
     RouterLink,
     NgFor,
+    NgIf,
   ],
 })
-export class HeaderComponent {
-  constructor(private authService: AuthService, private toast: ToastComponent) {
+export class HeaderComponent implements OnInit {
+  constructor(
+    private authService: AuthService,
+    private toast: ToastComponent,
+    private userService: UserService
+  ) {
     addIcons({
       chatbubblesOutline,
       personCircleOutline,
@@ -68,10 +70,8 @@ export class HeaderComponent {
       settingsOutline,
       exitOutline,
     });
-
-    this.user = getUser();
   }
-  user: any;
+  user!: UserInterface;
 
   handleLogout() {
     this.toast.setToast({
@@ -82,7 +82,11 @@ export class HeaderComponent {
     this.authService.logout();
   }
 
+  ngOnInit(): void {
+    this.userService.getDataById(`user/${getUserId()}`).subscribe((user) => {
+      this.user = user;
+      console.log('user do header', user);
+    });
+  }
   items = menuHeader;
-
-  avatarUrl = 'https://ionicframework.com/docs/img/demos/avatar.svg';
 }

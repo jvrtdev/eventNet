@@ -1,8 +1,10 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { EventsService } from '@app/tabs/components/events/services/events.service';
 import { getUserId } from '@core/common/utils/getUserId';
 import { ParticipantInterface } from '@core/shared/@types/participant';
+import { UserEventInterface } from '@core/shared/@types/user-event.interface';
 import {
   IonAvatar,
   IonBackButton,
@@ -11,7 +13,7 @@ import {
   IonHeader,
   IonItem,
   IonLabel,
-  IonTitle,
+  IonText,
   IonToolbar,
 } from '@ionic/angular/standalone';
 import { FriendshipService } from 'src/core/services/user/friendship.service';
@@ -21,7 +23,7 @@ import { FriendshipService } from 'src/core/services/user/friendship.service';
   selector: 'app-chat-container',
   templateUrl: './chat-container.component.html',
   imports: [
-    IonTitle,
+    IonText,
     IonAvatar,
     IonItem,
     IonContent,
@@ -36,8 +38,12 @@ import { FriendshipService } from 'src/core/services/user/friendship.service';
   ],
 })
 export class ChatContainerComponent implements OnInit {
-  constructor(private readonly friendshipService: FriendshipService) {}
+  constructor(
+    private readonly friendshipService: FriendshipService,
+    private readonly eventService: EventsService
+  ) {}
   friends!: ParticipantInterface[];
+  events!: UserEventInterface[];
   userId = getUserId();
 
   ngOnInit() {
@@ -47,5 +53,9 @@ export class ChatContainerComponent implements OnInit {
         this.friends = friend;
         console.log(friend);
       });
+
+    this.eventService.findEventsAttendance(this.userId).subscribe((event) => {
+      this.events = event;
+    });
   }
 }

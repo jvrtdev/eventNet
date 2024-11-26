@@ -1,10 +1,13 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
+// import { Router } from '@angular/router';
 import { HeaderComponent } from '@core/components/header/header.component';
 import {
   IonContent,
   IonHeader,
   IonIcon,
   IonLabel,
+  IonRefresher,
+  IonRefresherContent,
   IonTabBar,
   IonTabButton,
   IonTabs,
@@ -50,4 +53,5 @@ export class TabsPage {
       notificationsOutline,
     });
   }
+
 }

@@ -27,10 +27,42 @@ export class UserEventRepository extends RepositoryFactory<
     });
   }
 
+  findParticipantEventByUserId(
+    userId: string,
+    eventId: string,
+  ): Promise<UserEventEntity> {
+    return this.prismaService.userEvent.findFirst({
+      where: {
+        eventId: eventId,
+        userId: userId,
+      },
+    });
+  }
+
   findById(id: string): Promise<UserEventEntity> {
     return this.prismaService.userEvent.findFirst({
       where: {
         id,
+      },
+    });
+  }
+
+  findUserEventByUserId(userId: string): Promise<UserEventEntity[]> {
+    return this.prismaService.userEvent.findMany({
+      where: {
+        userId: userId,
+      },
+      include: {
+        event: {
+          select: {
+            qr_code: true,
+            title: true,
+            start_datetime: true,
+            end_datetime: true,
+            location: true,
+            conversationId: true,
+          },
+        },
       },
     });
   }

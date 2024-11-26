@@ -46,7 +46,7 @@ export class EventService
       ...data,
     });
 
-    const qrCodeUrl = await generateQrCode(event.id);
+    const qrCodeUrl = generateQrCode(event.id);
 
     const eventUpdated = await this.eventRepository.update({
       id: event.id,

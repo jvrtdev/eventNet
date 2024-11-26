@@ -74,6 +74,30 @@ export class UserEventService
     return userEvent;
   }
 
+  async findParticipantEventByUserId(
+    userId: string,
+    eventId: string,
+  ): Promise<boolean> {
+    const isParticipant =
+      await this.userEventRepository.findParticipantEventByUserId(
+        userId,
+        eventId,
+      );
+
+    if (isParticipant) {
+      return true;
+    }
+
+    return false;
+  }
+
+  async findAllUserEventByUserId(userId: string): Promise<UserEventEntity[]> {
+    const userEvent =
+      await this.userEventRepository.findUserEventByUserId(userId);
+
+    return userEvent;
+  }
+
   async update(dto: UpdateUserEventDto): Promise<UserEventEntity> {
     const userEvent = await this.findById(dto.id);
 

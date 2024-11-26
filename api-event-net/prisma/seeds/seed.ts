@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { PrismaClient } from '@prisma/client';
+import { hash } from '../../src/common/utils/bcrypt/hash';
 import generateQrCode from '../../src/common/utils/qrcode/generateQrCode';
 const prisma = new PrismaClient();
 
@@ -31,7 +32,7 @@ async function dataSeed() {
         email: faker.internet.email(),
         name: faker.person.fullName(),
         userName: faker.internet.username(),
-        password: 'oi',
+        password: await hash('oi'),
         phone: faker.phone.number(),
         address: {
           create: {

@@ -1,4 +1,4 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
@@ -8,6 +8,11 @@ const config: CapacitorConfig = {
   // server: {
   //   androidScheme: 'eventNet',
   // },
+  plugins: {
+    CapacitorSQLite: {
+      androidDatabaseLocation: 'default',
+    },
+  },
 };
 
 export default config;

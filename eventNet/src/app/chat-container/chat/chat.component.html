@@ -2,14 +2,20 @@
   <ion-toolbar>
     <ion-buttons slot="start" class="w-full">
       <ion-back-button></ion-back-button>
-      <ion-item class="flex items-center gap-2 w-full">
+      <ion-item
+        class="flex items-center gap-2 w-full"
+        (click)="navigateTo()"
+        *ngIf="receiver"
+      >
         <ion-avatar class="mr-2">
           <img
             alt="Silhouette of a person's head"
-            src="https://ionicframework.com/docs/img/demos/avatar.svg"
+            src="{{ receiver.profile.avatar }}"
           />
         </ion-avatar>
-        <ion-label *ngIf="receiver">{{ receiver.name }}</ion-label>
+        <ion-label>{{
+          !conversation.isGroup ? receiver.name : conversation.event?.title
+        }}</ion-label>
       </ion-item>
     </ion-buttons>
     <ion-buttons slot="end"> </ion-buttons>

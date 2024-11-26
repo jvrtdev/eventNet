@@ -7,16 +7,25 @@
 </ion-header>
 <ion-content *ngIf="friends">
   <div *ngIf="friends.length == 0">Você não tem networks ainda</div>
+  <ion-text class="text-center flex justify-center text-lg">Amigos:</ion-text>
+
   <div *ngFor="let friend of friends">
-    <ion-item [routerLink]="['/chat/', friend.conversationId, friend.userId]">
+    <ion-item [routerLink]="['/chat/', friend.conversationId]">
       <ion-avatar slot="start">
         <img
           alt="Silhouette of a person's head"
-          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+          src="{{ friend.user?.profile?.avatar }}"
         />
       </ion-avatar>
 
       <ion-label>{{ friend.user?.name }}</ion-label>
+    </ion-item>
+  </div>
+
+  <ion-text class="text-center flex justify-center text-lg">Eventos:</ion-text>
+  <div *ngFor="let event of events">
+    <ion-item [routerLink]="['/chat/', event.event.conversationId]">
+      <ion-label>{{ event.event.title }}</ion-label>
     </ion-item>
   </div>
 </ion-content>

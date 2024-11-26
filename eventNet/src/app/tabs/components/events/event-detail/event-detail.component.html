@@ -8,54 +8,18 @@
 
 <ion-content class="ion-padding space-y-5" *ngIf="event">
   <ion-text>
-    <h1 class="text-2xl font-bold">{{event.title}}</h1>
+    <h1 class="text-2xl font-bold">{{ event.title }}</h1>
   </ion-text>
 
   <ion-text class="flex items-center gap-2 text-sm">
     <ion-icon name="calendar-outline" class="text-xl"></ion-icon>
-     <p>{{formatDate(event.start_datetime, event.end_datetime)}}</p>
+    <p>{{ formatDate(event.start_datetime, event.end_datetime) }}</p>
   </ion-text>
 
   <ion-text class="flex items-center gap-2 text-sm">
     <ion-icon name="location-outline" class="text-xl"></ion-icon>
-    <p>{{event.location}}</p>
+    <p>{{ event.location }}</p>
   </ion-text>
-
-  <ion-card class="rounded-xl">
-    <ion-card-header>
-      <ion-card-title class="flex items-center justify-between">
-        <p class="font-bold">Ingressos</p>
-        <div class="flex items-center text-base">
-          <ion-icon name="cart-outline" size="large"></ion-icon>
-          <span>R$ {{ valorIngresso }}</span>
-        </div>
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list lines="full">
-        <ion-item>
-          <div class="grid grid-cols-2 w-full">
-            <div class="flex items-center col-span-1">
-              <ion-icon name="ticket" class="text-4xl mr-2"></ion-icon>
-              <div class="flex flex-col">
-                <span class="text-nowrap">Ingresso Inteira</span>
-                <span>R$ 0,00</span>
-              </div>
-            </div>
-
-            <div class="flex items-center gap-2 col-span-1 place-content-end">
-              <ion-icon name="remove-circle" class="text-xl"></ion-icon>
-              <span class="text-xl">{{ numberTickets }}</span>
-              <ion-icon name="add-circle" class="text-xl"></ion-icon>
-            </div>
-          </div>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-    <div class="flex w-full justify-center items-center p-2">
-      <ion-button>Comprar Ingresso</ion-button>
-    </div>
-  </ion-card>
 
   <div class="flex flex-col mt-4 gap-2">
     <ion-text>
@@ -63,8 +27,13 @@
     </ion-text>
 
     <ion-text>
-      {{event.description}}
+      {{ event.description }}
     </ion-text>
-    <ion-button [routerLink]="['/chat/',event.conversationId]">Entrar no chat</ion-button>
+
+    <div class="flex flex-col items-center my-5 space-y-2">
+      <ion-text class="text-lg font-bold">QR Code do Evento</ion-text>
+      <img src="{{ event.qr_code }}" alt="qrcode do evento" />
+    </div>
+    <ion-button (click)="signInEvent()">Participar do Evento</ion-button>
   </div>
 </ion-content>

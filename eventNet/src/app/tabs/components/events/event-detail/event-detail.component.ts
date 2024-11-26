@@ -27,11 +27,11 @@ import {
   locationOutline,
   removeCircle,
   ticket,
-  ticketOutline,
 } from 'ionicons/icons';
 import { EventInterface } from '@core/shared/@types/event';
 import { GetEventDate } from 'src/core/common/utils/date/getEventDate';
 import { EventsService } from '../services/events.service';
+import { getUserId } from '@core/common/utils/getUserId';
 
 @Component({
   standalone: true,
@@ -60,13 +60,12 @@ import { EventsService } from '../services/events.service';
 })
 export class EventDetailComponent implements OnInit {
   id: string = '';
-  valorIngresso = '0,00';
-  numberTickets: number = 0;
   event!: EventInterface;
-
+  isParticipant: boolean = false;
+  userId = getUserId();
   constructor(
     private activatedRoute: ActivatedRoute,
-    private readonly eventService: EventsService
+    private readonly eventService: EventsService,
   ) {
     addIcons({
       calendarOutline,
@@ -82,6 +81,19 @@ export class EventDetailComponent implements OnInit {
     return GetEventDate(String(startDate), String(endDate));
   }
 
+  signInEvent() {
+    this.eventService
+      .signInEvent({ userId: this.userId, eventId: this.event?.id ?? '' })
+      .subscribe({
+        next: (event) => {
+          console.log(event);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+  }
+
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id')!;
     this.eventService
@@ -89,6 +101,13 @@ export class EventDetailComponent implements OnInit {
       .subscribe((event: EventInterface) => {
         this.event = event;
         console.log(event);
+
+        this.eventService
+          .checkUserEventIsSub(this.userId, event.id ?? '')
+          .subscribe((isParticipant) => {
+            this.isParticipant = isParticipant;
+            console.log('is participant', this.isParticipant);
+          });
       });
   }
 }
