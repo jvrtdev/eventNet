@@ -61,6 +61,7 @@ export class ChatComponent implements OnInit {
     content: '',
     senderId: '',
     conversationId: '',
+    senderName: '',
   };
   messages: MessageInterface[] = [];
   sender!: { sub: string; name: string; userName: string };
@@ -147,6 +148,7 @@ export class ChatComponent implements OnInit {
       content: '',
       conversationId: this.conversationId,
       senderId: this.sender.sub,
+      senderName: this.sender.name,
     };
 
     this.chatGateway.receiveMessage().subscribe((message) => {
@@ -156,6 +158,7 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage() {
+    console.log('func call');
     this.chatGateway.sendMessage(this.message);
     this.message.content = '';
     this.scrollToBottom();

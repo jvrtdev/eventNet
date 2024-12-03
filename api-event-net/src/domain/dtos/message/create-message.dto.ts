@@ -9,6 +9,10 @@ export class CreateMessageDto {
   @IsNotEmpty()
   conversationId: string;
 
+  @IsString()
+  @IsOptional()
+  senderName?: string;
+
   @IsBoolean()
   @IsOptional()
   isRead?: boolean;

@@ -13,8 +13,8 @@
             src="{{ receiver.profile.avatar }}"
           />
         </ion-avatar>
-        <ion-label>{{
-          !conversation.isGroup ? receiver.name : conversation.event?.title
+        <ion-label *ngIf="conversation">{{
+          conversation.event?.title
         }}</ion-label>
       </ion-item>
     </ion-buttons>
@@ -38,12 +38,10 @@
           : 'bg-blue-800 text-white p-2 max-w-fit justify-self-end rounded-br-2xl rounded-l-2xl'
       "
     >
-      <div class="flex flex-col">
-        <!-- <ion-text *ngIf="if isGroup">
-          <strong>{{
-            sender.sub != message.senderId ? receiver.name : sender.name
-          }}</strong>
-        </ion-text> -->
+      <div class="flex flex-col" *ngIf="conversation">
+        <ion-text *ngIf="conversation.isGroup">
+          <strong>{{ message.senderName }}</strong>
+        </ion-text>
         <ion-text>
           <p>{{ message.content }}</p>
         </ion-text>

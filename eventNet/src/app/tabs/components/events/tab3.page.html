@@ -1,6 +1,9 @@
 <ion-content class="ion-padding">
-  <ion-fab class="fixed bottom-2 right-2" [routerLink]="['/event']">
-    <ion-fab-button>
+  <ion-fab class="fixed bottom-2 right-2 space-y-2">
+    <ion-fab-button class="h-10 w-10 m-auto" (click)="scanQRCode()">
+      <ion-icon name="qr-code-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button [routerLink]="['/event']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

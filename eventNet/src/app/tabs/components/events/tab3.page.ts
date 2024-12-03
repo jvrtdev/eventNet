@@ -2,6 +2,7 @@ import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { ScanQrCodeService } from '@core/services/qrcode-scanner/scanQRCode';
 import { EventInterface } from '@core/shared/@types/event';
 import { QueryParamsInterface } from '@core/shared/@types/query-params.interface';
 import {
@@ -19,7 +20,7 @@ import {
   IonInfiniteScrollContent,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { add } from 'ionicons/icons';
+import { add, qrCodeOutline } from 'ionicons/icons';
 import { GetEventDate } from 'src/core/common/utils/date/getEventDate';
 import { EventsService } from './services/events.service';
 
@@ -53,10 +54,17 @@ export class Tab3Page implements OnInit {
     filter: 'createdAt',
   };
 
-  constructor(private eventService: EventsService) {
-    addIcons({ add });
+  constructor(
+    private eventService: EventsService,
+    private qrCodeService: ScanQrCodeService
+  ) {
+    addIcons({ add, qrCodeOutline });
   }
   events: EventInterface[] = [];
+
+  scanQRCode() {
+    this.qrCodeService.scanQRCode();
+  }
 
   formatDate(startDate: Date, endDate: Date): string {
     return GetEventDate(String(startDate), String(endDate));

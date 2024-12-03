@@ -29,17 +29,17 @@
       >
       </ion-textarea>
     </ion-item>
-    <ion-item lines="none" class="rounded-xl">
-      <ion-input labelPlacement="stacked" type="file" formControlName="avatar">
+    <ion-item lines="none" class="rounded-xl" (click)="openCamera()">
+      <ion-input
+        labelPlacement="stacked"
+        [value]="avatarUrl"
+        formControlName="avatar"
+      >
         <div slot="label">Foto de perfil</div>
       </ion-input>
     </ion-item>
     <ion-item lines="none" class="rounded-xl">
-      <ion-input
-        labelPlacement="floating"
-        type="text"
-        formControlName="github"
-      >
+      <ion-input labelPlacement="floating" type="text" formControlName="github">
         <div slot="label">Github</div>
       </ion-input>
     </ion-item>

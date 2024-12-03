@@ -13,7 +13,13 @@ import {
 import { Server, Socket } from 'socket.io';
 import { MessageService } from '../services/message.service';
 
-@WebSocketGateway({ cors: true })
+@WebSocketGateway({
+  cors: {
+    origin: '*',
+    credentials: true,
+    methods: ['GET', 'POST'],
+  },
+})
 export class MessageGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {

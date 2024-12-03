@@ -4,6 +4,7 @@ export interface MessageInterface {
   id?: string;
   content: string;
   conversationId: string;
+  senderName?: string;
   isRead?: boolean;
   senderId: string;
   createdAt?: Date;

@@ -8,7 +8,7 @@ export interface ConversationInterface {
   id: string;
   isGroup: boolean;
   createdAt: Date;
-  event?: EventInterface;
+  event?: EventInterface | any;
   message?: MessageInterface;
   participant: ParticipantInterface[];
   sender?: UserInterface;

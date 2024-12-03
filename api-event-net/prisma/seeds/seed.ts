@@ -94,6 +94,7 @@ async function dataSeed() {
             message: {
               create: {
                 content: 'Bem vindos ao chat do evento',
+                senderName: `${user.name}`,
                 user: {
                   connect: {
                     id: user.id,

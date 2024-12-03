@@ -9,14 +9,10 @@ import { catchError, Observable, shareReplay } from 'rxjs';
 export class ApiServiceFactory<T> {
   private cache = new Map<string, Observable<T[]>>();
 
-  constructor(
-    protected readonly http: HttpClient,
+  constructor(protected readonly http: HttpClient) {}
 
-  ) {
-  }
-
-  //protected baseUrl = 'https://api-event-net.onrender.com';
-  protected baseUrl = 'http://localhost:3000';
+  protected baseUrl = 'https://api-event-net.onrender.com';
+  //protected baseUrl = 'http://localhost:3000';
 
   getAllData(endpoint: string, params?: Record<string, any>): Observable<T[]> {
     const httpParams = new HttpParams({ fromObject: params });
@@ -26,7 +22,6 @@ export class ApiServiceFactory<T> {
       console.log('resposta do cache', this.cache);
       return this.cache.get(url)!;
     }
-
 
     const response$ = this.http.get<T[]>(url).pipe(
       shareReplay(1),
