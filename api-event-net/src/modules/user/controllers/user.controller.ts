@@ -24,8 +24,8 @@ export class UserController {
   }
 
   @Get()
-  findAllUsers(@Query() queryParams: QueryParamsDto): Promise<UserEntity[]> {
-    return this.userService.findAll(queryParams);
+  findAllUsers(): Promise<UserEntity[]> {
+    return this.userService.findAll();
   }
 
   @Get(':id')

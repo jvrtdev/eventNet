@@ -68,13 +68,8 @@ export class UserService
     };
   }
 
-  async findAll(queryParams: QueryParamsDto): Promise<UserEntity[]> {
-    const { query } = new QueryBuilder()
-      .sort(queryParams.orderBy)
-      .date('createdAt', queryParams.from, queryParams.to)
-      .pagination(queryParams.page, queryParams.pageSize);
-
-    const data = await this.userRepository.findAll(query);
+  async findAll(): Promise<UserEntity[]> {
+    const data = await this.userRepository.findAll();
 
     return data;
   }
