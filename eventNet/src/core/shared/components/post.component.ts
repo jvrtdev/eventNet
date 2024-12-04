@@ -14,7 +14,7 @@ import { PostInterface } from '../@types/post';
 @Component({
   standalone: true,
   selector: 'post-component',
-  imports: [NgFor, NgIf, RouterLink, IonIcon, IonText],
+  imports: [NgFor, RouterLink, IonIcon, IonText],
   template: `<div
     class="border-slate-500 border-y border-opacity-20"
     *ngFor="let post of data"
@@ -25,8 +25,8 @@ import { PostInterface } from '../@types/post';
   </span> -->
     <div class="flex flex-nowrap gap-2 w-full p-2">
       <img
-        alt="Silhouette of a person's head"
-        src="https://ionicframework.com/docs/img/demos/avatar.svg"
+        alt=""
+        src="{{ post.owner?.profile?.avatar }}"
         class="w-12 h-12 min-h-fit min-w-fit rounded-full"
         id="profile"
       />
@@ -47,20 +47,6 @@ import { PostInterface } from '../@types/post';
           <div class="flex items-center gap-1">
             <ion-icon name="chatbubble-outline"></ion-icon>
             <span>{{ post._count.comments }}</span>
-          </div>
-
-          <div class="flex items-center gap-1">
-            <ion-icon name="repeat-sharp"></ion-icon>
-            <span>{{ post._count.reposts }}</span>
-          </div>
-
-          <div class="flex items-center gap-1">
-            <ion-icon name="heart-outline"></ion-icon>
-            <span>{{ post._count.likes }}</span>
-          </div>
-
-          <div class="flex items-center gap-1">
-            <ion-icon name="mail-outline"></ion-icon>
           </div>
         </footer>
       </div>

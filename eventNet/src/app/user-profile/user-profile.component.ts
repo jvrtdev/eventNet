@@ -42,7 +42,6 @@ import { PostComponent } from '../../core/shared/components/post.component';
   templateUrl: './user-profile.component.html',
   imports: [
     IonButtons,
-    IonTitle,
     IonButton,
     IonContent,
     IonText,
