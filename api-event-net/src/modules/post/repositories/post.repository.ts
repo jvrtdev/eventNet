@@ -47,10 +47,6 @@ export class PostRepository extends RepositoryFactory<
               },
             },
           },
-          select: {
-            text: true,
-            createdAt: true,
-          },
         },
         reposts: true,
         likes: true,
