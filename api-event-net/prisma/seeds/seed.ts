@@ -30,7 +30,7 @@ async function dataSeed() {
     const user = await prisma.user.create({
       data: {
         email: faker.internet.email(),
-        name: faker.person.fullName(),
+        name: faker.person.firstName(),
         userName: faker.internet.username(),
         password: await hash('oi'),
         phone: faker.phone.number(),
