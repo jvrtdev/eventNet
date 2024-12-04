@@ -40,12 +40,14 @@ export class PostRepository extends RepositoryFactory<
       },
       include: {
         comments: {
-          select: {
+          include: {
             user: {
               include: {
                 profile: true,
               },
             },
+          },
+          select: {
             text: true,
             createdAt: true,
           },
