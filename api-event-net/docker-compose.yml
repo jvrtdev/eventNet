@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: eventnet_user
       POSTGRES_PASSWORD: YAVePifSTZBwVq7stsRXGgXLQSJ1WIUJ
-      POSTGRES_DB: eventnet_m7qi
+      POSTGRES_DB: eventnetdb
       # POSTGRES_USER: eventUser
       # POSTGRES_PASSWORD: eventPass
       # POSTGRES_DB: eventNet
@@ -26,11 +26,11 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgresql://eventnet_user:YAVePifSTZBwVq7stsRXGgXLQSJ1WIUJ@dpg-ct7p0vl6l47c73c9s9e0-a/eventnet_m7qi
+      DATABASE_URL: postgresql://eventnet_user:YAVePifSTZBwVq7stsRXGgXLQSJ1WIUJ@dpg-ct7p0
       DATABASE_PORT: 5432
       DATABASE_USERNAME: eventnet_user
       DATABASE_PASSWORD: YAVePifSTZBwVq7stsRXGgXLQSJ1WIUJ
-      DATABASE_NAME: eventnet
+      DATABASE_NAME: eventnetdb
       PRISMA_BINARY_TARGETS: linux-musl-openssl-3.0.x
       JWT_SECRET: oi
     networks:
