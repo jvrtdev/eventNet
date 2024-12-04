@@ -13,8 +13,8 @@ export class PostController {
   }
 
   @Get()
-  findAllPosts(@Query() queryParams: QueryParamsDto): Promise<PostEntity[]> {
-    return this.postService.findAll(queryParams);
+  findAllPosts(): Promise<PostEntity[]> {
+    return this.postService.findAll();
   }
 
   @Get(':id')

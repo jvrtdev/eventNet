@@ -13,9 +13,8 @@ export class PostRepository extends RepositoryFactory<
     super('post');
   }
 
-  findAll(query: QueryBuilderEntity): Promise<PostEntity[]> {
+  findAll(): Promise<PostEntity[]> {
     return this.prismaService.post.findMany({
-      ...query,
       include: {
         comments: true,
         likes: true,

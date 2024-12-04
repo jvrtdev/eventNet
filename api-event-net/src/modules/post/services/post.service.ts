@@ -15,13 +15,8 @@ export class PostService
     return await this.postRepository.create(dto);
   }
 
-  async findAll(queryParams: QueryParamsDto): Promise<PostEntity[]> {
-    const { query } = new QueryBuilder()
-      .sort(queryParams.orderBy)
-      .date('createdAt', queryParams.from, queryParams.to)
-      .pagination(queryParams.page, queryParams.pageSize);
-
-    const data = await this.postRepository.findAll(query);
+  async findAll(): Promise<PostEntity[]> {
+    const data = await this.postRepository.findAll();
 
     return data;
   }
