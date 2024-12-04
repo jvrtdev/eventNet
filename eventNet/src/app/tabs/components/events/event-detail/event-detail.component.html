@@ -34,6 +34,15 @@
       <ion-text class="text-lg font-bold">QR Code do Evento</ion-text>
       <img src="{{ event.qr_code }}" alt="qrcode do evento" />
     </div>
-    <ion-button (click)="signInEvent()">Participar do Evento</ion-button>
+
+    <ion-button *ngIf="!isParticipant" (click)="signInEvent()"
+      >Participar do Evento</ion-button
+    >
+
+    <ion-button
+      *ngIf="isParticipant"
+      [routerLink]="['/chat/', event.conversationId]"
+      >Chat do evento</ion-button
+    >
   </div>
 </ion-content>

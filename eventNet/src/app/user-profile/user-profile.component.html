@@ -17,12 +17,12 @@
         />
       </ion-avatar>
 
-      <div *ngIf="isUserProfileOwner">
+      <!-- <div *ngIf="isUserProfileOwner">
         <ion-button shape="round" [routerLink]="[]">
           <ion-icon name="settings-outline"></ion-icon>
           <ion-text class="ml-2">Editar</ion-text>
         </ion-button>
-      </div>
+      </div> -->
       <div *ngIf="!isFriend && !isUserProfileOwner">
         <ion-button (click)="addFriend()">
           <ion-icon name="person-add-outline"></ion-icon>

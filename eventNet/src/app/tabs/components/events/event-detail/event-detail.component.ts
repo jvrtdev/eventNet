@@ -1,6 +1,8 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { getUserId } from '@core/common/utils/getUserId';
+import { EventInterface } from '@core/shared/@types/event';
 import {
   IonBackButton,
   IonButton,
@@ -28,23 +30,14 @@ import {
   removeCircle,
   ticket,
 } from 'ionicons/icons';
-import { EventInterface } from '@core/shared/@types/event';
 import { GetEventDate } from 'src/core/common/utils/date/getEventDate';
 import { EventsService } from '../services/events.service';
-import { getUserId } from '@core/common/utils/getUserId';
 
 @Component({
   standalone: true,
   selector: 'event-detail',
   templateUrl: './event-detail.component.html',
   imports: [
-    IonLabel,
-    IonItem,
-    IonList,
-    IonCardTitle,
-    IonCardHeader,
-    IonCardContent,
-    IonCard,
     IonText,
     IonButton,
     IonBackButton,
@@ -53,7 +46,6 @@ import { getUserId } from '@core/common/utils/getUserId';
     IonToolbar,
     IonButtons,
     IonIcon,
-    IonCardSubtitle,
     NgIf,
     RouterLink,
   ],
@@ -66,6 +58,7 @@ export class EventDetailComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private readonly eventService: EventsService,
+    private router: Router
   ) {
     addIcons({
       calendarOutline,
@@ -87,6 +80,8 @@ export class EventDetailComponent implements OnInit {
       .subscribe({
         next: (event) => {
           console.log(event);
+          this.isParticipant = true;
+          this.router.navigate(['/tabs/tickets']);
         },
         error: (error) => {
           console.log(error);

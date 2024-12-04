@@ -25,6 +25,7 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
+  MenuController,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -61,7 +62,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private toast: ToastComponent,
-    private userService: UserService
+    private userService: UserService,
+    private menuController: MenuController
   ) {
     addIcons({
       chatbubblesOutline,
@@ -74,12 +76,17 @@ export class HeaderComponent implements OnInit {
   user!: UserInterface;
 
   handleLogout() {
+    this.closeMenu();
     this.toast.setToast({
       label: 'Usuario desconectado',
       color: 'secondary',
       icon: 'information-circle',
     });
     this.authService.logout();
+  }
+
+  closeMenu() {
+    this.menuController.close();
   }
 
   ngOnInit(): void {

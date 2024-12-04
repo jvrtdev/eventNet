@@ -24,7 +24,9 @@
       <div *ngFor="let item of items">
         <div
           [routerLink]="[item.path]"
-          (click)="item.label === 'Sair da conta' ? handleLogout() : null"
+          (click)="
+            item.label === 'Sair da conta' ? handleLogout() : closeMenu()
+          "
           class="flex items-center space-x-1 text-lg"
         >
           <ion-icon name="{{ item.icon }}"></ion-icon>

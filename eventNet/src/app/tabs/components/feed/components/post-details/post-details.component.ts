@@ -12,6 +12,7 @@ import { getUserId } from '@core/common/utils/getUserId';
 import { CommentComponent } from '@core/components/comment/comment.component';
 import { CommentInterface } from '@core/shared/@types/comment';
 import { PostInterface } from '@core/shared/@types/post';
+import { Platform } from '@ionic/angular';
 import {
   IonBackButton,
   IonButton,
@@ -65,7 +66,8 @@ export class PostDetailsComponent implements OnInit {
     private readonly postDetailsService: PostDetailsService,
     private readonly commentService: CommentService,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private platform: Platform
   ) {
     addIcons({
       chatbubbleOutline,
@@ -85,6 +87,16 @@ export class PostDetailsComponent implements OnInit {
     return formatPostDate(date);
   }
 
+  reloadPage() {
+    if (this.platform.is('capacitor')) {
+      // Para aplicativos rodando com Capacitor
+      location.reload();
+    } else {
+      // Para aplicativos rodando em navegadores (PWA)
+      window.location.reload();
+    }
+  }
+
   createComment() {
     if (this.comment.text) {
       this.commentService
@@ -92,8 +104,10 @@ export class PostDetailsComponent implements OnInit {
         .subscribe((response) => {
           console.log(response);
         });
-      this.post.comments?.push(this.comment);
       this.comment.text = '';
+      setTimeout(() => {
+        this.reloadPage();
+      }, 1000);
     }
   }
 

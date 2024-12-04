@@ -15,7 +15,7 @@ import {
   standalone: true,
   selector: 'comment-component',
   templateUrl: './comment.component.html',
-  imports: [IonContent, IonText, NgFor, NgIf, RouterLink, IonIcon],
+  imports: [IonText, NgFor, NgIf],
 })
 export class CommentComponent implements OnInit {
   constructor() {
@@ -26,7 +26,6 @@ export class CommentComponent implements OnInit {
       chatbubbleOutline,
       mailOutline,
     });
-    console.log(this.comments);
   }
 
   @Input() comments: any;
