@@ -16,7 +16,15 @@ export class PostRepository extends RepositoryFactory<
   findAll(): Promise<PostEntity[]> {
     return this.prismaService.post.findMany({
       include: {
-        comments: true,
+        comments: {
+          include: {
+            user: {
+              include: {
+                profile: true,
+              },
+            },
+          },
+        },
         likes: true,
         reposts: true,
         owner: true,
@@ -33,7 +41,11 @@ export class PostRepository extends RepositoryFactory<
       include: {
         comments: {
           select: {
-            user: true,
+            user: {
+              include: {
+                profile: true,
+              },
+            },
             text: true,
             createdAt: true,
           },
@@ -85,7 +97,11 @@ export class PostRepository extends RepositoryFactory<
         owner: true,
         comments: {
           select: {
-            user: true,
+            user: {
+              include: {
+                profile: true,
+              },
+            },
           },
         },
         _count: true,
