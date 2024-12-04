@@ -6,7 +6,7 @@ import { io, Socket } from 'socket.io-client';
   providedIn: 'root',
 })
 export class NotificationsGateway {
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = 'https://api-event-net.onrender.com';
   private socket: Socket;
   constructor() {
     this.socket = io(this.baseUrl);

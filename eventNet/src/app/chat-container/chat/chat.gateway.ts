@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
+import { MessageInterfaceWs } from '@core/shared/@types/message.interface-ws';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
-import { MessageInterfaceWs } from '@core/shared/@types/message.interface-ws';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatGateway {
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = 'https://api-event-net.onrender.com';
   private socket: Socket;
 
   constructor() {
