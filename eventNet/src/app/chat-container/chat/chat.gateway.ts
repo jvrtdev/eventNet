@@ -7,7 +7,7 @@ import { io, Socket } from 'socket.io-client';
   providedIn: 'root',
 })
 export class ChatGateway {
-  private baseUrl = 'https://api-event-net.onrender.com';
+  private baseUrl = 'https://localhost:3000';
   private socket: Socket;
 
   constructor() {

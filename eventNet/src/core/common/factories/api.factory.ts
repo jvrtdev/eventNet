@@ -11,8 +11,8 @@ export class ApiServiceFactory<T> {
 
   constructor(protected readonly http: HttpClient) {}
 
-  protected baseUrl = 'https://api-event-net.onrender.com';
-  //protected baseUrl = 'http://localhost:3000';
+  //protected baseUrl = 'https://api-event-net.onrender.com';
+  protected baseUrl = 'http://localhost:3000';
 
   getAllData(endpoint: string, params?: Record<string, any>): Observable<T[]> {
     const httpParams = new HttpParams({ fromObject: params });

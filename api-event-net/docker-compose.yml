@@ -5,12 +5,9 @@ services:
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_USER: eventnet_user
-      POSTGRES_PASSWORD: YAVePifSTZBwVq7stsRXGgXLQSJ1WIUJ
-      POSTGRES_DB: eventnetdb
-      # POSTGRES_USER: eventUser
-      # POSTGRES_PASSWORD: eventPass
-      # POSTGRES_DB: eventNet
+      POSTGRES_USER: eventUser
+      POSTGRES_PASSWORD: eventPass
+      POSTGRES_DB: eventNet
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
